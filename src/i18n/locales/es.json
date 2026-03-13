@@ -1,0 +1,226 @@
+{
+  "app": {
+    "name": "ConvertMyFilePro",
+    "tagline": "Herramientas rápidas y seguras de conversión de archivos en línea",
+    "description": "Convierte imágenes, PDFs y documentos en línea. Gratis, rápido y seguro: todo el procesamiento ocurre en tu navegador.",
+    "instagram": "@markdigenlinea",
+    "email": "info@ConvertMyFilePro.com"
+  },
+  "nav": {
+    "home": "Inicio",
+    "tools": "Herramientas",
+    "images": "Imágenes",
+    "pdf": "PDF",
+    "documents": "Documentos",
+    "blog": "Blog",
+    "about": "Nosotros",
+    "contact": "Contacto"
+  },
+  "common": {
+    "upload": "Subir",
+    "download": "Descargar",
+    "convert": "Convertir",
+    "processing": "Procesando...",
+    "dragDrop": "Arrastra y suelta archivos aquí",
+    "orBrowse": "o busca archivos",
+    "selectFile": "Seleccionar Archivo",
+    "selectFiles": "Seleccionar Archivos",
+    "fileSizeLimit": "Tamaño máximo: {{size}}MB",
+    "remove": "Eliminar",
+    "clear": "Limpiar Todo",
+    "cancel": "Cancelar",
+    "done": "Listo",
+    "error": "Error",
+    "success": "Éxito",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "language": "Idioma",
+    "darkMode": "Modo Oscuro",
+    "lightMode": "Modo Claro"
+  },
+  "tools": {
+    "categories": {
+      "images": {
+        "title": "Herramientas de Imagen",
+        "description": "Convierte, redimensiona, comprime y mejora tus imágenes"
+      },
+      "pdf": {
+        "title": "Herramientas PDF",
+        "description": "Une, divide, comprime y convierte archivos PDF"
+      },
+      "documents": {
+        "title": "Herramientas de Documentos",
+        "description": "Convierte entre formatos de documentos fácilmente"
+      }
+    },
+    "jpgToPng": {
+      "title": "JPG a PNG",
+      "description": "Convierte imágenes JPG a formato PNG con soporte de transparencia",
+      "seoTitle": "Convertir JPG a PNG Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor gratuito de JPG a PNG en línea. Convierte tus imágenes a formato PNG con soporte de transparencia. Rápido, seguro y sin subida de archivos."
+    },
+    "pngToJpg": {
+      "title": "PNG a JPG",
+      "description": "Convierte imágenes PNG a formato JPG con control de calidad",
+      "seoTitle": "Convertir PNG a JPG Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor gratuito de PNG a JPG en línea. Convierte tus imágenes a formato JPG con calidad ajustable. Rápido, seguro y sin subida de archivos."
+    },
+    "webpToJpg": {
+      "title": "WEBP a JPG",
+      "description": "Convierte imágenes WEBP a formato JPG",
+      "seoTitle": "Convertir WEBP a JPG Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor gratuito de WEBP a JPG en línea. Convierte imágenes WEBP a formato JPG fácilmente. Rápido, seguro y sin subida de archivos."
+    },
+    "webpToPng": {
+      "title": "WEBP a PNG",
+      "description": "Convierte imágenes WEBP a formato PNG",
+      "seoTitle": "Convertir WEBP a PNG Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor gratuito de WEBP a PNG en línea. Convierte imágenes WEBP a formato PNG con transparencia. Rápido, seguro y sin subida de archivos."
+    },
+    "heicToJpg": {
+      "title": "HEIC a JPG",
+      "description": "Convierte fotos HEIC de iPhone a formato JPG",
+      "seoTitle": "Convertir HEIC a JPG Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor gratuito de HEIC a JPG en línea. Convierte fotos de iPhone a formato JPG. Rápido, seguro y sin subida de archivos."
+    },
+    "resizeImage": {
+      "title": "Redimensionar Imagen",
+      "description": "Redimensiona imágenes a dimensiones exactas",
+      "seoTitle": "Redimensionar Imágenes Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Redimensionador de imágenes gratuito en línea. Cambia el tamaño de imágenes a dimensiones exactas manteniendo la calidad. Rápido, seguro y sin subida.",
+      "width": "Ancho (px)",
+      "height": "Alto (px)",
+      "maintainAspect": "Mantener proporción",
+      "originalSize": "Original: {{width}} x {{height}}"
+    },
+    "compressImage": {
+      "title": "Comprimir Imagen",
+      "description": "Reduce el tamaño del archivo sin perder calidad",
+      "seoTitle": "Comprimir Imágenes Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Compresor de imágenes gratuito en línea. Reduce el tamaño de archivos manteniendo la calidad. Soporta JPG, PNG, WEBP. Rápido y seguro.",
+      "quality": "Calidad",
+      "originalSize": "Tamaño original",
+      "compressedSize": "Tamaño comprimido",
+      "reduction": "Reducción"
+    },
+    "enhanceImage": {
+      "title": "Mejorar Imagen",
+      "description": "Mejora de imágenes con tecnología AI",
+      "seoTitle": "Mejorar Imágenes Online Gratis | IA | ConvertMyFilePro",
+      "seoDescription": "Mejorador de imágenes gratuito en línea. Afila y mejora tus imágenes con tecnología AI. Rápido, seguro y sin subida de archivos."
+    },
+    "mergePdf": {
+      "title": "Unir PDF",
+      "description": "Combina múltiples PDFs en un solo archivo",
+      "seoTitle": "Unir PDFs Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Herramienta gratuita para unir PDFs en línea. Combina múltiples archivos PDF en uno solo. Reordena páginas fácilmente. Rápido y seguro.",
+      "addFiles": "Agregar PDFs",
+      "reorder": "Arrastra para reordenar"
+    },
+    "splitPdf": {
+      "title": "Dividir PDF",
+      "description": "Extrae páginas o divide por rangos",
+      "seoTitle": "Dividir PDF Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Herramienta gratuita para dividir PDFs en línea. Extrae páginas o divide PDF por rangos. Rápido, seguro y sin subida de archivos.",
+      "pageRange": "Rango de Páginas",
+      "pageRangeHelp": "Ejemplo: 1-5, 8, 11-13",
+      "totalPages": "Total de páginas: {{count}}"
+    },
+    "compressPdf": {
+      "title": "Comprimir PDF",
+      "description": "Reduce el tamaño del PDF manteniendo la calidad",
+      "seoTitle": "Comprimir PDF Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Compresor de PDF gratuito en línea. Reduce significativamente el tamaño del PDF manteniendo la calidad. Rápido, seguro y sin subida."
+    },
+    "pdfToJpg": {
+      "title": "PDF a JPG",
+      "description": "Convierte páginas PDF a imágenes JPG",
+      "seoTitle": "Convertir PDF a JPG Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor gratuito de PDF a JPG en línea. Convierte páginas PDF a imágenes JPG de alta calidad. Rápido, seguro y sin subida."
+    },
+    "jpgToPdf": {
+      "title": "JPG a PDF",
+      "description": "Convierte imágenes JPG a documento PDF",
+      "seoTitle": "Convertir JPG a PDF Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor gratuito de JPG a PDF en línea. Convierte imágenes a documento PDF. Múltiples imágenes soportadas. Rápido y seguro."
+    },
+    "docxToPdf": {
+      "title": "DOCX a PDF",
+      "description": "Convierte documentos Word a formato PDF",
+      "seoTitle": "Convertir DOCX a PDF Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor gratuito de DOCX a PDF en línea. Convierte documentos Word a formato PDF. Rápido, seguro y sin subida de archivos."
+    },
+    "pdfToDocx": {
+      "title": "PDF a DOCX",
+      "description": "Convierte PDFs a documentos Word editables",
+      "seoTitle": "Convertir PDF a DOCX Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor gratuito de PDF a DOCX en línea. Convierte PDF a documento Word editable. Rápido, seguro y sin subida de archivos."
+    },
+    "txtToPdf": {
+      "title": "TXT a PDF",
+      "description": "Convierte archivos de texto a formato PDF",
+      "seoTitle": "Convertir TXT a PDF Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor gratuito de TXT a PDF en línea. Convierte archivos de texto a formato PDF. Rápido, seguro y sin subida de archivos."
+    },
+    "ocr": {
+      "title": "OCR - Imagen a Texto",
+      "description": "Extrae texto de imágenes usando OCR",
+      "seoTitle": "OCR Online Gratis | Extraer Texto de Imagen | ConvertMyFilePro",
+      "seoDescription": "Herramienta OCR gratuita en línea. Extrae texto de imágenes y documentos escaneados. Soporta múltiples idiomas. Rápido y seguro.",
+      "extracting": "Extrayendo texto...",
+      "result": "Texto Extraído",
+      "noText": "No se encontró texto en la imagen",
+      "copyText": "Copiar Texto"
+    },
+    "watermark": {
+      "title": "Marca de Agua",
+      "description": "Agrega marca de agua a tus imágenes",
+      "seoTitle": "Agregar Marca de Agua Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Herramienta gratuita de marca de agua en línea. Agrega texto o imagen de marca de agua a tus fotos. Posición y opacidad personalizables.",
+      "text": "Texto de Marca de Agua",
+      "position": "Posición",
+      "opacity": "Opacidad",
+      "fontSize": "Tamaño de Fuente"
+    },
+    "batchConvert": {
+      "title": "Conversión por Lotes",
+      "description": "Convierte múltiples imágenes a la vez",
+      "seoTitle": "Conversión de Imágenes por Lotes Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor por lotes gratuito en línea. Convierte múltiples imágenes a diferentes formatos a la vez. Rápido, seguro y sin subida.",
+      "targetFormat": "Formato Destino",
+      "filesSelected": "{{count}} archivos seleccionados"
+    }
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "secure": {
+      "question": "¿Mis datos están seguros?",
+      "answer": "¡Sí! Todo el procesamiento de archivos ocurre directamente en tu navegador. Tus archivos nunca abandonan tu dispositivo ni se suben a ningún servidor."
+    },
+    "free": {
+      "question": "¿Este servicio es gratuito?",
+      "answer": "¡Sí, todas nuestras herramientas básicas son completamente gratuitas! Podemos introducir funciones premium en el futuro para necesidades avanzadas."
+    },
+    "limits": {
+      "question": "¿Hay límites de tamaño de archivo?",
+      "answer": "Sí, para garantizar un rendimiento óptimo en tu navegador, limitamos el tamaño de los archivos a 50MB por archivo para la mayoría de las herramientas."
+    },
+    "quality": {
+      "question": "¿Se verá afectada la calidad de mi imagen?",
+      "answer": "Nuestras herramientas están diseñadas para mantener la mayor calidad posible. Para compresión, puedes ajustar el control deslizante de calidad para encontrar el equilibrio perfecto."
+    }
+  },
+  "ads": {
+    "advertisement": "Publicidad"
+  },
+  "footer": {
+    "tagline": "Herramientas rápidas y seguras de conversión de archivos que funcionan en tu navegador.",
+    "tools": "Herramientas",
+    "company": "Empresa",
+    "legal": "Legal",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "contact": "Contáctanos",
+    "allRights": "Todos los derechos reservados."
+  }
+}

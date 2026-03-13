@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* Brand Colors */
+    --color-primary: #3D6373;
+    --color-primary-dark: #16333c;
+    --color-accent: #006C4C;
+    --color-accent-light: #89F8C7;
+    --color-bg: #f5f8f9;
+    --color-surface: #ffffff;
+    --color-text: #16333c;
+    --color-muted: #58707a;
+    --color-border: #dbe6ea;
+    --radius: 18px;
+
+    /* shadcn/ui theme mapping */
+    --background: 195 20% 97%;
+    --foreground: 195 42% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 195 42% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 195 42% 16%;
+    --primary: 195 30% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 195 20% 92%;
+    --secondary-foreground: 195 42% 16%;
+    --muted: 195 15% 90%;
+    --muted-foreground: 195 15% 40%;
+    --accent: 158 100% 21%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 195 25% 89%;
+    --input: 195 25% 89%;
+    --ring: 195 30% 35%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 195 42% 10%;
+    --foreground: 195 20% 97%;
+    --card: 195 35% 14%;
+    --card-foreground: 195 20% 97%;
+    --popover: 195 35% 14%;
+    --popover-foreground: 195 20% 97%;
+    --primary: 158 100% 50%;
+    --primary-foreground: 195 42% 10%;
+    --secondary: 195 30% 20%;
+    --secondary-foreground: 195 20% 97%;
+    --muted: 195 30% 20%;
+    --muted-foreground: 195 15% 60%;
+    --accent: 158 100% 50%;
+    --accent-foreground: 195 42% 10%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 195 30% 20%;
+    --input: 195 30% 20%;
+    --ring: 158 100% 50%;
+    --sidebar-background: 195 42% 10%;
+    --sidebar-foreground: 195 20% 97%;
+    --sidebar-primary: 158 100% 50%;
+    --sidebar-primary-foreground: 195 42% 10%;
+    --sidebar-accent: 195 30% 20%;
+    --sidebar-accent-foreground: 195 20% 97%;
+    --sidebar-border: 195 30% 20%;
+    --sidebar-ring: 158 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  }
+  .gradient-accent {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  }
+  .shadow-card {
+    box-shadow: 0 4px 20px -2px rgba(22, 51, 60, 0.1);
+  }
+  .shadow-card-hover {
+    box-shadow: 0 8px 30px -4px rgba(22, 51, 60, 0.15);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* Drag and drop zone */
+.drop-zone {
+  border: 2px dashed var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.drop-zone.drag-over {
+  border-color: var(--color-accent);
+  background: rgba(137, 248, 199, 0.1);
+}
+
+/* Animation for progress */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+.pulse-ring {
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* File input hidden */
+input[type="file"].hidden-input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
