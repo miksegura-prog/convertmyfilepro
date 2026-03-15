@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://convertmyfilepro.com/</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Tool Categories -->
+  <url>
+    <loc>https://convertmyfilepro.com/tools/images</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/tools/pdf</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/tools/documents</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Blog -->
+  <url>
+    <loc>https://convertmyfilepro.com/blog</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://convertmyfilepro.com/blog/how-to-convert-jpg-to-png</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/blog/how-to-compress-images-without-losing-quality</loc>
+    <lastmod>2024-01-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/blog/how-to-merge-pdf-files-online-free</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/blog/how-to-extract-text-from-images-ocr</loc>
+    <lastmod>2024-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/blog/how-to-resize-images-online-free</loc>
+    <lastmod>2024-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/blog/how-to-split-pdf-pages-online-free</loc>
+    <lastmod>2024-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/blog/how-to-convert-heic-to-jpg-iphone-photos</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/blog/webp-format-guide-convert-webp</loc>
+    <lastmod>2024-02-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/blog/how-to-convert-jpg-to-pdf-online-free</loc>
+    <lastmod>2024-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Image Tools -->
+  <url>
+    <loc>https://convertmyfilepro.com/jpg-to-png</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/png-to-jpg</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/resize-image</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/compress-image</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- PDF Tools -->
+  <url>
+    <loc>https://convertmyfilepro.com/merge-pdf</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/split-pdf</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/jpg-to-pdf</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- OCR -->
+  <url>
+    <loc>https://convertmyfilepro.com/ocr</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://convertmyfilepro.com/privacy</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://convertmyfilepro.com/terms</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+</urlset>

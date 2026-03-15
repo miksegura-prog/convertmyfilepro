@@ -26,11 +26,14 @@ const JpgToPdf = lazy(() => import('@/pages/tools/JpgToPdf'));
 // OCR
 const OcrTool = lazy(() => import('@/pages/tools/OcrTool'));
 
+// Blog
+const BlogIndex = lazy(() => import('@/pages/blog/BlogIndex'));
+const BlogPost = lazy(() => import('@/pages/blog/BlogPost'));
+
 // Loading component
 const PageLoader: React.FC = () => (
   <div className="flex items-center justify-center min-h-[400px]">
-    <div className="w-12 h-12 border-4 border-[var(--color-primary)] border-t-transparent 
-                    rounded-full animate-spin" />
+    <div className="w-12 h-12 border-4 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin" />
   </div>
 );
 
@@ -41,72 +44,123 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={
-                <Suspense fallback={<PageLoader />}>
-                  <Home />
-                </Suspense>
-              } />
-              
+              <Route
+                index
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <Home />
+                  </Suspense>
+                }
+              />
+
               {/* Tool Categories */}
-              <Route path="tools/:category" element={
-                <Suspense fallback={<PageLoader />}>
-                  <ToolCategory />
-                </Suspense>
-              } />
-              
+              <Route
+                path="tools/:category"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ToolCategory />
+                  </Suspense>
+                }
+              />
+
               {/* Image Tools */}
-              <Route path="jpg-to-png" element={
-                <Suspense fallback={<PageLoader />}>
-                  <JpgToPng />
-                </Suspense>
-              } />
-              <Route path="png-to-jpg" element={
-                <Suspense fallback={<PageLoader />}>
-                  <PngToJpg />
-                </Suspense>
-              } />
-              <Route path="resize-image" element={
-                <Suspense fallback={<PageLoader />}>
-                  <ResizeImage />
-                </Suspense>
-              } />
-              <Route path="compress-image" element={
-                <Suspense fallback={<PageLoader />}>
-                  <CompressImage />
-                </Suspense>
-              } />
-              
+              <Route
+                path="jpg-to-png"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <JpgToPng />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="png-to-jpg"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PngToJpg />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="resize-image"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ResizeImage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="compress-image"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CompressImage />
+                  </Suspense>
+                }
+              />
+
               {/* PDF Tools */}
-              <Route path="merge-pdf" element={
-                <Suspense fallback={<PageLoader />}>
-                  <MergePdf />
-                </Suspense>
-              } />
-              <Route path="split-pdf" element={
-                <Suspense fallback={<PageLoader />}>
-                  <SplitPdf />
-                </Suspense>
-              } />
-              <Route path="jpg-to-pdf" element={
-                <Suspense fallback={<PageLoader />}>
-                  <JpgToPdf />
-                </Suspense>
-              } />
-              
+              <Route
+                path="merge-pdf"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <MergePdf />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="split-pdf"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SplitPdf />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="jpg-to-pdf"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <JpgToPdf />
+                  </Suspense>
+                }
+              />
+
               {/* OCR */}
-              <Route path="ocr" element={
-                <Suspense fallback={<PageLoader />}>
-                  <OcrTool />
-                </Suspense>
-              } />
-              
+              <Route
+                path="ocr"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <OcrTool />
+                  </Suspense>
+                }
+              />
+
+              {/* Blog */}
+              <Route
+                path="blog"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BlogIndex />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="blog/:slug"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BlogPost />
+                  </Suspense>
+                }
+              />
+
               {/* 404 */}
-              <Route path="*" element={
-                <div className="text-center py-20">
-                  <h1 className="text-4xl font-bold text-[var(--color-text)] mb-4">404</h1>
-                  <p className="text-[var(--color-muted)]">Page not found</p>
-                </div>
-              } />
+              <Route
+                path="*"
+                element={
+                  <div className="text-center py-20">
+                    <h1 className="text-4xl font-bold text-[var(--color-text)] mb-4">404</h1>
+                    <p className="text-[var(--color-muted)]">Page not found</p>
+                  </div>
+                }
+              />
             </Route>
           </Routes>
         </Router>
