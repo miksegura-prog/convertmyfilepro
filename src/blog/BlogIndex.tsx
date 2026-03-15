@@ -3,51 +3,39 @@ import { Link } from "react-router-dom";
 import { blogPosts } from "@/blog/posts";
 
 export default function BlogIndex() {
+
   return (
-    <div className="max-w-5xl mx-auto px-6 py-12">
 
-      <h1 className="text-4xl font-bold mb-10">
-        Blog
-      </h1>
+    <div style={{padding:"40px", maxWidth:"900px", margin:"auto"}}>
 
-      <div className="grid gap-6">
+      <h1>Blog</h1>
 
-        {blogPosts.map((post) => (
+      {blogPosts.length === 0 && (
+        <p>No posts found</p>
+      )}
 
-          <article
-            key={post.slug}
-            className="border rounded-xl p-6 hover:shadow-md transition"
-          >
+      {blogPosts.map((post) => (
 
-            <h2 className="text-2xl font-semibold mb-2">
+        <div key={post.slug} style={{marginBottom:"30px"}}>
 
-              <Link to={`/blog/${post.slug}`}>
-                {post.title}
-              </Link>
-
-            </h2>
-
-            <p className="text-gray-600 mb-3">
-              {post.description}
-            </p>
-
-            <div className="text-sm text-gray-500 mb-3">
-              {post.category} · {post.readTime}
-            </div>
-
-            <Link
-              to={`/blog/${post.slug}`}
-              className="text-blue-600"
-            >
-              Read article →
+          <h2>
+            <Link to={`/blog/${post.slug}`}>
+              {post.title}
             </Link>
+          </h2>
 
-          </article>
+          <p>{post.description}</p>
 
-        ))}
+          <small>
+            {post.category} • {post.readTime}
+          </small>
 
-      </div>
+        </div>
+
+      ))}
 
     </div>
+
   );
+
 }

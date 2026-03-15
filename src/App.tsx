@@ -5,32 +5,25 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import './App.css';
 
-// Layout
 import { Layout } from '@/components/ui-custom/Layout';
 
-// Lazy load pages for better performance
+import BlogIndex from '@/pages/blog/BlogIndex';
+import BlogPost from '@/pages/blog/BlogPost';
+
 const Home = lazy(() => import('@/pages/Home'));
 const ToolCategory = lazy(() => import('@/pages/ToolCategory'));
 
-// Image Tools
 const JpgToPng = lazy(() => import('@/pages/tools/JpgToPng'));
 const PngToJpg = lazy(() => import('@/pages/tools/PngToJpg'));
 const ResizeImage = lazy(() => import('@/pages/tools/ResizeImage'));
 const CompressImage = lazy(() => import('@/pages/tools/CompressImage'));
 
-// PDF Tools
 const MergePdf = lazy(() => import('@/pages/tools/MergePdf'));
 const SplitPdf = lazy(() => import('@/pages/tools/SplitPdf'));
 const JpgToPdf = lazy(() => import('@/pages/tools/JpgToPdf'));
 
-// OCR
 const OcrTool = lazy(() => import('@/pages/tools/OcrTool'));
 
-// Blog
-const BlogIndex = lazy(() => import('@/pages/blog/BlogIndex'));
-const BlogPost = lazy(() => import('@/pages/blog/BlogPost'));
-
-// Loading component
 const PageLoader: React.FC = () => (
   <div className="flex items-center justify-center min-h-[400px]">
     <div className="w-12 h-12 border-4 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin" />
@@ -53,7 +46,6 @@ function App() {
                 }
               />
 
-              {/* Tool Categories */}
               <Route
                 path="tools/:category"
                 element={
@@ -63,7 +55,6 @@ function App() {
                 }
               />
 
-              {/* Image Tools */}
               <Route
                 path="jpg-to-png"
                 element={
@@ -97,7 +88,6 @@ function App() {
                 }
               />
 
-              {/* PDF Tools */}
               <Route
                 path="merge-pdf"
                 element={
@@ -123,7 +113,6 @@ function App() {
                 }
               />
 
-              {/* OCR */}
               <Route
                 path="ocr"
                 element={
@@ -133,25 +122,9 @@ function App() {
                 }
               />
 
-              {/* Blog */}
-              <Route
-                path="blog"
-                element={
-                  <Suspense fallback={<PageLoader />}>
-                    <BlogIndex />
-                  </Suspense>
-                }
-              />
-              <Route
-                path="blog/:slug"
-                element={
-                  <Suspense fallback={<PageLoader />}>
-                    <BlogPost />
-                  </Suspense>
-                }
-              />
+              <Route path="blog" element={<BlogIndex />} />
+              <Route path="blog/:slug" element={<BlogPost />} />
 
-              {/* 404 */}
               <Route
                 path="*"
                 element={
