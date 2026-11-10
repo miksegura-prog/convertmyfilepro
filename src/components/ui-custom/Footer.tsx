@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   FileStack, Mail, Instagram,
   Image, FileText, Music,
-  BookOpen, Shield, FileCheck
+  BookOpen, Shield, FileCheck, Grid
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -33,6 +33,29 @@ export const Footer: React.FC = () => {
       { path: '/compress-video-whatsapp', label: t('tools.compressVideo.title') },
     ],
   };
+
+  const allToolsList = [
+    { path: '/convert/jpg-to-png', label: 'JPG to PNG' },
+    { path: '/convert/png-to-jpg', label: 'PNG to JPG' },
+    { path: '/convert/webp-to-jpg', label: 'WEBP to JPG' },
+    { path: '/convert/webp-to-png', label: 'WEBP to PNG' },
+    { path: '/convert/heic-to-jpg', label: 'HEIC to JPG' },
+    { path: '/convert/compress-image', label: 'Compress Image' },
+    { path: '/convert/resize-image', label: 'Resize Image' },
+    { path: '/convert/merge-pdf', label: 'Merge PDF' },
+    { path: '/convert/split-pdf', label: 'Split PDF' },
+    { path: '/convert/compress-pdf', label: 'Compress PDF' },
+    { path: '/convert/jpg-to-pdf', label: 'JPG to PDF' },
+    { path: '/convert/png-to-pdf', label: 'PNG to PDF' },
+    { path: '/convert/docx-to-pdf', label: 'DOCX to PDF' },
+    { path: '/convert/xlsx-to-pdf', label: 'XLSX to PDF' },
+    { path: '/convert/txt-to-pdf', label: 'TXT to PDF' },
+    { path: '/convert/html-to-pdf', label: 'HTML to PDF' },
+    { path: '/convert/wav-to-mp3', label: 'WAV to MP3' },
+    { path: '/convert/mp4-to-mp3', label: 'MP4 to MP3' },
+    { path: '/convert/compress-video-whatsapp', label: 'Compress Video' },
+    { path: '/convert/ocr-image-to-text', label: 'OCR Text' },
+  ];
 
   const bottomLinks = [
     { path: '/privacy', label: t('footer.privacy'), icon: Shield },
@@ -141,6 +164,24 @@ export const Footer: React.FC = () => {
                   <Link to={link.path}
                     className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
                     {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* All Tools */}
+          <div>
+            <h4 className="font-semibold text-[var(--color-text)] mb-4 flex items-center gap-2">
+              <Grid className="w-4 h-4" />
+              {t('footer.allTools')}
+            </h4>
+            <ul className="space-y-2">
+              {allToolsList.map((tool) => (
+                <li key={tool.path}>
+                  <Link to={tool.path}
+                    className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
+                    {tool.label}
                   </Link>
                 </li>
               ))}

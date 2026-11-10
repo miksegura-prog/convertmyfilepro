@@ -31,6 +31,8 @@ const CompressVideo = lazy(() => import('@/pages/tools/CompressVideo'));
 
 const OcrTool = lazy(() => import('@/pages/tools/OcrTool'));
 
+const SeoToolPage = lazy(() => import('@/pages/SeoToolPage'));
+
 const PageLoader: React.FC = () => (
   <div className="flex items-center justify-center min-h-[400px]">
     <div className="w-12 h-12 border-4 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin" />
@@ -173,6 +175,15 @@ function App() {
 
               <Route path="blog" element={<BlogIndex />} />
               <Route path="blog/:slug" element={<BlogPost />} />
+
+              <Route
+                path="convert/:slug"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SeoToolPage />
+                  </Suspense>
+                }
+              />
 
               <Route
                 path="*"
