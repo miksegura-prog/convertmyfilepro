@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, Image, FileText, FileStack } from 'lucide-react';
+import { ArrowRight, Image, FileText, FileStack, Music } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { SEO } from '@/components/ui-custom/SEO';
 import type { Tool } from '@/types';
@@ -33,6 +33,10 @@ const ToolCategory: React.FC = () => {
       { id: 'pdf-to-docx', title: t('tools.pdfToDocx.title'), description: t('tools.pdfToDocx.description'), category: 'documents', icon: 'doc', path: '/pdf-to-docx', color: 'from-slate-500 to-gray-500' },
       { id: 'txt-to-pdf', title: t('tools.txtToPdf.title'), description: t('tools.txtToPdf.description'), category: 'documents', icon: 'doc', path: '/txt-to-pdf', color: 'from-zinc-500 to-neutral-500' },
     ],
+    audioVideo: [
+      { id: 'wav-to-mp3', title: t('tools.wavToMp3.title'), description: t('tools.wavToMp3.description'), category: 'audioVideo', icon: 'music', path: '/wav-to-mp3', color: 'from-purple-500 to-violet-500' },
+      { id: 'compress-video-whatsapp', title: t('tools.compressVideo.title'), description: t('tools.compressVideo.description'), category: 'audioVideo', icon: 'video', path: '/compress-video-whatsapp', color: 'from-green-500 to-emerald-500' },
+    ],
     bonus: [
       { id: 'ocr', title: t('tools.ocr.title'), description: t('tools.ocr.description'), category: 'bonus', icon: 'ocr', path: '/ocr', color: 'from-emerald-500 to-green-500' },
       { id: 'watermark', title: t('tools.watermark.title'), description: t('tools.watermark.description'), category: 'bonus', icon: 'watermark', path: '/watermark', color: 'from-sky-500 to-blue-500' },
@@ -46,6 +50,7 @@ const ToolCategory: React.FC = () => {
     images: { title: t('tools.categories.images.title'), description: t('tools.categories.images.description'), icon: Image },
     pdf: { title: t('tools.categories.pdf.title'), description: t('tools.categories.pdf.description'), icon: FileText },
     documents: { title: t('tools.categories.documents.title'), description: t('tools.categories.documents.description'), icon: FileStack },
+    audioVideo: { title: t('tools.categories.audioVideo.title'), description: t('tools.categories.audioVideo.description'), icon: Music },
   };
 
   const info = category ? categoryInfo[category as keyof typeof categoryInfo] : null;
@@ -86,6 +91,7 @@ const ToolCategory: React.FC = () => {
                   {tool.category === 'images' && <Image className="w-6 h-6 text-white" />}
                   {tool.category === 'pdf' && <FileText className="w-6 h-6 text-white" />}
                   {tool.category === 'documents' && <FileStack className="w-6 h-6 text-white" />}
+                  {tool.category === 'audioVideo' && <Music className="w-6 h-6 text-white" />}
                   {tool.category === 'bonus' && <Icon className="w-6 h-6 text-white" />}
                 </div>
                 <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">

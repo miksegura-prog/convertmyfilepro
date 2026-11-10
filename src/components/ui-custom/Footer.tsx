@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { 
-  FileStack, Mail, Instagram, 
-  Image, FileText, FileStack as FileStackIcon,
-  Shield, FileCheck
+import {
+  FileStack, Mail, Instagram,
+  Image, FileText, Music,
+  BookOpen, Shield, FileCheck
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -21,21 +21,30 @@ export const Footer: React.FC = () => {
     pdf: [
       { path: '/merge-pdf', label: t('tools.mergePdf.title') },
       { path: '/split-pdf', label: t('tools.splitPdf.title') },
-      { path: '/compress-pdf', label: t('tools.compressPdf.title') },
-      { path: '/pdf-to-jpg', label: t('tools.pdfToJpg.title') },
+      { path: '/jpg-to-pdf', label: t('tools.jpgToPdf.title') },
     ],
     documents: [
       { path: '/docx-to-pdf', label: t('tools.docxToPdf.title') },
-      { path: '/pdf-to-docx', label: t('tools.pdfToDocx.title') },
+      { path: '/xlsx-to-pdf', label: t('tools.xlsxToPdf.title') },
       { path: '/txt-to-pdf', label: t('tools.txtToPdf.title') },
-    ]
+    ],
+    audioVideo: [
+      { path: '/wav-to-mp3', label: t('tools.wavToMp3.title') },
+      { path: '/compress-video-whatsapp', label: t('tools.compressVideo.title') },
+    ],
   };
 
+  const bottomLinks = [
+    { path: '/privacy', label: t('footer.privacy'), icon: Shield },
+    { path: '/terms', label: t('footer.terms'), icon: FileCheck },
+    { path: '/blog', label: t('nav.blog'), icon: BookOpen },
+  ];
+
   return (
-    <footer className="bg-[var(--color-bg)] dark:bg-[var(--color-card)] 
+    <footer className="bg-[var(--color-bg)] dark:bg-[var(--color-card)]
                       border-t border-[var(--color-border)]">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-8">
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
@@ -50,24 +59,16 @@ export const Footer: React.FC = () => {
             <p className="text-[var(--color-muted)] mb-6 max-w-sm">
               {t('footer.tagline')}
             </p>
-            
             {/* Contact */}
             <div className="space-y-2">
-              <a 
-                href={`mailto:${t('app.email')}`}
-                className="flex items-center gap-2 text-[var(--color-muted)] 
-                         hover:text-[var(--color-primary)] transition-colors"
-              >
+              <a href={`mailto:${t('app.email')}`}
+                className="flex items-center gap-2 text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
                 <Mail className="w-4 h-4" />
                 {t('app.email')}
               </a>
-              <a 
-                href={`https://instagram.com/${t('app.instagram').replace('@', '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[var(--color-muted)] 
-                         hover:text-[var(--color-primary)] transition-colors"
-              >
+              <a href={`https://instagram.com/${t('app.instagram').replace('@', '')}`}
+                target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
                 <Instagram className="w-4 h-4" />
                 {t('app.instagram')}
               </a>
@@ -83,11 +84,8 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2">
               {toolLinks.images.map((link) => (
                 <li key={link.path}>
-                  <Link 
-                    to={link.path}
-                    className="text-sm text-[var(--color-muted)] 
-                             hover:text-[var(--color-primary)] transition-colors"
-                  >
+                  <Link to={link.path}
+                    className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -104,11 +102,8 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2">
               {toolLinks.pdf.map((link) => (
                 <li key={link.path}>
-                  <Link 
-                    to={link.path}
-                    className="text-sm text-[var(--color-muted)] 
-                             hover:text-[var(--color-primary)] transition-colors"
-                  >
+                  <Link to={link.path}
+                    className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -119,21 +114,64 @@ export const Footer: React.FC = () => {
           {/* Document Tools */}
           <div>
             <h4 className="font-semibold text-[var(--color-text)] mb-4 flex items-center gap-2">
-              <FileStackIcon className="w-4 h-4" />
+              <FileText className="w-4 h-4" />
               {t('nav.documents')}
             </h4>
             <ul className="space-y-2">
               {toolLinks.documents.map((link) => (
                 <li key={link.path}>
-                  <Link 
-                    to={link.path}
-                    className="text-sm text-[var(--color-muted)] 
-                             hover:text-[var(--color-primary)] transition-colors"
-                  >
+                  <Link to={link.path}
+                    className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
                     {link.label}
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Audio & Video Tools */}
+          <div>
+            <h4 className="font-semibold text-[var(--color-text)] mb-4 flex items-center gap-2">
+              <Music className="w-4 h-4" />
+              {t('nav.audioVideo')}
+            </h4>
+            <ul className="space-y-2">
+              {toolLinks.audioVideo.map((link) => (
+                <li key={link.path}>
+                  <Link to={link.path}
+                    className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Blog & Legal */}
+          <div>
+            <h4 className="font-semibold text-[var(--color-text)] mb-4 flex items-center gap-2">
+              <BookOpen className="w-4 h-4" />
+              {t('nav.blog')}
+            </h4>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/blog"
+                  className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
+                  {t('blog.title')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/privacy"
+                  className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
+                  {t('footer.privacy')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms"
+                  className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
+                  {t('footer.terms')}
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -142,28 +180,16 @@ export const Footer: React.FC = () => {
         <div className="mt-12 pt-8 border-t border-[var(--color-border)]
                       flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-[var(--color-muted)]">
-            © {currentYear} {t('app.name')}. {t('footer.allRights')}
+            &copy; {currentYear} {t('app.name')}. {t('footer.allRights')}
           </p>
-          
           <div className="flex items-center gap-6">
-            <Link 
-              to="/privacy"
-              className="text-sm text-[var(--color-muted)] 
-                       hover:text-[var(--color-primary)] transition-colors
-                       flex items-center gap-1"
-            >
-              <Shield className="w-4 h-4" />
-              {t('footer.privacy')}
-            </Link>
-            <Link 
-              to="/terms"
-              className="text-sm text-[var(--color-muted)] 
-                       hover:text-[var(--color-primary)] transition-colors
-                       flex items-center gap-1"
-            >
-              <FileCheck className="w-4 h-4" />
-              {t('footer.terms')}
-            </Link>
+            {bottomLinks.map((link) => (
+              <Link key={link.path} to={link.path}
+                className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors flex items-center gap-1">
+                <link.icon className="w-4 h-4" />
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

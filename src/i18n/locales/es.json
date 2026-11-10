@@ -12,6 +12,7 @@
     "images": "Imágenes",
     "pdf": "PDF",
     "documents": "Documentos",
+    "audioVideo": "Audio y Vídeo",
     "blog": "Blog",
     "about": "Nosotros",
     "contact": "Contacto"
@@ -51,6 +52,10 @@
       "documents": {
         "title": "Herramientas de Documentos",
         "description": "Convierte entre formatos de documentos fácilmente"
+      },
+      "audioVideo": {
+        "title": "Herramientas de Audio y Vídeo",
+        "description": "Convierte archivos de audio y comprime vídeos para compartir"
       }
     },
     "jpgToPng": {
@@ -189,6 +194,18 @@
       "seoDescription": "Convertidor por lotes gratuito en línea. Convierte múltiples imágenes a diferentes formatos a la vez. Rápido, seguro y sin subida.",
       "targetFormat": "Formato Destino",
       "filesSelected": "{{count}} archivos seleccionados"
+    },
+    "wavToMp3": {
+      "title": "WAV a MP3",
+      "description": "Convierte archivos de audio WAV a MP3 comprimido",
+      "seoTitle": "Convertir WAV a MP3 Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convertidor gratuito de WAV a MP3 en línea. Reduce el peso de tus audios sin pérdida notable de calidad. Privado, sin subida de archivos."
+    },
+    "compressVideo": {
+      "title": "Comprimir Vídeo para WhatsApp",
+      "description": "Reduce el tamaño del vídeo para compartir en WhatsApp",
+      "seoTitle": "Comprimir Vídeo para WhatsApp Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Compresor de vídeo gratuito en línea. Reduce vídeos a menos de 16MB para WhatsApp. Rápido, privado, sin servidores."
     }
   },
   "faq": {

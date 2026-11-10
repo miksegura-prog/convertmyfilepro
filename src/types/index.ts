@@ -2,7 +2,7 @@ export interface Tool {
   id: string;
   title: string;
   description: string;
-  category: 'images' | 'pdf' | 'documents' | 'audio' | 'video' | 'bonus';
+  category: 'images' | 'pdf' | 'documents' | 'audio' | 'video' | 'audioVideo' | 'bonus';
   icon: string;
   path: string;
   color: string;

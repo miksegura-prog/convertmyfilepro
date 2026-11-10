@@ -12,6 +12,7 @@
     "images": "Images",
     "pdf": "PDF",
     "documents": "Documents",
+    "audioVideo": "Audio & Video",
     "blog": "Blog",
     "about": "About",
     "contact": "Contact"
@@ -51,6 +52,10 @@
       "documents": {
         "title": "Document Tools",
         "description": "Convert between document formats easily"
+      },
+      "audioVideo": {
+        "title": "Audio & Video Tools",
+        "description": "Convert audio files and compress videos for sharing"
       }
     },
     "jpgToPng": {
@@ -189,6 +194,18 @@
       "seoDescription": "Free online batch image converter. Convert multiple images to different formats at once. Fast, secure, and no upload required.",
       "targetFormat": "Target Format",
       "filesSelected": "{{count}} files selected"
+    },
+    "wavToMp3": {
+      "title": "WAV to MP3",
+      "description": "Convert WAV audio files to compressed MP3 format",
+      "seoTitle": "Convert WAV to MP3 Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online WAV to MP3 converter. Reduce audio file size without noticeable quality loss. Private, no upload required."
+    },
+    "compressVideo": {
+      "title": "Compress Video for WhatsApp",
+      "description": "Reduce video file size for WhatsApp sharing",
+      "seoTitle": "Compress Video for WhatsApp Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online video compressor. Reduce video size under 16MB for WhatsApp. Fast, private, no server upload."
     }
   },
   "faq": {
