@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { 
   Image, FileText, FileStack, ArrowRight,
-  Shield, Zap, Lock, Globe
+  Shield, Zap, Lock, Globe, Music, Video
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -12,6 +12,27 @@ import type { Tool } from '@/types';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
+
+  const multimediaTools: Tool[] = [
+    {
+      id: 'compress-video-whatsapp',
+      title: 'Comprimir Vídeo para WhatsApp',
+      description: 'Reduce vídeos a menos de 16 MB con excelente nitidez para enviar por WhatsApp.',
+      category: 'video',
+      icon: 'video',
+      path: '/compress-video-whatsapp',
+      color: 'from-emerald-500 to-green-600'
+    },
+    {
+      id: 'wav-to-mp3',
+      title: 'Convertidor Audio (WAV a MP3)',
+      description: 'Convierte grabaciones pesadas WAV a MP3 comprimido de 128 o 192 kbps en el navegador.',
+      category: 'audio',
+      icon: 'audio',
+      path: '/wav-to-mp3',
+      color: 'from-purple-500 to-indigo-600'
+    },
+  ];
 
   const imageTools: Tool[] = [
     { id: 'jpg-to-png', title: t('tools.jpgToPng.title'), description: t('tools.jpgToPng.description'), category: 'images', icon: 'image', path: '/jpg-to-png', color: 'from-blue-500 to-cyan-500' },
@@ -28,8 +49,10 @@ const Home: React.FC = () => {
   ];
 
   const docTools: Tool[] = [
-    { id: 'docx-to-pdf', title: t('tools.docxToPdf.title'), description: t('tools.docxToPdf.description'), category: 'documents', icon: 'doc', path: '/docx-to-pdf', color: 'from-blue-600 to-indigo-600' },
-    { id: 'pdf-to-docx', title: t('tools.pdfToDocx.title'), description: t('tools.pdfToDocx.description'), category: 'documents', icon: 'doc', path: '/pdf-to-docx', color: 'from-slate-500 to-gray-500' },
+    { id: 'docx-to-pdf', title: 'DOCX a PDF', description: 'Convierte documentos Word a formato PDF limpio', category: 'documents', icon: 'doc', path: '/docx-to-pdf', color: 'from-blue-600 to-indigo-600' },
+    { id: 'xlsx-to-pdf', title: 'Excel (XLSX) a PDF', description: 'Convierte hojas de cálculo a tablas PDF maquetadas', category: 'documents', icon: 'doc', path: '/xlsx-to-pdf', color: 'from-emerald-600 to-teal-600' },
+    { id: 'txt-to-pdf', title: 'TXT / HTML a PDF', description: 'Convierte archivos de texto y HTML a PDF', category: 'documents', icon: 'doc', path: '/txt-to-pdf', color: 'from-slate-600 to-gray-700' },
+    { id: 'ocr', title: 'OCR (Imagen a Texto)', description: 'Extrae texto de fotos y documentos escaneados', category: 'documents', icon: 'doc', path: '/ocr', color: 'from-violet-600 to-purple-600' },
   ];
 
   const features = [
@@ -50,6 +73,8 @@ const Home: React.FC = () => {
           {tool.category === 'images' && <Image className="w-6 h-6 text-white" />}
           {tool.category === 'pdf' && <FileText className="w-6 h-6 text-white" />}
           {tool.category === 'documents' && <FileStack className="w-6 h-6 text-white" />}
+          {tool.category === 'audio' && <Music className="w-6 h-6 text-white" />}
+          {tool.category === 'video' && <Video className="w-6 h-6 text-white" />}
         </div>
         <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">
           {tool.title}
@@ -109,6 +134,28 @@ const Home: React.FC = () => {
                 {t('nav.pdf')}
               </Button>
             </Link>
+          </div>
+        </section>
+
+        {/* Multimedia & Video Tools Section */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs bg-emerald-100 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                  Novedad
+                </span>
+                <h2 className="text-2xl font-bold text-[var(--color-text)]">
+                  Herramientas Multimedia (Vídeo y Audio)
+                </h2>
+              </div>
+              <p className="text-[var(--color-muted)] mt-1">
+                Comprime vídeos pesados para WhatsApp y convierte audios WAV a MP3 100% en tu navegador
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {multimediaTools.map(tool => <ToolCard key={tool.id} tool={tool} />)}
           </div>
         </section>
 

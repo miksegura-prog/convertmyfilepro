@@ -22,6 +22,13 @@ const MergePdf = lazy(() => import('@/pages/tools/MergePdf'));
 const SplitPdf = lazy(() => import('@/pages/tools/SplitPdf'));
 const JpgToPdf = lazy(() => import('@/pages/tools/JpgToPdf'));
 
+const DocxToPdf = lazy(() => import('@/pages/tools/DocxToPdf'));
+const XlsxToPdf = lazy(() => import('@/pages/tools/XlsxToPdf'));
+const TxtToPdf = lazy(() => import('@/pages/tools/TxtToPdf'));
+
+const WavToMp3 = lazy(() => import('@/pages/tools/WavToMp3'));
+const CompressVideo = lazy(() => import('@/pages/tools/CompressVideo'));
+
 const OcrTool = lazy(() => import('@/pages/tools/OcrTool'));
 
 const PageLoader: React.FC = () => (
@@ -109,6 +116,48 @@ function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <JpgToPdf />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="docx-to-pdf"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <DocxToPdf />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="xlsx-to-pdf"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <XlsxToPdf />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="txt-to-pdf"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <TxtToPdf />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="wav-to-mp3"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <WavToMp3 />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="compress-video-whatsapp"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <CompressVideo />
                   </Suspense>
                 }
               />

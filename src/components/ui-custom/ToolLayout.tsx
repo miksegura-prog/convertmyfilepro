@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Loader2 } from 'lucide-react';
+import { ArrowLeft, Loader2, Archive, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import JSZip from 'jszip';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -12,6 +13,7 @@ import { useFileUpload } from '@/hooks/useFileUpload';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import type { FileWithPreview } from '@/types';
 import { SEO } from './SEO';
+import { downloadBlob } from '@/utils/fileHelpers';
 
 interface ToolLayoutProps {
   toolId: string;
@@ -66,6 +68,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
   const [progress, setProgress] = useState(0);
   const [convertedFiles, setConvertedFiles] = useState<FileWithPreview[]>([]);
   const [convertError, setConvertError] = useState<string | null>(null);
+  const [isZipping, setIsZipping] = useState(false);
 
   const handleConvert = async () => {
     if (files.length === 0) return;
@@ -89,6 +92,29 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
 
   const handleDownload = (file: FileWithPreview) => {
     trackDownload(toolId, file.file.size);
+  };
+
+  const handleDownloadAllZip = async () => {
+    if (convertedFiles.length === 0) return;
+    setIsZipping(true);
+
+    try {
+      const zip = new JSZip();
+      for (const item of convertedFiles) {
+        if (item.result instanceof Blob) {
+          const extension = outputFormat || item.file.name.split('.').pop() || 'bin';
+          const baseName = item.file.name.replace(/\.[^/.]+$/, '');
+          zip.file(`${baseName}_converted.${extension}`, item.result);
+        }
+      }
+
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      downloadBlob(zipBlob, `${toolId}_files.zip`);
+    } catch (e) {
+      console.error('Failed to create ZIP:', e);
+    } finally {
+      setIsZipping(false);
+    }
   };
 
   const handleReset = () => {
@@ -194,6 +220,33 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
           {/* Results */}
           {convertedFiles.length > 0 && (
             <div className="space-y-4">
+              {/* Batch Download ZIP Button if multiple files */}
+              {convertedFiles.filter(f => f.result).length > 1 && (
+                <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-blue-500 text-white flex items-center justify-center">
+                      <Archive className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-blue-900 dark:text-blue-200">
+                        {convertedFiles.length} archivos convertidos
+                      </p>
+                      <p className="text-xs text-blue-700 dark:text-blue-400">
+                        Descárgalos todos juntos en un único archivo comprimido ZIP
+                      </p>
+                    </div>
+                  </div>
+                  <Button
+                    onClick={handleDownloadAllZip}
+                    disabled={isZipping}
+                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white shadow-md"
+                  >
+                    {isZipping ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Download className="w-4 h-4 mr-2" />}
+                    Descargar Todo (.ZIP)
+                  </Button>
+                </div>
+              )}
+
               {convertedFiles.map((file) => (
                 <ConversionResult
                   key={file.id}
