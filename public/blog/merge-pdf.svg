@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <defs>
+    <linearGradient id="merge-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dc2626" />
+      <stop offset="100%" stop-color="#b91c1c" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="24" fill="url(#merge-bg)"/>
+  <!-- Multiple PDFs merging -->
+  <g transform="translate(80, 80)">
+    <rect x="0" y="0" width="140" height="200" rx="6" fill="white" opacity="0.9"/>
+    <rect x="0" y="0" width="140" height="40" rx="6" fill="#ef4444"/>
+    <text x="70" y="26" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">PDF 1</text>
+    <line x1="15" y1="60" x2="125" y2="60" stroke="#fecaca" stroke-width="2"/>
+    <line x1="15" y1="80" x2="100" y2="80" stroke="#fecaca" stroke-width="2"/>
+    <line x1="15" y1="100" x2="110" y2="100" stroke="#fecaca" stroke-width="2"/>
+  </g>
+  <g transform="translate(140, 140)">
+    <rect x="0" y="0" width="140" height="200" rx="6" fill="white" opacity="0.9"/>
+    <rect x="0" y="0" width="140" height="40" rx="6" fill="#f87171"/>
+    <text x="70" y="26" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">PDF 2</text>
+    <line x1="15" y1="60" x2="100" y2="60" stroke="#fecaca" stroke-width="2"/>
+    <line x1="15" y1="80" x2="115" y2="80" stroke="#fecaca" stroke-width="2"/>
+    <line x1="15" y1="100" x2="95" y2="100" stroke="#fecaca" stroke-width="2"/>
+  </g>
+  <g transform="translate(200, 200)">
+    <rect x="0" y="0" width="140" height="200" rx="6" fill="white" opacity="0.9"/>
+    <rect x="0" y="0" width="140" height="40" rx="6" fill="#fca5a5"/>
+    <text x="70" y="26" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">PDF 3</text>
+    <line x1="15" y1="60" x2="105" y2="60" stroke="#fecaca" stroke-width="2"/>
+    <line x1="15" y1="80" x2="90" y2="80" stroke="#fecaca" stroke-width="2"/>
+    <line x1="15" y1="100" x2="110" y2="100" stroke="#fecaca" stroke-width="2"/>
+  </g>
+  <!-- Merge button -->
+  <g transform="translate(370, 230)">
+    <circle cx="30" cy="30" r="30" fill="#fbbf24"/>
+    <path d="M20 30 L40 30 M30 20 L30 40" stroke="#dc2626" stroke-width="4" stroke-linecap="round"/>
+    <text x="30" y="80" font-family="Arial, sans-serif" font-size="14" fill="#fde68a" text-anchor="middle">Unir</text>
+  </g>
+  <!-- Result single PDF -->
+  <g transform="translate(500, 130)">
+    <rect x="0" y="0" width="180" height="240" rx="8" fill="white" opacity="0.95"/>
+    <rect x="0" y="0" width="180" height="50" rx="8" fill="#dc2626"/>
+    <text x="90" y="32" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle" font-weight="bold">PDF UNIDO</text>
+    <line x1="20" y1="75" x2="160" y2="75" stroke="#fecaca" stroke-width="2"/>
+    <line x1="20" y1="100" x2="140" y2="100" stroke="#fecaca" stroke-width="2"/>
+    <line x1="20" y1="125" x2="150" y2="125" stroke="#fecaca" stroke-width="2"/>
+    <line x1="20" y1="150" x2="130" y2="150" stroke="#fecaca" stroke-width="2"/>
+    <line x1="20" y1="175" x2="155" y2="175" stroke="#fecaca" stroke-width="2"/>
+    <circle cx="90" cy="215" r="12" fill="#22c55e"/>
+    <path d="M84 215 L88 220 L97 210" stroke="white" stroke-width="3" fill="none"/>
+  </g>
+  <text x="400" y="450" font-family="Arial, sans-serif" font-size="15" fill="#fca5a5" text-anchor="middle">Une 3, 5 o 10 PDFs en un solo documento</text>
+</svg>

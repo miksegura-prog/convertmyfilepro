@@ -222,5 +222,20 @@
     "terms": "Terms of Service",
     "contact": "Contact Us",
     "allRights": "All rights reserved."
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Guides, tutorials and tips to get the most out of our file conversion tools.",
+    "article": "article",
+    "articles": "articles",
+    "noPosts": "No articles published yet. Come back soon!",
+    "readMore": "Read more",
+    "backToBlog": "Back to Blog",
+    "allArticles": "All articles",
+    "notFound": "Post not found",
+    "notFoundDesc": "The article you are looking for does not exist or is not yet published.",
+    "comingSoon": "Coming Soon",
+    "publishDate": "Publish date",
+    "availableIn": "Also available in"
   }
 }

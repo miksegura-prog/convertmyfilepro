@@ -222,5 +222,20 @@
     "terms": "Términos de Servicio",
     "contact": "Contáctanos",
     "allRights": "Todos los derechos reservados."
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Guias, tutoriales y consejos para sacar el maximo provecho a nuestras herramientas.",
+    "article": "articulo",
+    "articles": "articulos",
+    "noPosts": "Aun no hay articulos publicados. Vuelve pronto!",
+    "readMore": "Leer mas",
+    "backToBlog": "Volver al Blog",
+    "allArticles": "Todos los articulos",
+    "notFound": "Articulo no encontrado",
+    "notFoundDesc": "El articulo que buscas no existe o aun no ha sido publicado.",
+    "comingSoon": "Proximamente",
+    "publishDate": "Fecha de publicacion",
+    "availableIn": "Tambien disponible en"
   }
 }

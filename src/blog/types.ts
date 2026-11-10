@@ -1,15 +1,20 @@
-export interface BlogPost {
-  slug: string;
+export interface LocalizedBlogContent {
   title: string;
   description: string;
   content: string;
-  date: string;
   readTime: string;
-  author: string;
   category: string;
   tags: string[];
-  image?: string;
+}
+
+export interface BlogPost {
+  slug: string;
+  publishDate: string; // YYYY-MM-DD — artículo visible si <= fecha actual
+  author: string;
+  image: string; // ruta a ilustración SVG /blog/ilustracion.svg
   featured?: boolean;
+  es: LocalizedBlogContent;
+  en: LocalizedBlogContent;
 }
 
 export interface BlogCategory {

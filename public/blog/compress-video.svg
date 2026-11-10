@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <defs>
+    <linearGradient id="vid-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="vid-screen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="24" fill="url(#vid-bg)"/>
+  <!-- Smartphone frame -->
+  <rect x="300" y="80" width="200" height="340" rx="30" fill="#1c1917" stroke="#a7f3d0" stroke-width="3"/>
+  <rect x="310" y="95" width="180" height="260" rx="8" fill="url(#vid-screen)"/>
+  <!-- Play button -->
+  <circle cx="400" cy="225" r="30" fill="white" opacity="0.9"/>
+  <path d="M390 212 L390 238 L415 225 Z" fill="#059669"/>
+  <!-- Timeline bar -->
+  <rect x="320" y="300" width="160" height="6" rx="3" fill="white" opacity="0.3"/>
+  <rect x="320" y="300" width="100" height="6" rx="3" fill="white" opacity="0.8"/>
+  <circle cx="420" cy="303" r="6" fill="white"/>
+  <!-- Size badge -->
+  <g transform="translate(260, 380)">
+    <rect x="0" y="0" width="280" height="50" rx="25" fill="white" opacity="0.15"/>
+    <text x="140" y="32" font-family="Arial, sans-serif" font-size="18" fill="#a7f3d0" text-anchor="middle" font-weight="bold">&lt; 16 MB ✓</text>
+  </g>
+  <!-- Compress arrows -->
+  <g transform="translate(80, 210)" fill="#6ee7b7" opacity="0.7">
+    <path d="M0 30 L40 30 L40 0 M0 30 L40 30 L40 60" stroke="#6ee7b7" stroke-width="3" fill="none"/>
+    <text x="60" y="38" font-family="Arial, sans-serif" font-size="14" fill="#a7f3d0">Comprimir</text>
+  </g>
+  <g transform="translate(660, 210)" fill="#6ee7b7" opacity="0.7">
+    <path d="M40 30 L0 30 L0 0 M40 30 L0 30 L0 60" stroke="#6ee7b7" stroke-width="3" fill="none"/>
+    <text x="-40" y="38" font-family="Arial, sans-serif" font-size="14" fill="#a7f3d0" text-anchor="end">WhatsApp</text>
+  </g>
+  <!-- WhatsApp icon -->
+  <g transform="translate(610, 60)">
+    <rect x="0" y="0" width="50" height="50" rx="12" fill="#25D366"/>
+    <text x="25" y="34" font-family="Arial, sans-serif" font-size="22" fill="white" text-anchor="middle">WA</text>
+  </g>
+</svg>
