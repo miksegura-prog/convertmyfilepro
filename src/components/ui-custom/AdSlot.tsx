@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface AdSlotProps {
-  position: 'top' | 'sidebar' | 'bottom' | 'inline';
+  position: 'sidebar' | 'inline';
   className?: string;
   id?: string;
 }
@@ -15,9 +15,7 @@ export const AdSlot: React.FC<AdSlotProps> = ({
   const { t } = useTranslation();
   
   const dimensions = {
-    top: 'w-full h-[90px] max-w-[728px]',
     sidebar: 'w-[300px] h-[250px]',
-    bottom: 'w-full h-[90px] max-w-[728px]',
     inline: 'w-full h-[250px] max-w-[300px]'
   };
 
@@ -39,9 +37,7 @@ export const AdSlot: React.FC<AdSlotProps> = ({
         {t('ads.advertisement')}
       </span>
       <span className="text-sm text-[var(--color-muted)] mt-1">
-        {position === 'top' && '728x90'}
         {position === 'sidebar' && '300x250'}
-        {position === 'bottom' && '728x90'}
         {position === 'inline' && '300x250'}
       </span>
       
