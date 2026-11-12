@@ -11,6 +11,7 @@ import { mergePdfs, splitPdf, compressPdf, jpgToPdf } from '@/tools/pdfTools';
 import { docxToPdf, xlsxToPdf, txtToPdf } from '@/tools/documentConverter';
 import { compressVideoForWhatsApp } from '@/tools/videoCompressor';
 import { compressImage, resizeImage, convertHeicToJpg } from '@/tools/imageConverter';
+import { srtToVtt, vttToSrt, txtToSrt } from '@/tools/subtitleConverter';
 import type { FileWithPreview } from '@/types';
 import { Card } from '@/components/ui/card';
 const SeoToolPage: React.FC = () => {
@@ -136,6 +137,22 @@ const SeoToolPage: React.FC = () => {
           else if (dt === 'xlsx') blob = await xlsxToPdf(files[i].file);
           else blob = await txtToPdf(files[i].file);
           files[i].result = blob; files[i].resultUrl = URL.createObjectURL(blob);
+          o.setProgress(((i + 1) / n) * 100);
+        }
+        break;
+      }
+      case 'subtitle-convert': {
+        const direction = (tool.converterOptions?.direction as string) || 'srt-to-vtt';
+        for (let i = 0; i < n; i++) {
+          o.setProgress((i / n) * 50);
+          const content = await files[i].file.text();
+          let result: string;
+          if (direction === 'vtt-to-srt') result = vttToSrt(content);
+          else if (direction === 'txt-to-srt') result = txtToSrt(content);
+          else result = srtToVtt(content);
+          const mime = direction === 'srt-to-vtt' ? 'text/vtt' : 'text/plain';
+          files[i].result = new Blob([result], { type: mime });
+          files[i].resultUrl = URL.createObjectURL(files[i].result!);
           o.setProgress(((i + 1) / n) * 100);
         }
         break;

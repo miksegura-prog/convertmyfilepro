@@ -29,6 +29,10 @@ const TxtToPdf = lazy(() => import('@/pages/tools/TxtToPdf'));
 const WavToMp3 = lazy(() => import('@/pages/tools/WavToMp3'));
 const CompressVideo = lazy(() => import('@/pages/tools/CompressVideo'));
 
+const SrtToVtt = lazy(() => import('@/pages/tools/SrtToVtt'));
+const VttToSrt = lazy(() => import('@/pages/tools/VttToSrt'));
+const TxtToSrt = lazy(() => import('@/pages/tools/TxtToSrt'));
+
 const OcrTool = lazy(() => import('@/pages/tools/OcrTool'));
 
 const SeoToolPage = lazy(() => import('@/pages/SeoToolPage'));
@@ -162,6 +166,31 @@ function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <CompressVideo />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="srt-to-vtt"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <SrtToVtt />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="vtt-to-srt"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <VttToSrt />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="txt-to-srt"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <TxtToSrt />
                   </Suspense>
                 }
               />

@@ -268,6 +268,33 @@
       "description": "Reduce video file size for WhatsApp sharing",
       "seoTitle": "Compress Video for WhatsApp Online Free | ConvertMyFilePro",
       "seoDescription": "Free online video compressor. Reduce video size under 16MB for WhatsApp. Fast, private, no server upload."
+    },
+    "srtToVtt": {
+      "title": "SRT to VTT",
+      "description": "Convert SRT subtitles to WebVTT format",
+      "seoTitle": "Convert SRT to VTT Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online SRT to VTT converter. Convert SubRip subtitles to WebVTT format instantly. Private, no upload required.",
+      "faq1": { "q": "What is the difference between SRT and VTT?", "a": "SRT (SubRip) uses commas for milliseconds (00:00:01,000) while VTT (WebVTT) uses dots (00:00:01.000). VTT also supports additional styling options like text positioning and colors." },
+      "faq2": { "q": "Will I lose any timing information?", "a": "No. The conversion preserves all timestamps, text content, and formatting. Only the timestamp delimiter changes from comma to dot." },
+      "faq3": { "q": "Can I convert multiple SRT files at once?", "a": "Yes. You can batch convert up to 20 SRT subtitle files to VTT format simultaneously." }
+    },
+    "vttToSrt": {
+      "title": "VTT to SRT",
+      "description": "Convert WebVTT subtitles to SRT format",
+      "seoTitle": "Convert VTT to SRT Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online VTT to SRT converter. Convert WebVTT subtitles to SubRip format instantly. Private, no upload required.",
+      "faq1": { "q": "Why convert VTT to SRT?", "a": "Many media players and video editors prefer SRT format. SRT is more widely supported across different devices and software platforms." },
+      "faq2": { "q": "Does VTT to SRT conversion change the timing?", "a": "No. All timestamps and text content remain exactly the same. Only the format changes from WebVTT to SubRip standard." },
+      "faq3": { "q": "Will my subtitles lose WebVTT styling?", "a": "SRT format only supports plain text without styling. Any position, color, or font settings from VTT will be removed during conversion." }
+    },
+    "txtToSrt": {
+      "title": "TXT to SRT",
+      "description": "Convert plain text files to SRT subtitles",
+      "seoTitle": "Convert TXT to SRT Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online TXT to SRT converter. Turn plain text into subtitled SRT files. Fast, private, no download required.",
+      "faq1": { "q": "How does TXT to SRT conversion work?", "a": "The tool splits your text into segments based on paragraphs. Each segment becomes a subtitle block with auto-calculated timing based on reading speed." },
+      "faq2": { "q": "Can I adjust the timing?", "a": "The auto-timing uses ~15 characters per second. For precise timing, we recommend using SRT editing software after conversion." },
+      "faq3": { "q": "What is TXT to SRT good for?", "a": "Perfect for creating subtitles from transcripts, scripts, or lyrics. Great for YouTubers, educators, and content creators who need quick subtitles." }
     }
   },
   "faq": {
