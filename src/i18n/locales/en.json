@@ -39,6 +39,22 @@
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode"
   },
+  "homepage": {
+    "convertNow": "Convert now",
+    "multimedia": {
+      "badge": "New",
+      "title": "Multimedia Tools (Video & Audio)",
+      "description": "Compress videos for WhatsApp and convert WAV audio to MP3 right in your browser.",
+      "compressVideo": {
+        "title": "Compress Video for WhatsApp",
+        "description": "Reduce videos to under 16 MB with excellent clarity for sharing on WhatsApp."
+      },
+      "wavToMp3": {
+        "title": "WAV to MP3 Audio Converter",
+        "description": "Convert large WAV files to 128 or 192 kbps MP3 right in your browser."
+      }
+    }
+  },
   "tools": {
     "categories": {
       "images": {

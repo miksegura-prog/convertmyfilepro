@@ -16,8 +16,8 @@ const Home: React.FC = () => {
   const multimediaTools: Tool[] = [
     {
       id: 'compress-video-whatsapp',
-      title: 'Comprimir Vídeo para WhatsApp',
-      description: 'Reduce vídeos a menos de 16 MB con excelente nitidez para enviar por WhatsApp.',
+      title: t('homepage.multimedia.compressVideo.title'),
+      description: t('homepage.multimedia.compressVideo.description'),
       category: 'video',
       icon: 'video',
       path: '/compress-video-whatsapp',
@@ -25,8 +25,8 @@ const Home: React.FC = () => {
     },
     {
       id: 'wav-to-mp3',
-      title: 'Convertidor Audio (WAV a MP3)',
-      description: 'Convierte grabaciones pesadas WAV a MP3 comprimido de 128 o 192 kbps en el navegador.',
+      title: t('homepage.multimedia.wavToMp3.title'),
+      description: t('homepage.multimedia.wavToMp3.description'),
       category: 'audio',
       icon: 'audio',
       path: '/wav-to-mp3',
@@ -84,7 +84,7 @@ const Home: React.FC = () => {
         </p>
         <div className="mt-4 flex items-center text-[var(--color-accent)] text-sm font-medium
                       opacity-0 group-hover:opacity-100 transition-opacity">
-          {t('common.convert')} now
+          {t('homepage.convertNow')}
           <ArrowRight className="w-4 h-4 ml-1" />
         </div>
       </Card>
@@ -143,14 +143,14 @@ const Home: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xs bg-emerald-100 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                  Novedad
+                  {t('homepage.multimedia.badge')}
                 </span>
                 <h2 className="text-2xl font-bold text-[var(--color-text)]">
-                  Herramientas Multimedia (Vídeo y Audio)
+                  {t('homepage.multimedia.title')}
                 </h2>
               </div>
               <p className="text-[var(--color-muted)] mt-1">
-                Comprime vídeos pesados para WhatsApp y convierte audios WAV a MP3 100% en tu navegador
+                {t('homepage.multimedia.description')}
               </p>
             </div>
           </div>
