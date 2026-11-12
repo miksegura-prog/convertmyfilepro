@@ -122,6 +122,7 @@ export const Header: React.FC = () => {
                 size="sm"
                 className="gap-1.5 text-green-600 dark:text-green-400 font-semibold cursor-default"
                 disabled
+                aria-label={t('pro.active')}
               >
                 <Crown className="w-4 h-4" />
                 <span className="hidden sm:inline">PRO</span>
@@ -137,7 +138,7 @@ export const Header: React.FC = () => {
                 }}
               >
                 <Sparkles className="w-4 h-4" />
-                <span className="hidden sm:inline">PRO / Sin Anuncios</span>
+                <span className="hidden sm:inline">{t('pro.badge')}</span>
               </Button>
             )}
             <DropdownMenu>
@@ -164,6 +165,7 @@ export const Header: React.FC = () => {
                 size="sm"
                 className="gap-1.5 text-green-600 dark:text-green-400 font-semibold cursor-default"
                 disabled
+                aria-label={t('pro.active')}
               >
                 <Crown className="w-4 h-4" />
               </Button>
@@ -178,6 +180,7 @@ export const Header: React.FC = () => {
                 }}
               >
                 <Sparkles className="w-4 h-4" />
+                <span className="sr-only">{t('pro.badge')}</span>
               </Button>
             )}
             <DropdownMenu>
@@ -227,7 +230,7 @@ export const Header: React.FC = () => {
               {isPro ? (
                 <div className="flex items-center gap-2 px-3 py-2 rounded-lg text-green-600 dark:text-green-400 font-semibold">
                   <Crown className="w-4 h-4" />
-                  PRO Activo
+                  {t('pro.active')}
                 </div>
               ) : (
                 <button
@@ -239,7 +242,7 @@ export const Header: React.FC = () => {
                   className="flex items-center gap-2 px-3 py-2 rounded-lg w-full text-left text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/30 font-semibold"
                 >
                   <Sparkles className="w-4 h-4" />
-                  PRO / Sin Anuncios
+                  {t('pro.badge')}
                 </button>
               )}
             </nav>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Loader2, CheckCircle2, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useProStatus } from '@/hooks/useProStatus';
@@ -7,18 +8,18 @@ import { useProStatus } from '@/hooks/useProStatus';
 const ProSuccess: React.FC = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { activatePro } = useProStatus();
-  const [status, setStatus] = useState<'verifying' | 'success' | 'error'>('verifying');
-  const [errorMsg, setErrorMsg] = useState('');
+  const sessionId = searchParams.get('session_id');
+  const [status, setStatus] = useState<'verifying' | 'success' | 'error'>(
+    sessionId ? 'verifying' : 'error'
+  );
+  const [errorMsg, setErrorMsg] = useState(
+    sessionId ? '' : t('pro.success.noSession')
+  );
 
   useEffect(() => {
-    const sessionId = searchParams.get('session_id');
-
-    if (!sessionId) {
-      setStatus('error');
-      setErrorMsg('No se encontró el ID de sesión de pago.');
-      return;
-    }
+    if (!sessionId) return;
 
     const verifySession = async () => {
       try {
@@ -31,16 +32,16 @@ const ProSuccess: React.FC = () => {
           setStatus('success');
         } else {
           setStatus('error');
-          setErrorMsg(data.error || 'No se pudo verificar el pago.');
+          setErrorMsg(data.error || t('pro.success.verifyFailed'));
         }
-      } catch (err) {
+      } catch {
         setStatus('error');
-        setErrorMsg('Error de conexión al verificar el pago. Contacta a soporte.');
+        setErrorMsg(t('pro.success.connectionError'));
       }
     };
 
     verifySession();
-  }, [searchParams, activatePro]);
+  }, [sessionId, activatePro, t]);
 
   return (
     <div className="min-h-[60vh] flex items-center justify-center">
@@ -51,10 +52,10 @@ const ProSuccess: React.FC = () => {
               <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
             </div>
             <h1 className="text-2xl font-bold text-[var(--color-text)]">
-              Verificando tu pago...
+              {t('pro.success.verifyingTitle')}
             </h1>
             <p className="text-[var(--color-muted)]">
-              Estamos confirmando tu suscripción PRO. Un momento...
+              {t('pro.success.verifyingDescription')}
             </p>
           </>
         )}
@@ -65,18 +66,17 @@ const ProSuccess: React.FC = () => {
               <CheckCircle2 className="w-10 h-10 text-green-500" />
             </div>
             <h1 className="text-2xl font-bold text-green-600 dark:text-green-400">
-              ¡Bienvenido a PRO!
+              {t('pro.success.title')}
             </h1>
             <p className="text-[var(--color-muted)]">
-              Tu suscripción PRO está activa. Disfruta de todas las ventajas:
-              sin publicidad, lotes ilimitados, vídeos hasta 2 GB y prioridad de procesamiento.
+              {t('pro.success.description')}
             </p>
             <div className="space-y-3 pt-4">
               <Button
                 onClick={() => navigate('/')}
                 className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-6"
               >
-                Ir a las herramientas
+                {t('pro.success.goToTools')}
               </Button>
             </div>
           </>
@@ -88,13 +88,13 @@ const ProSuccess: React.FC = () => {
               <XCircle className="w-10 h-10 text-red-500" />
             </div>
             <h1 className="text-2xl font-bold text-red-600 dark:text-red-400">
-              Error de verificación
+              {t('pro.success.errorTitle')}
             </h1>
             <p className="text-[var(--color-muted)]">
               {errorMsg}
             </p>
             <p className="text-sm text-[var(--color-muted)]">
-              Si ya realizaste el pago, contacta a soporte con tu ID de sesión de Stripe.
+              {t('pro.success.errorSupport')}
             </p>
             <div className="space-y-3 pt-4">
               <Button
@@ -102,7 +102,7 @@ const ProSuccess: React.FC = () => {
                 variant="outline"
                 className="w-full py-6"
               >
-                Volver al inicio
+                {t('pro.success.backHome')}
               </Button>
             </div>
           </>

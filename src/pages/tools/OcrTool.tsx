@@ -156,12 +156,12 @@ const OcrTool: React.FC = () => {
           {!isPro && (
             <div className="mt-4 flex items-center gap-2 text-xs text-[var(--color-muted)] p-2 bg-[var(--color-bg)] rounded-lg">
               <span className="font-medium">
-                OCR Gratis: {ocrCount}/{OCR_FREE_LIMIT} páginas procesadas
+                {t('pro.ocrCounter', { count: ocrCount, limit: OCR_FREE_LIMIT })}
               </span>
               {ocrCount >= OCR_FREE_LIMIT && (
                 <span className="text-amber-500 font-semibold flex items-center gap-1">
                   <Sparkles className="w-3 h-3" />
-                  Límite alcanzado — Actualiza a PRO para páginas ilimitadas
+                  {t('pro.ocrLimitReached')}
                 </span>
               )}
             </div>

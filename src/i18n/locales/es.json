@@ -55,6 +55,52 @@
       }
     }
   },
+  "pro": {
+    "badge": "PRO / Sin anuncios",
+    "active": "PRO activo",
+    "benefitsTitle": "Con PRO obtienes:",
+    "keepFree": "Seguir gratis",
+    "upgrade": "Ir a PRO",
+    "benefits": {
+      "adFree": "Sin publicidad: una experiencia limpia",
+      "unlimitedBatch": "Lotes ilimitados, sin límite de archivos",
+      "largeVideos": "Vídeos de hasta 2 GB",
+      "priority": "Procesamiento prioritario"
+    },
+    "triggers": {
+      "batch": {
+        "title": "Límite de archivos alcanzado",
+        "description": "La versión gratuita permite procesar hasta 3 archivos por lote. Pásate a PRO para procesar archivos ilimitados."
+      },
+      "video": {
+        "title": "Límite de tamaño de vídeo",
+        "description": "La versión gratuita permite vídeos de hasta 25 MB. Pásate a PRO para comprimir vídeos de hasta 2 GB."
+      },
+      "ocr": {
+        "title": "Límite de OCR alcanzado",
+        "description": "La versión gratuita permite extraer texto de hasta 2 imágenes por sesión. Pásate a PRO para procesar páginas ilimitadas."
+      },
+      "general": {
+        "title": "Función PRO",
+        "description": "Esta función solo está disponible para usuarios PRO. Pásate a PRO y disfruta de todas las ventajas."
+      }
+    },
+    "ocrCounter": "OCR gratis: {{count}}/{{limit}} páginas procesadas",
+    "ocrLimitReached": "Límite alcanzado: pásate a PRO para procesar páginas ilimitadas",
+    "success": {
+      "noSession": "No se encontró el ID de sesión de pago.",
+      "verifyFailed": "No se pudo verificar el pago.",
+      "connectionError": "Error de conexión al verificar el pago. Contacta con soporte.",
+      "verifyingTitle": "Verificando tu pago...",
+      "verifyingDescription": "Estamos confirmando tu suscripción PRO. Un momento...",
+      "title": "¡Te damos la bienvenida a PRO!",
+      "description": "Tu suscripción PRO está activa. Disfruta de todas las ventajas: sin publicidad, lotes ilimitados, vídeos de hasta 2 GB y procesamiento prioritario.",
+      "goToTools": "Ir a las herramientas",
+      "errorTitle": "Error de verificación",
+      "errorSupport": "Si ya realizaste el pago, contacta con soporte e indícales tu ID de sesión de Stripe.",
+      "backHome": "Volver al inicio"
+    }
+  },
   "tools": {
     "categories": {
       "images": {

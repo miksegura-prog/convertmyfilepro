@@ -55,6 +55,52 @@
       }
     }
   },
+  "pro": {
+    "badge": "PRO / Ad-Free",
+    "active": "PRO Active",
+    "benefitsTitle": "With PRO, you get:",
+    "keepFree": "Stay on Free",
+    "upgrade": "Upgrade to PRO",
+    "benefits": {
+      "adFree": "Ad-free experience",
+      "unlimitedBatch": "Unlimited batch processing, with no file limits",
+      "largeVideos": "Videos up to 2 GB",
+      "priority": "Priority processing"
+    },
+    "triggers": {
+      "batch": {
+        "title": "File limit reached",
+        "description": "The free plan supports up to 3 files per batch. Upgrade to PRO for unlimited batch processing."
+      },
+      "video": {
+        "title": "Video size limit reached",
+        "description": "The free plan supports videos up to 25 MB. Upgrade to PRO to compress videos up to 2 GB."
+      },
+      "ocr": {
+        "title": "OCR limit reached",
+        "description": "The free plan lets you extract text from up to 2 images per session. Upgrade to PRO for unlimited pages."
+      },
+      "general": {
+        "title": "PRO feature",
+        "description": "This feature is available to PRO users only. Upgrade now to enjoy all the benefits."
+      }
+    },
+    "ocrCounter": "Free OCR: {{count}}/{{limit}} pages processed",
+    "ocrLimitReached": "Limit reached: upgrade to PRO for unlimited pages",
+    "success": {
+      "noSession": "Payment session ID not found.",
+      "verifyFailed": "Unable to verify the payment.",
+      "connectionError": "Connection error while verifying payment. Please contact support.",
+      "verifyingTitle": "Verifying your payment...",
+      "verifyingDescription": "We're confirming your PRO subscription. Please wait...",
+      "title": "Welcome to PRO!",
+      "description": "Your PRO subscription is active. Enjoy all the benefits: ad-free use, unlimited batches, videos up to 2 GB, and priority processing.",
+      "goToTools": "Go to tools",
+      "errorTitle": "Verification error",
+      "errorSupport": "If you've already paid, contact support and provide your Stripe session ID.",
+      "backHome": "Back to home"
+    }
+  },
   "tools": {
     "categories": {
       "images": {

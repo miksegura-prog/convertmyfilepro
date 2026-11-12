@@ -17,32 +17,12 @@ interface ProModalProps {
   trigger?: 'batch' | 'video' | 'ocr' | 'general';
 }
 
-const triggers = {
-  batch: {
-    title: 'Límite de archivos alcanzado',
-    description: 'Con la versión gratuita puedes procesar hasta 3 archivos por lote. Actualiza a PRO y procesa archivos ilimitados.',
-  },
-  video: {
-    title: 'Límite de tamaño de vídeo',
-    description: 'La versión gratuita permite vídeos de hasta 25 MB. Actualiza a PRO y comprime vídeos de hasta 2 GB.',
-  },
-  ocr: {
-    title: 'Límite de OCR alcanzado',
-    description: 'Con la versión gratuita puedes extraer texto de hasta 2 imágenes por sesión. Actualiza a PRO y procesa páginas ilimitadas.',
-  },
-  general: {
-    title: 'Funcionalidad PRO',
-    description: 'Esta funcionalidad está disponible solo para usuarios PRO. Actualiza ahora y disfruta de todas las ventajas.',
-  },
-};
-
 export const ProModal: React.FC<ProModalProps> = ({
   open,
   onOpenChange,
   trigger = 'general',
 }) => {
   const { t } = useTranslation();
-  const currentTrigger = triggers[trigger];
 
   const handleUpgrade = () => {
     const paymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK;
@@ -53,10 +33,10 @@ export const ProModal: React.FC<ProModalProps> = ({
   };
 
   const benefits = [
-    { icon: Ban, text: 'Sin publicidad — experiencia limpia' },
-    { icon: Upload, text: 'Lotes ilimitados — sin restricción de archivos' },
-    { icon: Video, text: 'Vídeos hasta 2 GB' },
-    { icon: Zap, text: 'Prioridad de procesamiento' },
+    { icon: Ban, text: t('pro.benefits.adFree') },
+    { icon: Upload, text: t('pro.benefits.unlimitedBatch') },
+    { icon: Video, text: t('pro.benefits.largeVideos') },
+    { icon: Zap, text: t('pro.benefits.priority') },
   ];
 
   return (
@@ -67,16 +47,16 @@ export const ProModal: React.FC<ProModalProps> = ({
             <Crown className="w-8 h-8 text-white" />
           </div>
           <DialogTitle className="text-center text-2xl font-bold">
-            {currentTrigger.title}
+            {t(`pro.triggers.${trigger}.title`)}
           </DialogTitle>
           <DialogDescription className="text-center text-base pt-2">
-            {currentTrigger.description}
+            {t(`pro.triggers.${trigger}.description`)}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-3 my-4">
           <p className="text-sm font-semibold text-[var(--color-text)] text-center mb-3">
-            {t('pro.benefitsTitle', 'Con PRO obtienes:')}
+            {t('pro.benefitsTitle')}
           </p>
           {benefits.map((benefit, index) => (
             <div
@@ -99,14 +79,14 @@ export const ProModal: React.FC<ProModalProps> = ({
             onClick={() => onOpenChange(false)}
             className="flex-1"
           >
-            {t('pro.keepFree', 'Seguir Gratis')}
+            {t('pro.keepFree')}
           </Button>
           <Button
             onClick={handleUpgrade}
             className="flex-1 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold shadow-lg shadow-amber-500/30"
           >
             <Sparkles className="w-4 h-4 mr-2" />
-            {t('pro.upgrade', 'Ir a PRO')}
+            {t('pro.upgrade')}
           </Button>
         </DialogFooter>
       </DialogContent>
