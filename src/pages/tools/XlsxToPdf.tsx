@@ -38,6 +38,7 @@ const XlsxToPdf: React.FC = () => {
       onConvert={handleConvert}
       outputFormat="pdf"
       keywords={['xlsx to pdf', 'excel to pdf', 'convert spreadsheet to pdf']}
+      proRequired={{ maxFiles: 3, trigger: 'batch' }}
     />
   );
 };

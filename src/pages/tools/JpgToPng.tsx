@@ -36,6 +36,7 @@ const JpgToPng: React.FC = () => {
       onConvert={handleConvert}
       outputFormat="png"
       keywords={['jpg to png', 'convert jpg to png', 'jpeg to png', 'image converter', 'free online']}
+      proRequired={{ maxFiles: 3, trigger: 'batch' }}
     />
   );
 };

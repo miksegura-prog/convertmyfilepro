@@ -38,6 +38,7 @@ const TxtToPdf: React.FC = () => {
       onConvert={handleConvert}
       outputFormat="pdf"
       keywords={['txt to pdf', 'html to pdf', 'convert text to pdf']}
+      proRequired={{ maxFiles: 3, trigger: 'batch' }}
     />
   );
 };

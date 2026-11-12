@@ -3,7 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   Menu, X, Moon, Sun, Globe, ChevronDown,
-  Image, FileText, FileStack, Home, BookOpen, Music, Video
+  Image, FileText, FileStack, Home, BookOpen, Music, Video,
+  Crown, Sparkles
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,11 +15,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useTheme } from '@/hooks/useTheme';
 import { supportedLanguages } from '@/i18n';
+import { useProStatus } from '@/hooks/useProStatus';
 
 export const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const { resolvedTheme, toggle } = useTheme();
+  const { isPro } = useProStatus();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const changeLanguage = (lang: string) => {
@@ -112,6 +115,31 @@ export const Header: React.FC = () => {
                 </Link>
               )
             ))}
+            {/* PRO Button Desktop */}
+            {isPro ? (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="gap-1.5 text-green-600 dark:text-green-400 font-semibold cursor-default"
+                disabled
+              >
+                <Crown className="w-4 h-4" />
+                <span className="hidden sm:inline">PRO</span>
+              </Button>
+            ) : (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="gap-1.5 text-amber-500 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30 font-semibold"
+                onClick={() => {
+                  const paymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK;
+                  if (paymentLink) window.open(paymentLink, '_blank');
+                }}
+              >
+                <Sparkles className="w-4 h-4" />
+                <span className="hidden sm:inline">PRO / Sin Anuncios</span>
+              </Button>
+            )}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm"><Globe className="w-4 h-4" /></Button>
@@ -129,6 +157,29 @@ export const Header: React.FC = () => {
             </Button>
           </nav>
           <div className="flex md:hidden items-center gap-2">
+            {/* Mobile PRO Button */}
+            {isPro ? (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="gap-1.5 text-green-600 dark:text-green-400 font-semibold cursor-default"
+                disabled
+              >
+                <Crown className="w-4 h-4" />
+              </Button>
+            ) : (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="gap-1.5 text-amber-500 font-semibold"
+                onClick={() => {
+                  const paymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK;
+                  if (paymentLink) window.open(paymentLink, '_blank');
+                }}
+              >
+                <Sparkles className="w-4 h-4" />
+              </Button>
+            )}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm"><Globe className="w-4 h-4" /></Button>
@@ -172,6 +223,25 @@ export const Header: React.FC = () => {
                   </Link>
                 )
               ))}
+              {/* Mobile PRO Link */}
+              {isPro ? (
+                <div className="flex items-center gap-2 px-3 py-2 rounded-lg text-green-600 dark:text-green-400 font-semibold">
+                  <Crown className="w-4 h-4" />
+                  PRO Activo
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    const paymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK;
+                    if (paymentLink) window.open(paymentLink, '_blank');
+                  }}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg w-full text-left text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/30 font-semibold"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  PRO / Sin Anuncios
+                </button>
+              )}
             </nav>
           </div>
         )}

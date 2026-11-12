@@ -116,6 +116,7 @@ const CompressVideo: React.FC = () => {
       onConvert={handleConvert}
       outputFormat="mp4"
       keywords={['comprimir video whatsapp', 'compress video for whatsapp', 'reducir video menos 16mb', 'video compressor online']}
+      proRequired={{ maxSizeMB: 25, trigger: 'video' }}
     />
   );
 };

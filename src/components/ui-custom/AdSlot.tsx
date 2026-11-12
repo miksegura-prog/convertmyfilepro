@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { isProSync } from '@/hooks/useProStatus';
 
 interface AdSlotProps {
   position: 'sidebar' | 'inline';
@@ -13,6 +14,11 @@ export const AdSlot: React.FC<AdSlotProps> = ({
   id 
 }) => {
   const { t } = useTranslation();
+  
+  // Hide ads for PRO users
+  if (isProSync()) {
+    return null;
+  }
   
   const dimensions = {
     sidebar: 'w-[300px] h-[250px]',
@@ -50,6 +56,9 @@ export const AdSlot: React.FC<AdSlotProps> = ({
 // Google AdSense initialization hook
 export const useAdSense = () => {
   React.useEffect(() => {
+    // Skip loading AdSense for PRO users
+    if (isProSync()) return;
+
     // Check if AdSense script is already loaded
     const existingScript = document.getElementById('adsense-script');
     
@@ -83,3 +92,5 @@ export const initializeAd = (elementId: string) => {
     }
   }
 };
+
+

@@ -38,6 +38,7 @@ const DocxToPdf: React.FC = () => {
       onConvert={handleConvert}
       outputFormat="pdf"
       keywords={['docx to pdf', 'convert word to pdf', 'word to pdf online free']}
+      proRequired={{ maxFiles: 3, trigger: 'batch' }}
     />
   );
 };

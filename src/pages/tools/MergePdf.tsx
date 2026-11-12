@@ -38,6 +38,7 @@ const MergePdf: React.FC = () => {
       onConvert={handleConvert}
       outputFormat="pdf"
       keywords={['merge pdf', 'combine pdf', 'pdf merger', 'join pdf files']}
+      proRequired={{ maxFiles: 3, trigger: 'batch' }}
     />
   );
 };

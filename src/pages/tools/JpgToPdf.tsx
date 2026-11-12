@@ -38,6 +38,7 @@ const JpgToPdf: React.FC = () => {
       onConvert={handleConvert}
       outputFormat="pdf"
       keywords={['jpg to pdf', 'image to pdf', 'convert images to pdf', 'photo to pdf']}
+      proRequired={{ maxFiles: 3, trigger: 'batch' }}
     />
   );
 };

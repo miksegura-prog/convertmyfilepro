@@ -33,6 +33,8 @@ const OcrTool = lazy(() => import('@/pages/tools/OcrTool'));
 
 const SeoToolPage = lazy(() => import('@/pages/SeoToolPage'));
 
+const ProSuccess = lazy(() => import('@/pages/ProSuccess'));
+
 const PageLoader: React.FC = () => (
   <div className="flex items-center justify-center min-h-[400px]">
     <div className="w-12 h-12 border-4 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin" />
@@ -181,6 +183,15 @@ function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <SeoToolPage />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="pro-success"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ProSuccess />
                   </Suspense>
                 }
               />

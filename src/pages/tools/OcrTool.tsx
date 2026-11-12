@@ -8,17 +8,23 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Copy, Check, Loader2 } from 'lucide-react';
+import { Copy, Check, Loader2, Sparkles } from 'lucide-react';
 import { DropZone } from '@/components/ui-custom/DropZone';
 import { useFileUpload } from '@/hooks/useFileUpload';
+import { useProStatus } from '@/hooks/useProStatus';
+import { ProModal } from '@/components/ui-custom/ProModal';
 import { FAQ } from '@/components/ui-custom/FAQ';
 
 const OcrTool: React.FC = () => {
   const { t } = useTranslation();
+  const { isPro } = useProStatus();
   const [language, setLanguage] = useState('eng');
   const [result, setResult] = useState<OcrResult | null>(null);
   const [extracting, setExtracting] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [ocrCount, setOcrCount] = useState(0);
+  const [proModalOpen, setProModalOpen] = useState(false);
+  const OCR_FREE_LIMIT = 2;
 
   const {
     files,
@@ -37,6 +43,12 @@ const OcrTool: React.FC = () => {
 
   const handleExtract = async () => {
     if (files.length === 0) return;
+
+    // PRO check: limit free users to OCR_FREE_LIMIT pages
+    if (!isPro && ocrCount >= OCR_FREE_LIMIT) {
+      setProModalOpen(true);
+      return;
+    }
     
     setExtracting(true);
     setResult(null);
@@ -44,6 +56,7 @@ const OcrTool: React.FC = () => {
     try {
       const ocrResult = await extractTextFromImage(files[0].file, language);
       setResult(ocrResult);
+      setOcrCount(prev => prev + 1);
     } catch (err) {
       console.error('OCR error:', err);
     } finally {
@@ -139,6 +152,21 @@ const OcrTool: React.FC = () => {
             </div>
           )}
 
+          {/* OCR Free counter */}
+          {!isPro && (
+            <div className="mt-4 flex items-center gap-2 text-xs text-[var(--color-muted)] p-2 bg-[var(--color-bg)] rounded-lg">
+              <span className="font-medium">
+                OCR Gratis: {ocrCount}/{OCR_FREE_LIMIT} páginas procesadas
+              </span>
+              {ocrCount >= OCR_FREE_LIMIT && (
+                <span className="text-amber-500 font-semibold flex items-center gap-1">
+                  <Sparkles className="w-3 h-3" />
+                  Límite alcanzado — Actualiza a PRO para páginas ilimitadas
+                </span>
+              )}
+            </div>
+          )}
+
           {/* Result */}
           {result && (
             <div className="space-y-4">
@@ -178,6 +206,13 @@ const OcrTool: React.FC = () => {
         </Card>
 
         <FAQ />
+
+        {/* PRO Upgrade Modal for OCR limit */}
+        <ProModal
+          open={proModalOpen}
+          onOpenChange={setProModalOpen}
+          trigger="ocr"
+        />
       </div>
     </>
   );

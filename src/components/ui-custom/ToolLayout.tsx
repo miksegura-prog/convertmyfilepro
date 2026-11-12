@@ -11,9 +11,17 @@ import { ConversionResult } from './ConversionResult';
 import { FAQ } from './FAQ';
 import { useFileUpload } from '@/hooks/useFileUpload';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import { useProStatus } from '@/hooks/useProStatus';
+import { ProModal } from './ProModal';
 import type { FileWithPreview } from '@/types';
 import { SEO } from './SEO';
 import { downloadBlob } from '@/utils/fileHelpers';
+
+interface ProLimits {
+  maxFiles?: number;
+  maxSizeMB?: number;
+  trigger?: 'batch' | 'video' | 'ocr' | 'general';
+}
 
 interface ToolLayoutProps {
   toolId: string;
@@ -29,6 +37,7 @@ interface ToolLayoutProps {
   outputFormat?: string;
   faqItems?: Array<{ question: string; answer: string }>;
   keywords?: string[];
+  proRequired?: ProLimits;
 }
 
 export const ToolLayout: React.FC<ToolLayoutProps> = ({
@@ -44,10 +53,14 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
   onConvert,
   outputFormat,
   faqItems,
-  keywords = []
+  keywords = [],
+  proRequired
 }) => {
   const { t } = useTranslation();
   const { trackConversion, trackDownload } = useAnalytics();
+  const { isPro } = useProStatus();
+  const [proModalOpen, setProModalOpen] = useState(false);
+  const [proModalTrigger, setProModalTrigger] = useState<'batch' | 'video' | 'ocr' | 'general'>('general');
   
   const {
     files,
@@ -72,6 +85,27 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
 
   const handleConvert = async () => {
     if (files.length === 0) return;
+
+    // Check PRO limits before conversion
+    if (!isPro && proRequired) {
+      // Check max files limit
+      if (proRequired.maxFiles && files.length > proRequired.maxFiles) {
+        setProModalTrigger(proRequired.trigger || 'batch');
+        setProModalOpen(true);
+        return;
+      }
+
+      // Check max size per file (e.g. video > 25MB)
+      if (proRequired.maxSizeMB) {
+        const maxBytes = proRequired.maxSizeMB * 1024 * 1024;
+        const oversized = files.some(f => f.file.size > maxBytes);
+        if (oversized) {
+          setProModalTrigger(proRequired.trigger || 'video');
+          setProModalOpen(true);
+          return;
+        }
+      }
+    }
     
     setConverting(true);
     setProgress(0);
@@ -269,6 +303,13 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
 
         {/* FAQ */}
         <FAQ items={faqItems} />
+
+        {/* PRO Upgrade Modal */}
+        <ProModal
+          open={proModalOpen}
+          onOpenChange={setProModalOpen}
+          trigger={proModalTrigger}
+        />
       </div>
     </>
   );

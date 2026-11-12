@@ -1,0 +1,2 @@
+# Ignore API folder from static build
+# The api/ folder is handled separately by Vercel serverless functions
