@@ -1,18 +1,32 @@
 /**
- * Cloudflare Pages Function — verifies Stripe Checkout session.
+ * Cloudflare Worker entry point — serves static assets from ./dist
+ * and handles the /api/verify-stripe endpoint.
  *
- * Path: /api/verify-stripe?session_id=cs_xxx
- * Environment: STRIPE_SECRET_KEY must be set in Cloudflare Pages dashboard.
+ * The [assets] block in wrangler.toml handles static file serving.
+ * This Worker intercepts only /api/* routes.
  */
 
 export interface Env {
   STRIPE_SECRET_KEY: string;
 }
 
-export const onRequest: PagesFunction<Env> = async (context) => {
-  const request = context.request;
-  const env = context.env;
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
 
+    // Handle /api/verify-stripe route
+    if (url.pathname === '/api/verify-stripe') {
+      return handleVerifyStripe(request, env);
+    }
+
+    // All other routes are handled by the static assets via [assets] block.
+    // This line should never be reached if the assets handler works correctly,
+    // but we keep it as a fallback.
+    return new Response('Not found', { status: 404 });
+  },
+};
+
+async function handleVerifyStripe(request: Request, env: Env): Promise<Response> {
   // Only allow GET requests
   if (request.method !== 'GET') {
     return new Response(JSON.stringify({ error: 'Method not allowed' }), {
@@ -105,4 +119,4 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       }
     );
   }
-};
+}

@@ -8,8 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "pages:dev": "wrangler pages dev dist --compatibility-date=2025-04-01",
-    "deploy": "npm run build && wrangler pages deploy dist --branch main"
+    "pages:dev": "wrangler pages dev dist --compatibility-date=2024-11-01",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
