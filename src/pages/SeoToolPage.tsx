@@ -42,7 +42,7 @@ const SeoToolPage: React.FC = () => {
     switch (tool.converterType) {
       case 'image-convert': {
         const format = tool.converterOptions?.format;
-        const fmt = format === 'jpeg' || format === 'png' || format === 'webp'
+        const fmt = format === 'jpeg' || format === 'png' || format === 'webp' || format === 'avif'
           ? format
           : 'png';
         const q = tool.converterOptions?.quality as number;

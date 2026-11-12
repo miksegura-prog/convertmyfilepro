@@ -295,6 +295,33 @@
       "faq1": { "q": "How does TXT to SRT conversion work?", "a": "The tool splits your text into segments based on paragraphs. Each segment becomes a subtitle block with auto-calculated timing based on reading speed." },
       "faq2": { "q": "Can I adjust the timing?", "a": "The auto-timing uses ~15 characters per second. For precise timing, we recommend using SRT editing software after conversion." },
       "faq3": { "q": "What is TXT to SRT good for?", "a": "Perfect for creating subtitles from transcripts, scripts, or lyrics. Great for YouTubers, educators, and content creators who need quick subtitles." }
+    },
+    "avifToPng": {
+      "title": "AVIF to PNG",
+      "description": "Convert AVIF images to PNG format with transparency",
+      "seoTitle": "Convert AVIF to PNG Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online AVIF to PNG converter. Convert AVIF images to PNG format with transparency support. Fast, secure, no upload required.",
+      "faq1": { "q": "What is AVIF format?", "a": "AVIF (AV1 Image File Format) is a next-generation image format that offers superior compression compared to JPEG and WebP." },
+      "faq2": { "q": "Why convert AVIF to PNG?", "a": "PNG is more widely supported across older browsers, image editors, and social media platforms." },
+      "faq3": { "q": "Will I lose quality converting AVIF to PNG?", "a": "No. PNG uses lossless compression, so the image quality is preserved at its original level." }
+    },
+    "avifToJpg": {
+      "title": "AVIF to JPG",
+      "description": "Convert AVIF images to JPG format",
+      "seoTitle": "Convert AVIF to JPG Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online AVIF to JPG converter. Convert AVIF images to JPEG format easily. Fast, private, no upload required.",
+      "faq1": { "q": "Is AVIF better than JPG?", "a": "AVIF typically offers 50% better compression than JPEG at the same quality level. However, JPG is more universally supported." },
+      "faq2": { "q": "Will converting AVIF to JPG reduce quality?", "a": "JPG uses lossy compression, so there may be slight quality reduction. Our tool uses high-quality settings to minimize visible differences." },
+      "faq3": { "q": "What devices support AVIF?", "a": "AVIF is supported in Chrome, Firefox, and Opera but not in Safari or Internet Explorer. Converting to JPG ensures compatibility." }
+    },
+    "webpToPng": {
+      "title": "WEBP to PNG",
+      "description": "Convert WEBP images to PNG format with transparency",
+      "seoTitle": "Convert WEBP to PNG Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online WEBP to PNG converter. Convert WEBP images to PNG format with transparency. Fast, secure, no upload required.",
+      "faq1": { "q": "What is WEBP format?", "a": "WEBP is a modern image format by Google that provides superior compression for images on the web." },
+      "faq2": { "q": "Why convert WEBP to PNG?", "a": "PNG is more universally supported across all image editors and platforms. Converting ensures you can edit the image anywhere." },
+      "faq3": { "q": "Does WEBP to PNG conversion affect quality?", "a": "No. PNG uses lossless compression, preserving all original image data. The file size will be larger than the original WEBP." }
     }
   },
   "faq": {

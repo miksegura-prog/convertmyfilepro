@@ -33,6 +33,10 @@ const SrtToVtt = lazy(() => import('@/pages/tools/SrtToVtt'));
 const VttToSrt = lazy(() => import('@/pages/tools/VttToSrt'));
 const TxtToSrt = lazy(() => import('@/pages/tools/TxtToSrt'));
 
+const AvifToPng = lazy(() => import('@/pages/tools/AvifToPng'));
+const AvifToJpg = lazy(() => import('@/pages/tools/AvifToJpg'));
+const WebpToPng = lazy(() => import('@/pages/tools/WebpToPng'));
+
 const OcrTool = lazy(() => import('@/pages/tools/OcrTool'));
 
 const SeoToolPage = lazy(() => import('@/pages/SeoToolPage'));
@@ -191,6 +195,31 @@ function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <TxtToSrt />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="avif-to-png"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <AvifToPng />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="avif-to-jpg"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <AvifToJpg />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="webp-to-png"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <WebpToPng />
                   </Suspense>
                 }
               />

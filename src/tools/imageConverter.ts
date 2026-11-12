@@ -2,7 +2,7 @@ import { canvasToBlob } from '@/utils/fileHelpers';
 import imageCompression from 'browser-image-compression';
 
 export interface ConvertImageOptions {
-  format: 'jpeg' | 'png' | 'webp';
+  format: 'jpeg' | 'png' | 'webp' | 'avif';
   quality?: number;
 }
 
@@ -44,6 +44,43 @@ export const convertImage = async (
     const mimeType = `image/${format}`;
     const blob = await canvasToBlob(canvas, mimeType, quality);
     
+    return blob;
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+};
+
+/**
+ * Decodes any browser-supported image (AVIF, WEBP, HEIC, etc.) to a <canvas>,
+ * then re-encodes to the target format.
+ * Works for AVIF→PNG, AVIF→JPG, WEBP→PNG, etc.
+ */
+export const convertImageWithCanvas = async (
+  file: File,
+  targetFormat: 'png' | 'jpeg' | 'webp' | 'avif',
+  quality: number = 0.92
+): Promise<Blob> => {
+  const img = new Image();
+  const url = URL.createObjectURL(file);
+
+  try {
+    await new Promise<void>((resolve, reject) => {
+      img.onload = () => resolve();
+      img.onerror = reject;
+      img.src = url;
+    });
+
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Failed to get canvas context');
+
+    ctx.drawImage(img, 0, 0);
+
+    const mimeType = `image/${targetFormat}`;
+    const blob = await canvasToBlob(canvas, mimeType, quality);
     return blob;
   } finally {
     URL.revokeObjectURL(url);
