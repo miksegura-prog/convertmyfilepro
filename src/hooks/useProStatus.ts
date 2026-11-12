@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
 const STORAGE_KEY = 'convertmyfilepro_pro';
+const INITIAL_TIME = Date.now();
 
 interface ProStatus {
   active: boolean;
@@ -36,14 +37,14 @@ function loadStatus(): ProStatus {
 
 export function useProStatus() {
   const [status, setStatus] = useState<ProStatus>(loadStatus);
-  const [initialized, setInitialized] = useState(false);
+  const [now, setNow] = useState(INITIAL_TIME);
 
   useEffect(() => {
-    setStatus(loadStatus());
-    setInitialized(true);
+    const interval = window.setInterval(() => setNow(Date.now()), 60_000);
+    return () => window.clearInterval(interval);
   }, []);
 
-  const isPro = status.active && status.expiresAt !== null && status.expiresAt > Date.now();
+  const isPro = status.active && status.expiresAt !== null && status.expiresAt > now;
 
   const activatePro = useCallback((sessionId: string, expiresAt?: number) => {
     // Default PRO: 1 year from now if no expiration provided
@@ -65,7 +66,7 @@ export function useProStatus() {
 
   return {
     isPro,
-    isProVisible: initialized,
+    isProVisible: true,
     activatePro,
     deactivatePro,
     sessionId: status.sessionId,

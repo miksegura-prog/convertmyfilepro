@@ -63,7 +63,7 @@ export const useFileUpload = (options: UseFileUploadOptions = {}): UseFileUpload
       );
 
       setFiles(prev => multiple ? [...prev, ...filesWithPreview] : filesWithPreview);
-    } catch (err) {
+    } catch {
       setError('Failed to process files');
     }
   }, [files.length, maxFiles, maxSizeMB, allowedTypes, multiple]);

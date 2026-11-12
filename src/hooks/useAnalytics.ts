@@ -7,11 +7,34 @@ interface AnalyticsEvent {
   value?: number;
 }
 
+interface GoogleAnalyticsParameters {
+  event_category?: string;
+  event_label?: string;
+  value?: number;
+  page_path?: string;
+  page_title?: string;
+}
+
+interface PlausibleOptions {
+  props?: Record<string, string | number | undefined>;
+}
+
+declare global {
+  interface Window {
+    gtag?: (
+      command: 'event' | 'config',
+      target: string,
+      parameters?: GoogleAnalyticsParameters
+    ) => void;
+    plausible?: (eventName: string, options?: PlausibleOptions) => void;
+  }
+}
+
 export const useAnalytics = () => {
   const trackEvent = useCallback(({ action, category, label, value }: AnalyticsEvent) => {
     // Google Analytics 4
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', action, {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', action, {
         event_category: category,
         event_label: label,
         value: value
@@ -19,8 +42,8 @@ export const useAnalytics = () => {
     }
 
     // Plausible Analytics
-    if (typeof window !== 'undefined' && (window as any).plausible) {
-      (window as any).plausible(action, {
+    if (typeof window !== 'undefined' && window.plausible) {
+      window.plausible(action, {
         props: {
           category,
           label
@@ -36,16 +59,16 @@ export const useAnalytics = () => {
 
   const trackPageView = useCallback((path: string, title?: string) => {
     // Google Analytics 4
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('config', 'GA_MEASUREMENT_ID', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('config', 'GA_MEASUREMENT_ID', {
         page_path: path,
         page_title: title
       });
     }
 
     // Plausible Analytics
-    if (typeof window !== 'undefined' && (window as any).plausible) {
-      (window as any).plausible('pageview', {
+    if (typeof window !== 'undefined' && window.plausible) {
+      window.plausible('pageview', {
         props: {
           path,
           title

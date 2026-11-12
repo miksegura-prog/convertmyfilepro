@@ -1,0 +1,7 @@
+name = "convertmyfilepro"
+compatibility_date = "2025-04-01"
+
+pages_build_output_dir = "./dist"
+
+[env.production]
+# No custom_domains here — add them via Cloudflare Dashboard > Workers & Pages > convertmyfilepro > Custom Domains

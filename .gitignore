@@ -26,6 +26,7 @@ dist-ssr
 # Cloudflare
 .wrangler
 worker
+wrangler.jsonc
  
 # Vercel (migrated to Cloudflare)
 .vercel

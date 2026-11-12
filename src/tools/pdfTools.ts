@@ -91,10 +91,10 @@ export const compressPdf = async (file: File): Promise<Blob> => {
   return new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' });
 };
 
-export const pdfToJpg = async (_file: File): Promise<Blob[]> => {
+export const pdfToJpg = async (file: File): Promise<Blob[]> => {
   // For now, return empty array - pdf.js integration can be added later
   // This is a placeholder that would need pdf.js to be properly set up
-  throw new Error('PDF to JPG conversion requires pdf.js setup');
+  throw new Error(`PDF to JPG conversion for "${file.name}" requires pdf.js setup`);
 };
 
 export const jpgToPdf = async (files: File[]): Promise<Blob> => {

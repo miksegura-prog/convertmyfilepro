@@ -2,6 +2,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { isProSync } from '@/hooks/useProStatus';
 
+declare global {
+  interface Window {
+    adsbygoogle?: Record<string, unknown>[];
+  }
+}
+
 interface AdSlotProps {
   position: 'sidebar' | 'inline';
   className?: string;
@@ -75,8 +81,8 @@ export const useAdSense = () => {
       
       script.onload = () => {
         // Initialize ads
-        if ((window as any).adsbygoogle) {
-          (window as any).adsbygoogle.push({});
+        if (window.adsbygoogle) {
+          window.adsbygoogle.push({});
         }
       };
     }
@@ -85,12 +91,11 @@ export const useAdSense = () => {
 
 // Initialize ads on a specific element
 export const initializeAd = (elementId: string) => {
-  if (typeof window !== 'undefined' && (window as any).adsbygoogle) {
+  if (typeof window !== 'undefined' && window.adsbygoogle) {
     const element = document.getElementById(elementId);
     if (element) {
-      (window as any).adsbygoogle.push({});
+      window.adsbygoogle.push({});
     }
   }
 };
-
 

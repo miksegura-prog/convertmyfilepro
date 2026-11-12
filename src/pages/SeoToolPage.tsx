@@ -40,11 +40,14 @@ const SeoToolPage: React.FC = () => {
     const n = files.length;
     switch (tool.converterType) {
       case 'image-convert': {
-        const fmt = (tool.converterOptions?.format as string) || 'png';
+        const format = tool.converterOptions?.format;
+        const fmt = format === 'jpeg' || format === 'png' || format === 'webp'
+          ? format
+          : 'png';
         const q = tool.converterOptions?.quality as number;
         for (let i = 0; i < n; i++) {
           o.setProgress((i / n) * 50);
-          files[i].result = await convertImage(files[i].file, { format: fmt as any, quality: q });
+          files[i].result = await convertImage(files[i].file, { format: fmt, quality: q });
           files[i].resultUrl = URL.createObjectURL(files[i].result!);
           o.setProgress(((i + 1) / n) * 100);
         }
