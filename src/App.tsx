@@ -37,6 +37,10 @@ const AvifToPng = lazy(() => import('@/pages/tools/AvifToPng'));
 const AvifToJpg = lazy(() => import('@/pages/tools/AvifToJpg'));
 const WebpToPng = lazy(() => import('@/pages/tools/WebpToPng'));
 
+const FlacToMp3 = lazy(() => import('@/pages/tools/FlacToMp3'));
+const OggToMp3 = lazy(() => import('@/pages/tools/OggToMp3'));
+const WavToFlac = lazy(() => import('@/pages/tools/WavToFlac'));
+
 const OcrTool = lazy(() => import('@/pages/tools/OcrTool'));
 
 const SeoToolPage = lazy(() => import('@/pages/SeoToolPage'));
@@ -220,6 +224,31 @@ function App() {
                 element={
                   <Suspense fallback={<PageLoader />}>
                     <WebpToPng />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="flac-to-mp3"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <FlacToMp3 />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="ogg-to-mp3"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <OggToMp3 />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="wav-to-flac"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <WavToFlac />
                   </Suspense>
                 }
               />

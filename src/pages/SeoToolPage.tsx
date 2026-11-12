@@ -6,7 +6,7 @@ import { getSeoTool, getRelatedTools } from '@/data/seoTools';
 import { SEO, FAQSchema } from '@/components/ui-custom/SEO';
 import { ToolLayout } from '@/components/ui-custom/ToolLayout';
 import { convertImage } from '@/tools/imageConverter';
-import { convertAudioToMp3 } from '@/tools/audioConverter';
+import { convertAudioToMp3, convertAudioToWav } from '@/tools/audioConverter';
 import { mergePdfs, splitPdf, compressPdf, jpgToPdf } from '@/tools/pdfTools';
 import { docxToPdf, xlsxToPdf, txtToPdf } from '@/tools/documentConverter';
 import { compressVideoForWhatsApp } from '@/tools/videoCompressor';
@@ -84,6 +84,18 @@ const SeoToolPage: React.FC = () => {
           const ep = Math.round(((i + 1) / n) * 100);
           files[i].result = await convertAudioToMp3(files[i].file, {
             bitrate: 128, onProgress: (p) => o.setProgress(sp + Math.round((p / 100) * (ep - sp)))
+          });
+          files[i].resultUrl = URL.createObjectURL(files[i].result!);
+        }
+        o.setProgress(100);
+        break;
+      }
+      case 'audio-to-wav': {
+        for (let i = 0; i < n; i++) {
+          const sp = Math.round((i / n) * 100);
+          const ep = Math.round(((i + 1) / n) * 100);
+          files[i].result = await convertAudioToWav(files[i].file, {
+            onProgress: (p) => o.setProgress(sp + Math.round((p / 100) * (ep - sp))),
           });
           files[i].resultUrl = URL.createObjectURL(files[i].result!);
         }

@@ -101,3 +101,90 @@ export const convertAudioToMp3 = async (
 
   return new Blob(mp3Data as unknown as BlobPart[], { type: 'audio/mp3' });
 };
+
+/**
+ * Converts any decodable audio file (FLAC, OGG, WAV, etc.) to WAV format (16-bit PCM).
+ * Uses Web Audio API to decode then writes a raw WAV file.
+ */
+export const convertAudioToWav = async (
+  file: File,
+  options: { onProgress?: (p: number) => void } = {}
+): Promise<Blob> => {
+  const { onProgress } = options;
+
+  onProgress?.(5);
+
+  const arrayBuffer = await file.arrayBuffer();
+  onProgress?.(20);
+
+  // Decode audio data using browser's native Web Audio API
+  const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+  const audioCtx = new AudioContextClass();
+
+  let audioBuffer: AudioBuffer;
+  try {
+    audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+  } finally {
+    if (audioCtx.state !== 'closed') {
+      audioCtx.close().catch(() => {});
+    }
+  }
+
+  onProgress?.(50);
+
+  const numChannels = audioBuffer.numberOfChannels;
+  const sampleRate = audioBuffer.sampleRate;
+  const samplesLength = audioBuffer.length;
+
+  // Interleave channels and convert to Int16
+  const interleaved = new Int16Array(samplesLength * numChannels);
+  for (let ch = 0; ch < numChannels; ch++) {
+    const channelData = audioBuffer.getChannelData(ch);
+    for (let i = 0; i < samplesLength; i++) {
+      const s = Math.max(-1, Math.min(1, channelData[i]));
+      interleaved[i * numChannels + ch] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+    }
+  }
+
+  onProgress?.(70);
+
+  // Build WAV header
+  const dataLength = interleaved.byteLength;
+  const headerLength = 44;
+  const totalLength = headerLength + dataLength;
+  const wavBuffer = new ArrayBuffer(totalLength);
+  const view = new DataView(wavBuffer);
+
+  // RIFF header
+  writeString(view, 0, 'RIFF');
+  view.setUint32(4, totalLength - 8, true);
+  writeString(view, 8, 'WAVE');
+
+  // fmt chunk
+  writeString(view, 12, 'fmt ');
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, numChannels, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * numChannels * 2, true);
+  view.setUint16(32, numChannels * 2, true);
+  view.setUint16(34, 16, true);
+
+  // data chunk
+  writeString(view, 36, 'data');
+  view.setUint32(40, dataLength, true);
+
+  // Write interleaved samples
+  const outputArray = new Int8Array(wavBuffer);
+  outputArray.set(new Int8Array(interleaved.buffer), headerLength);
+
+  onProgress?.(100);
+
+  return new Blob([wavBuffer], { type: 'audio/wav' });
+};
+
+function writeString(view: DataView, offset: number, str: string): void {
+  for (let i = 0; i < str.length; i++) {
+    view.setUint8(offset + i, str.charCodeAt(i));
+  }
+}

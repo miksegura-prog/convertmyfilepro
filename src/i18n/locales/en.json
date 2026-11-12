@@ -322,6 +322,33 @@
       "faq1": { "q": "What is WEBP format?", "a": "WEBP is a modern image format by Google that provides superior compression for images on the web." },
       "faq2": { "q": "Why convert WEBP to PNG?", "a": "PNG is more universally supported across all image editors and platforms. Converting ensures you can edit the image anywhere." },
       "faq3": { "q": "Does WEBP to PNG conversion affect quality?", "a": "No. PNG uses lossless compression, preserving all original image data. The file size will be larger than the original WEBP." }
+    },
+    "flacToMp3": {
+      "title": "FLAC to MP3",
+      "description": "Convert FLAC audio files to compressed MP3 format",
+      "seoTitle": "Convert FLAC to MP3 Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online FLAC to MP3 converter. Reduce FLAC file size to MP3 without noticeable quality loss. Private, no upload required.",
+      "faq1": { "q": "What is FLAC format?", "a": "FLAC (Free Lossless Audio Codec) is a high-quality audio format that preserves all audio data. Files are typically 3-5 times larger than MP3." },
+      "faq2": { "q": "Why convert FLAC to MP3?", "a": "MP3 files are much smaller and universally compatible with all devices, music players, and messaging apps. Perfect for sharing." },
+      "faq3": { "q": "Will I lose audio quality?", "a": "MP3 uses lossy compression. At 192 kbps the difference is barely noticeable for most listeners. You save significant storage space." }
+    },
+    "oggToMp3": {
+      "title": "OGG to MP3",
+      "description": "Convert OGG Vorbis audio files to MP3 format",
+      "seoTitle": "Convert OGG to MP3 Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online OGG to MP3 converter. Convert OGG Vorbis audio to MP3 format. Fast, private, no upload required.",
+      "faq1": { "q": "What is OGG format?", "a": "OGG is a free, open container format that typically contains Vorbis audio. It offers better compression than MP3 at the same quality." },
+      "faq2": { "q": "Why convert OGG to MP3?", "a": "MP3 is the most widely supported audio format. Converting OGG to MP3 ensures playback on any device, smart speaker, or car stereo." },
+      "faq3": { "q": "Is OGG better than MP3?", "a": "OGG Vorbis offers slightly better quality at the same bitrate. However, MP3's universal compatibility makes it the preferred format for sharing." }
+    },
+    "wavToFlac": {
+      "title": "WAV to WAV",
+      "description": "Convert WAV audio files to uncompressed WAV format",
+      "seoTitle": "Convert WAV to WAV Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online WAV converter. Convert and normalize audio files to standard WAV format. Lossless, private, no upload required.",
+      "faq1": { "q": "What is WAV format?", "a": "WAV is an uncompressed audio format developed by Microsoft and IBM. It preserves full audio quality with no data loss." },
+      "faq2": { "q": "Why convert audio to WAV?", "a": "WAV is the standard format for professional audio editing, DAWs, and CD burning. It maintains full 16-bit PCM quality." },
+      "faq3": { "q": "Is WAV lossless?", "a": "Yes. WAV is a lossless format. The audio data is preserved bit-perfect without any compression artifacts." }
     }
   },
   "faq": {

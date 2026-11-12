@@ -322,6 +322,33 @@
       "faq1": { "q": "¿Qué es el formato WEBP?", "a": "WEBP es un formato moderno de Google que ofrece compresión superior para imágenes web." },
       "faq2": { "q": "¿Por qué convertir WEBP a PNG?", "a": "PNG es compatible con todos los editores y plataformas. Convertir asegura que puedas editar la imagen en cualquier lugar." },
       "faq3": { "q": "¿Afecta la conversión WEBP a PNG a la calidad?", "a": "No. PNG usa compresión sin pérdida. El archivo resultante será más grande que el WEBP original." }
+    },
+    "flacToMp3": {
+      "title": "FLAC a MP3",
+      "description": "Convierte archivos de audio FLAC a MP3 comprimido",
+      "seoTitle": "Convertir FLAC a MP3 Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Conversor gratuito de FLAC a MP3. Reduce el peso de tus audios FLAC a MP3 sin pérdida notable de calidad. Privado, sin subida de archivos.",
+      "faq1": { "q": "¿Qué es FLAC?", "a": "FLAC (Free Lossless Audio Codec) es un formato de audio de alta calidad que preserva todos los datos. Los archivos son 3-5 veces más grandes que MP3." },
+      "faq2": { "q": "¿Por qué convertir FLAC a MP3?", "a": "MP3 es mucho más pequeño y compatible con todos los dispositivos, reproductores y apps de mensajería." },
+      "faq3": { "q": "¿Pierdo calidad de audio?", "a": "MP3 usa compresión con pérdida. A 192 kbps la diferencia es casi imperceptible para la mayoría." }
+    },
+    "oggToMp3": {
+      "title": "OGG a MP3",
+      "description": "Convierte archivos de audio OGG Vorbis a MP3",
+      "seoTitle": "Convertir OGG a MP3 Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Conversor gratuito de OGG a MP3. Convierte audio OGG Vorbis a formato MP3. Rápido, privado, sin subida de archivos.",
+      "faq1": { "q": "¿Qué es OGG?", "a": "OGG es un formato contenedor libre que suele contener audio Vorbis. Ofrece mejor compresión que MP3 a la misma calidad." },
+      "faq2": { "q": "¿Por qué convertir OGG a MP3?", "a": "MP3 es el formato más compatible. Convertir OGG a MP3 asegura reproducción en cualquier dispositivo." },
+      "faq3": { "q": "¿Es OGG mejor que MP3?", "a": "OGG Vorbis ofrece calidad ligeramente superior. Pero MP3 es el estándar universal para compartir." }
+    },
+    "wavToFlac": {
+      "title": "WAV a WAV",
+      "description": "Convierte archivos de audio a formato WAV sin comprimir",
+      "seoTitle": "Convertir WAV a WAV Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Conversor gratuito de WAV. Convierte y normaliza archivos de audio a formato WAV estándar. Sin pérdida, privado, sin subir archivos.",
+      "faq1": { "q": "¿Qué es WAV?", "a": "WAV es un formato de audio sin comprimir desarrollado por Microsoft e IBM. Preserva la calidad total sin pérdida de datos." },
+      "faq2": { "q": "¿Por qué convertir a WAV?", "a": "WAV es el formato estándar para edición de audio profesional. Mantiene calidad PCM de 16-bit completa." },
+      "faq3": { "q": "¿WAV es sin pérdida?", "a": "Sí. WAV es un formato sin pérdida. Los datos de audio se preservan bit por bit." }
     }
   },
   "faq": {
