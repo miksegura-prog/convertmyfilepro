@@ -2,7 +2,7 @@
   "app": {
     "name": "ConvertMyFilePro",
     "tagline": "Fast, secure online file conversion tools",
-    "description": "Convert images, PDFs, and documents online. Free, fast, and secure - all processing happens in your browser.",
+    "description": "Convert images, video, audio, subtitles, and documents online. Free, fast, and secure — all processing happens in your browser.",
     "instagram": "@tramasonic",
     "email": "info@ConvertMyFilePro.com"
   },
@@ -37,10 +37,20 @@
     "copied": "Copied!",
     "language": "Language",
     "darkMode": "Dark Mode",
-    "lightMode": "Light Mode"
+    "lightMode": "Light Mode",
+    "useTool": "Use tool"
   },
   "homepage": {
     "convertNow": "Convert now",
+    "quickAccess": { "title": "Quick access to tools", "description": "Choose a category and open the tool you need." },
+    "viewAll": "View all",
+    "features": { "title": "Why choose {{appName}}?" },
+    "categories": {
+      "images": { "title": "Images", "description": "Convert, resize, and compress JPG, PNG, WEBP, AVIF, and more." },
+      "video": { "title": "Video", "description": "Compress videos for easy sharing." },
+      "audio": { "title": "Audio", "description": "Convert WAV, FLAC, OGG, and MP3 files." },
+      "documents": { "title": "Subtitles & Documents", "description": "Convert subtitles, documents, and PDF files." }
+    },
     "multimedia": {
       "badge": "New",
       "title": "Multimedia Tools (Video & Audio)",
@@ -56,6 +66,13 @@
     }
   },
   "pro": {
+    "page": {
+      "title": "More power, no distractions",
+      "description": "Upgrade your experience with more capacity, priority processing, and no ads.",
+      "checkout": "Get PRO now",
+      "waitlist": "Subscriptions are not available yet. Contact us to be notified when they launch.",
+      "contact": "Notify me by email"
+    },
     "badge": "PRO / Ad-Free",
     "active": "PRO Active",
     "benefitsTitle": "With PRO, you get:",
@@ -107,6 +124,8 @@
         "title": "Image Tools",
         "description": "Convert, resize, compress, and enhance your images"
       },
+      "audio": { "title": "Audio Tools", "description": "Convert WAV, FLAC, OGG, and MP3 formats." },
+      "video": { "title": "Video Tools", "description": "Compress videos for easy sharing." },
       "pdf": {
         "title": "PDF Tools",
         "description": "Merge, split, compress, and convert PDF files"
@@ -211,6 +230,7 @@
       "seoTitle": "Convert JPG to PDF Online Free | ConvertMyFilePro",
       "seoDescription": "Free online JPG to PDF converter. Convert images to PDF document. Multiple images supported. Fast, secure, and no upload required."
     },
+    "xlsxToPdf": { "title": "XLSX to PDF", "description": "Convert Excel spreadsheets to PDF." },
     "docxToPdf": {
       "title": "DOCX to PDF",
       "description": "Convert Word documents to PDF format",
@@ -372,6 +392,16 @@
   },
   "ads": {
     "advertisement": "Advertisement"
+  },
+  "legal": {
+    "privacy": { "intro": "We respect your privacy. Conversion tools process files in your browser and do not upload them to our servers." },
+    "terms": { "intro": "By using ConvertMyFilePro, you agree to use the service responsibly. Tools are provided as is." },
+    "privacyProcessing": { "title": "File processing", "text": "Files you select are processed locally in your browser and are not transmitted to our servers for conversion." },
+    "privacyStorage": { "title": "Data and storage", "text": "Language preferences and account status may be stored locally on your device. You can clear them in your browser settings." },
+    "privacyContact": { "title": "Contact", "text": "For privacy questions, email info@ConvertMyFilePro.com." },
+    "termsService": { "title": "Using the service", "text": "The service is provided to help with legitimate personal file conversions. We do not guarantee uninterrupted availability." },
+    "termsFiles": { "title": "Your files", "text": "You are responsible for having the necessary rights to process the files you select." },
+    "termsContact": { "title": "Contact", "text": "For questions about these terms, email info@ConvertMyFilePro.com." }
   },
   "footer": {
     "tagline": "Fast, secure file conversion tools that work in your browser.",

@@ -38,6 +38,11 @@ export const Header: React.FC = () => {
         { path: '/png-to-jpg', label: t('tools.pngToJpg.title'), icon: Image },
         { path: '/resize-image', label: t('tools.resizeImage.title'), icon: Image },
         { path: '/compress-image', label: t('tools.compressImage.title'), icon: Image },
+        { path: '/avif-to-jpg', label: t('tools.avifToJpg.title'), icon: Image },
+        { path: '/avif-to-png', label: t('tools.avifToPng.title'), icon: Image },
+        { path: '/webp-to-png', label: t('tools.webpToPng.title'), icon: Image },
+        { path: '/convert/webp-to-jpg', label: t('tools.webpToJpg.title'), icon: Image },
+        { path: '/convert/heic-to-jpg', label: t('tools.heicToJpg.title'), icon: Image },
       ]
     },
     {
@@ -59,10 +64,20 @@ export const Header: React.FC = () => {
       ]
     },
     {
-      label: t('nav.audioVideo'),
+      label: t('homepage.categories.audio.title'),
       icon: Music,
       children: [
         { path: '/wav-to-mp3', label: t('tools.wavToMp3.title'), icon: Music },
+        { path: '/flac-to-mp3', label: t('tools.flacToMp3.title'), icon: Music },
+        { path: '/ogg-to-mp3', label: t('tools.oggToMp3.title'), icon: Music },
+        { path: '/wav-to-flac', label: t('tools.wavToFlac.title'), icon: Music },
+      ]
+    },
+    {
+      path: '/tools/video',
+      label: t('homepage.categories.video.title'),
+      icon: Video,
+      children: [
         { path: '/compress-video-whatsapp', label: t('tools.compressVideo.title'), icon: Video },
       ]
     },
@@ -72,7 +87,9 @@ export const Header: React.FC = () => {
       children: [
         { path: '/tools/images', label: t('nav.images'), icon: Image },
         { path: '/tools/pdf', label: t('nav.pdf'), icon: FileText },
-        { path: '/tools/documents', label: t('nav.documents'), icon: FileStack },
+        { path: '/tools/documents', label: t('homepage.categories.documents.title'), icon: FileStack },
+        { path: '/tools/audio', label: t('homepage.categories.audio.title'), icon: Music },
+        { path: '/tools/video', label: t('homepage.categories.video.title'), icon: Video },
       ]
     },
     { path: '/blog', label: t('nav.blog'), icon: BookOpen },
@@ -128,17 +145,11 @@ export const Header: React.FC = () => {
                 <span className="hidden sm:inline">PRO</span>
               </Button>
             ) : (
-              <Button
-                variant="ghost"
-                size="sm"
-                className="gap-1.5 text-amber-500 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30 font-semibold"
-                onClick={() => {
-                  const paymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK;
-                  if (paymentLink) window.open(paymentLink, '_blank');
-                }}
-              >
-                <Sparkles className="w-4 h-4" />
-                <span className="hidden sm:inline">{t('pro.badge')}</span>
+              <Button asChild variant="ghost" size="sm" className="gap-1.5 text-amber-500 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30 font-semibold">
+                <a href="https://buy.stripe.com/8x214nfpg8CaeL0bFy2Ry08" target="_blank" rel="noopener noreferrer">
+                  <Sparkles className="w-4 h-4" />
+                  <span className="hidden sm:inline">{t('pro.badge')}</span>
+                </a>
               </Button>
             )}
             <DropdownMenu>
@@ -170,17 +181,11 @@ export const Header: React.FC = () => {
                 <Crown className="w-4 h-4" />
               </Button>
             ) : (
-              <Button
-                variant="ghost"
-                size="sm"
-                className="gap-1.5 text-amber-500 font-semibold"
-                onClick={() => {
-                  const paymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK;
-                  if (paymentLink) window.open(paymentLink, '_blank');
-                }}
-              >
-                <Sparkles className="w-4 h-4" />
-                <span className="sr-only">{t('pro.badge')}</span>
+              <Button asChild variant="ghost" size="sm" className="gap-1.5 text-amber-500 font-semibold">
+                <a href="https://buy.stripe.com/8x214nfpg8CaeL0bFy2Ry08" target="_blank" rel="noopener noreferrer" aria-label={t('pro.badge')}>
+                  <Sparkles className="w-4 h-4" />
+                  <span className="sr-only">{t('pro.badge')}</span>
+                </a>
               </Button>
             )}
             <DropdownMenu>
@@ -233,17 +238,16 @@ export const Header: React.FC = () => {
                   {t('pro.active')}
                 </div>
               ) : (
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    const paymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK;
-                    if (paymentLink) window.open(paymentLink, '_blank');
-                  }}
+                <a
+                  href="https://buy.stripe.com/8x214nfpg8CaeL0bFy2Ry08"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg w-full text-left text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/30 font-semibold"
                 >
                   <Sparkles className="w-4 h-4" />
                   {t('pro.badge')}
-                </button>
+                </a>
               )}
             </nav>
           </div>

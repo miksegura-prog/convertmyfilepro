@@ -25,11 +25,8 @@ export const ProModal: React.FC<ProModalProps> = ({
   const { t } = useTranslation();
 
   const handleUpgrade = () => {
-    const paymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK;
-    if (paymentLink) {
-      window.open(paymentLink, '_blank');
-    }
     onOpenChange(false);
+    window.open('https://buy.stripe.com/8x214nfpg8CaeL0bFy2Ry08', '_blank', 'noopener,noreferrer');
   };
 
   const benefits = [

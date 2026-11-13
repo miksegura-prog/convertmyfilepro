@@ -46,6 +46,8 @@ const OcrTool = lazy(() => import('@/pages/tools/OcrTool'));
 const SeoToolPage = lazy(() => import('@/pages/SeoToolPage'));
 
 const ProSuccess = lazy(() => import('@/pages/ProSuccess'));
+const Pro = lazy(() => import('@/pages/Pro'));
+const LegalPage = lazy(() => import('@/pages/LegalPage'));
 
 const PageLoader: React.FC = () => (
   <div className="flex items-center justify-center min-h-[400px]">
@@ -261,6 +263,10 @@ function App() {
                   </Suspense>
                 }
               />
+
+              <Route path="pro" element={<Suspense fallback={<PageLoader />}><Pro /></Suspense>} />
+              <Route path="privacy" element={<Suspense fallback={<PageLoader />}><LegalPage /></Suspense>} />
+              <Route path="terms" element={<Suspense fallback={<PageLoader />}><LegalPage /></Suspense>} />
 
               <Route path="blog" element={<BlogIndex />} />
               <Route path="blog/:slug" element={<BlogPost />} />

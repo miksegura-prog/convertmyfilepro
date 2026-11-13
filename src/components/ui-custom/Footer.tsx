@@ -30,31 +30,38 @@ export const Footer: React.FC = () => {
     ],
     audioVideo: [
       { path: '/wav-to-mp3', label: t('tools.wavToMp3.title') },
+      { path: '/flac-to-mp3', label: t('tools.flacToMp3.title') },
+      { path: '/ogg-to-mp3', label: t('tools.oggToMp3.title') },
+      { path: '/wav-to-flac', label: t('tools.wavToFlac.title') },
       { path: '/compress-video-whatsapp', label: t('tools.compressVideo.title') },
     ],
   };
 
   const allToolsList = [
-    { path: '/convert/jpg-to-png', label: 'JPG to PNG' },
-    { path: '/convert/png-to-jpg', label: 'PNG to JPG' },
-    { path: '/convert/webp-to-jpg', label: 'WEBP to JPG' },
-    { path: '/convert/webp-to-png', label: 'WEBP to PNG' },
-    { path: '/convert/heic-to-jpg', label: 'HEIC to JPG' },
-    { path: '/convert/compress-image', label: 'Compress Image' },
-    { path: '/convert/resize-image', label: 'Resize Image' },
-    { path: '/convert/merge-pdf', label: 'Merge PDF' },
-    { path: '/convert/split-pdf', label: 'Split PDF' },
-    { path: '/convert/compress-pdf', label: 'Compress PDF' },
-    { path: '/convert/jpg-to-pdf', label: 'JPG to PDF' },
-    { path: '/convert/png-to-pdf', label: 'PNG to PDF' },
-    { path: '/convert/docx-to-pdf', label: 'DOCX to PDF' },
-    { path: '/convert/xlsx-to-pdf', label: 'XLSX to PDF' },
-    { path: '/convert/txt-to-pdf', label: 'TXT to PDF' },
-    { path: '/convert/html-to-pdf', label: 'HTML to PDF' },
-    { path: '/convert/wav-to-mp3', label: 'WAV to MP3' },
-    { path: '/convert/mp4-to-mp3', label: 'MP4 to MP3' },
-    { path: '/convert/compress-video-whatsapp', label: 'Compress Video' },
-    { path: '/convert/ocr-image-to-text', label: 'OCR Text' },
+    { path: '/jpg-to-png', label: t('tools.jpgToPng.title') },
+    { path: '/png-to-jpg', label: t('tools.pngToJpg.title') },
+    { path: '/avif-to-jpg', label: t('tools.avifToJpg.title') },
+    { path: '/avif-to-png', label: t('tools.avifToPng.title') },
+    { path: '/webp-to-png', label: t('tools.webpToPng.title') },
+    { path: '/convert/webp-to-jpg', label: t('tools.webpToJpg.title') },
+    { path: '/convert/heic-to-jpg', label: t('tools.heicToJpg.title') },
+    { path: '/resize-image', label: t('tools.resizeImage.title') },
+    { path: '/compress-image', label: t('tools.compressImage.title') },
+    { path: '/wav-to-mp3', label: t('tools.wavToMp3.title') },
+    { path: '/flac-to-mp3', label: t('tools.flacToMp3.title') },
+    { path: '/ogg-to-mp3', label: t('tools.oggToMp3.title') },
+    { path: '/wav-to-flac', label: t('tools.wavToFlac.title') },
+    { path: '/compress-video-whatsapp', label: t('tools.compressVideo.title') },
+    { path: '/merge-pdf', label: t('tools.mergePdf.title') },
+    { path: '/split-pdf', label: t('tools.splitPdf.title') },
+    { path: '/jpg-to-pdf', label: t('tools.jpgToPdf.title') },
+    { path: '/docx-to-pdf', label: t('tools.docxToPdf.title') },
+    { path: '/xlsx-to-pdf', label: t('tools.xlsxToPdf.title') },
+    { path: '/txt-to-pdf', label: t('tools.txtToPdf.title') },
+    { path: '/ocr', label: t('tools.ocr.title') },
+    { path: '/srt-to-vtt', label: t('tools.srtToVtt.title') },
+    { path: '/vtt-to-srt', label: t('tools.vttToSrt.title') },
+    { path: '/txt-to-srt', label: t('tools.txtToSrt.title') },
   ];
 
   const bottomLinks = [
@@ -200,6 +207,12 @@ export const Footer: React.FC = () => {
                   className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
                   {t('blog.title')}
                 </Link>
+              </li>
+              <li>
+                <a href="https://buy.stripe.com/8x214nfpg8CaeL0bFy2Ry08" target="_blank" rel="noopener noreferrer"
+                  className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
+                  {t('pro.badge')}
+                </a>
               </li>
               <li>
                 <Link to="/privacy"

@@ -8,6 +8,7 @@
 
 export interface Env {
   STRIPE_SECRET_KEY: string;
+  ASSETS: { fetch(request: Request): Promise<Response> };
 }
 
 export default {
@@ -19,10 +20,8 @@ export default {
       return handleVerifyStripe(request, env);
     }
 
-    // All other routes are handled by the static assets via [assets] block.
-    // This line should never be reached if the assets handler works correctly,
-    // but we keep it as a fallback.
-    return new Response('Not found', { status: 404 });
+    // Forward static files and client-side routes to the configured assets binding.
+    return env.ASSETS.fetch(request);
   },
 };
 

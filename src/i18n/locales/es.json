@@ -2,7 +2,7 @@
   "app": {
     "name": "ConvertMyFilePro",
     "tagline": "Herramientas rápidas y seguras de conversión de archivos en línea",
-    "description": "Convierte imágenes, PDFs y documentos en línea. Gratis, rápido y seguro: todo el procesamiento ocurre en tu navegador.",
+    "description": "Convierte imágenes, vídeo, audio, subtítulos y documentos en línea. Gratis, rápido y seguro: todo el procesamiento ocurre en tu navegador.",
     "instagram": "@tramasonic",
     "email": "info@ConvertMyFilePro.com"
   },
@@ -37,10 +37,20 @@
     "copied": "¡Copiado!",
     "language": "Idioma",
     "darkMode": "Modo Oscuro",
-    "lightMode": "Modo Claro"
+    "lightMode": "Modo Claro",
+    "useTool": "Usar herramienta"
   },
   "homepage": {
     "convertNow": "Convertir ahora",
+    "quickAccess": { "title": "Acceso rápido a herramientas", "description": "Elige una categoría y abre directamente la herramienta que necesitas." },
+    "viewAll": "Ver todas",
+    "features": { "title": "¿Por qué elegir {{appName}}?" },
+    "categories": {
+      "images": { "title": "Imagen", "description": "Convierte, redimensiona y comprime JPG, PNG, WEBP, AVIF y más." },
+      "video": { "title": "Vídeo", "description": "Comprime vídeos para compartirlos fácilmente." },
+      "audio": { "title": "Audio", "description": "Convierte archivos WAV, FLAC, OGG y MP3." },
+      "documents": { "title": "Subtítulos y documentos", "description": "Convierte subtítulos, documentos y archivos PDF." }
+    },
     "multimedia": {
       "badge": "Novedad",
       "title": "Herramientas multimedia (vídeo y audio)",
@@ -56,6 +66,13 @@
     }
   },
   "pro": {
+    "page": {
+      "title": "Más potencia, sin distracciones",
+      "description": "Mejora tu experiencia con más capacidad, procesamiento prioritario y sin publicidad.",
+      "checkout": "Activar PRO ahora",
+      "waitlist": "La suscripción todavía no está disponible. Contáctanos para recibir un aviso cuando se active.",
+      "contact": "Avísame por correo"
+    },
     "badge": "PRO / Sin anuncios",
     "active": "PRO activo",
     "benefitsTitle": "Con PRO obtienes:",
@@ -107,6 +124,8 @@
         "title": "Herramientas de Imagen",
         "description": "Convierte, redimensiona, comprime y mejora tus imágenes"
       },
+      "audio": { "title": "Herramientas de Audio", "description": "Convierte formatos WAV, FLAC, OGG y MP3." },
+      "video": { "title": "Herramientas de Vídeo", "description": "Comprime vídeos para compartirlos fácilmente." },
       "pdf": {
         "title": "Herramientas PDF",
         "description": "Une, divide, comprime y convierte archivos PDF"
@@ -211,6 +230,7 @@
       "seoTitle": "Convertir JPG a PDF Online Gratis | ConvertMyFilePro",
       "seoDescription": "Convertidor gratuito de JPG a PDF en línea. Convierte imágenes a documento PDF. Múltiples imágenes soportadas. Rápido y seguro."
     },
+    "xlsxToPdf": { "title": "XLSX a PDF", "description": "Convierte hojas de cálculo de Excel a PDF." },
     "docxToPdf": {
       "title": "DOCX a PDF",
       "description": "Convierte documentos Word a formato PDF",
@@ -372,6 +392,16 @@
   },
   "ads": {
     "advertisement": "Publicidad"
+  },
+  "legal": {
+    "privacy": { "intro": "Respetamos tu privacidad. Las herramientas de conversión procesan los archivos en tu navegador y no los suben a nuestros servidores." },
+    "terms": { "intro": "Al utilizar ConvertMyFilePro, aceptas usar el servicio de forma responsable. Las herramientas se ofrecen tal como están." },
+    "privacyProcessing": { "title": "Procesamiento de archivos", "text": "Los archivos seleccionados se procesan localmente en tu navegador y no se transmiten a nuestros servidores para su conversión." },
+    "privacyStorage": { "title": "Datos y almacenamiento", "text": "La configuración de idioma y el estado de la cuenta pueden guardarse localmente en tu dispositivo. Puedes borrarlos desde la configuración del navegador." },
+    "privacyContact": { "title": "Contacto", "text": "Para preguntas sobre privacidad, escribe a info@ConvertMyFilePro.com." },
+    "termsService": { "title": "Uso del servicio", "text": "El servicio se proporciona para ayudar con conversiones de archivos personales y legítimas. No garantizamos disponibilidad ininterrumpida." },
+    "termsFiles": { "title": "Tus archivos", "text": "Eres responsable de contar con los derechos necesarios para procesar los archivos que elijas." },
+    "termsContact": { "title": "Contacto", "text": "Para consultas sobre estas condiciones, escribe a info@ConvertMyFilePro.com." }
   },
   "footer": {
     "tagline": "Herramientas rápidas y seguras de conversión de archivos que funcionan en tu navegador.",
