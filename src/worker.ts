@@ -11,6 +11,31 @@ export interface Env {
   ASSETS: { fetch(request: Request): Promise<Response> };
 }
 
+/**
+ * Precio anual verificado en Stripe: 5,99 EUR/año, producto
+ * «ConvertMyFilePro PRO (Annual / Anual)». Se usa para no activar PRO con
+ * sesiones pagadas de otros productos de la misma cuenta de Stripe.
+ */
+const PRO_PRICE_ID = 'price_1UanG9FA6QOCRduX1ERV4nPj';
+const ONE_YEAR_SECONDS = 365 * 24 * 60 * 60;
+
+interface StripeSubscription {
+  current_period_end?: number;
+  items?: { data?: Array<{ current_period_end?: number }> };
+}
+
+interface StripeCheckoutSession {
+  id: string;
+  created: number;
+  status?: string;
+  payment_status?: string;
+  amount_total?: number | null;
+  currency?: string | null;
+  customer_details?: { email?: string | null } | null;
+  subscription?: string | StripeSubscription | null;
+  line_items?: { data?: Array<{ price?: { id?: string } | null }> };
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
@@ -55,7 +80,7 @@ async function handleVerifyStripe(request: Request, env: Env): Promise<Response>
 
   try {
     const stripeResponse = await fetch(
-      `https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`,
+      `https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}?expand[]=line_items&expand[]=subscription`,
       {
         method: 'GET',
         headers: {
@@ -77,10 +102,10 @@ async function handleVerifyStripe(request: Request, env: Env): Promise<Response>
       );
     }
 
-    const session: any = await stripeResponse.json();
+    const session = (await stripeResponse.json()) as StripeCheckoutSession;
 
     // Verify that the payment was successful
-    if (session.payment_status !== 'paid') {
+    if (session.payment_status !== 'paid' || session.status !== 'complete') {
       return new Response(
         JSON.stringify({ success: false, error: 'Payment has not been completed.' }),
         {
@@ -90,8 +115,30 @@ async function handleVerifyStripe(request: Request, env: Env): Promise<Response>
       );
     }
 
-    // Calculate expiration: 1 year from session creation
-    const expiresAt = (session.created + 365 * 24 * 60 * 60) * 1000;
+    // Verify that the paid session belongs to the ConvertMyFilePro PRO price.
+    const lineItems = session.line_items?.data || [];
+    const isProPurchase = lineItems.some((item) => item?.price?.id === PRO_PRICE_ID);
+
+    if (!isProPurchase) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'This payment is not for ConvertMyFilePro PRO.' }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
+    // Duration: current subscription period when available (annual), otherwise
+    // 1 year from checkout creation. Stripe controls the subscription dates.
+    const subscription = session.subscription;
+    const subscriptionPeriodEnd =
+      (subscription && typeof subscription === 'object' &&
+        (subscription.current_period_end || subscription.items?.data?.[0]?.current_period_end)) ||
+      null;
+    const expiresAt = subscriptionPeriodEnd
+      ? subscriptionPeriodEnd * 1000
+      : (session.created + ONE_YEAR_SECONDS) * 1000;
 
     return new Response(
       JSON.stringify({

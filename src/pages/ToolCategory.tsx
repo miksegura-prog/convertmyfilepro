@@ -23,6 +23,7 @@ const ToolCategory: React.FC = () => {
       { id: 'compress-image', title: t('tools.compressImage.title'), description: t('tools.compressImage.description'), category: 'images', icon: 'image', path: '/compress-image', color: 'from-orange-500 to-red-500' },
     ],
     pdf: [
+      { id: 'pdf-studio', title: t('tools.pdfStudio.title'), description: t('tools.pdfStudio.description'), category: 'pdf', icon: 'pdf', path: '/pdf-studio', color: 'from-indigo-500 to-violet-500' },
       { id: 'merge-pdf', title: t('tools.mergePdf.title'), description: t('tools.mergePdf.description'), category: 'pdf', icon: 'pdf', path: '/merge-pdf', color: 'from-red-500 to-rose-500' },
       { id: 'split-pdf', title: t('tools.splitPdf.title'), description: t('tools.splitPdf.description'), category: 'pdf', icon: 'pdf', path: '/split-pdf', color: 'from-amber-500 to-orange-500' },
       { id: 'jpg-to-pdf', title: t('tools.jpgToPdf.title'), description: t('tools.jpgToPdf.description'), category: 'pdf', icon: 'pdf', path: '/jpg-to-pdf', color: 'from-blue-500 to-indigo-500' },

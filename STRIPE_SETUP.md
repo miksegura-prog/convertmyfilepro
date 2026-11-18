@@ -65,15 +65,22 @@ STRIPE_SECRET_KEY = SU_STRIPE_SECRET_KEY_AQUI
 
 ---
 
-## ¿Qué obtiene el usuario PRO?
+## ¿Qué obtiene el usuario PRO? (implementado y verificado)
 
 | Beneficio | FREE | PRO |
 |---|---|---|
-| Anuncios (AdSlot, Monetag, AdSense) | Visibles | Ocultos 🔇 |
-| Archivos por lote | Máximo 3 | Ilimitado ♾️ |
-| Tamaño máximo de vídeo | 25 MB | 2 GB |
-| OCR (imagen a texto) | 2 páginas/sesión | Ilimitado |
-| Procesamiento | Normal | Prioritario ⚡ |
+| Anuncios (AdSlot, Monetag vignette/push, AdSense) | Visibles | Ocultos al activar PRO en el navegador |
+| Archivos por lote | Máximo 3 | Hasta 20 en las herramientas que lo permiten |
+| Tamaño máximo de archivo/vídeo | 25 MB (vídeo) | 50 MB |
+| OCR (imagen a texto) | 2 páginas/sesión | Sin ese tope |
+| PDF Studio Beta | Incluido (edición básica) | Incluido |
+
+> **Próximamente (no anunciar como disponible):** edición avanzada de párrafos y
+> procesamiento prioritario. El acceso PRO se guarda en `localStorage` durante 12 meses;
+> no hay cuentas ni sincronización entre dispositivos.
+
+> **Precio verificado:** suscripción anual de 5,99 EUR (`price_1UanG9FA6QOCRduX1ERV4nPj`).
+> El Worker comprueba que la sesión pagada contiene ese precio antes de activar PRO.
 
 ---
 

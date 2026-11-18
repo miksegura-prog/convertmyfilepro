@@ -14,6 +14,7 @@
     "documents": "Documents",
     "audioVideo": "Audio & Video",
     "blog": "Blog",
+    "pricing": "Plans",
     "about": "About",
     "contact": "Contact"
   },
@@ -67,8 +68,8 @@
   },
   "pro": {
     "page": {
-      "title": "More power, no distractions",
-      "description": "Upgrade your experience with more capacity, priority processing, and no ads.",
+      "title": "Plans and pricing",
+      "description": "Compare the Free and PRO plans: limits, OCR, PDF Studio Beta and advertising.",
       "checkout": "Get PRO now",
       "waitlist": "Subscriptions are not available yet. Contact us to be notified when they launch.",
       "contact": "Notify me by email"
@@ -77,33 +78,36 @@
     "active": "PRO Active",
     "benefitsTitle": "With PRO, you get:",
     "keepFree": "Stay on Free",
-    "upgrade": "Upgrade to PRO",
+    "upgrade": "See plans and pricing",
+    "comingSoonNote": "Advanced paragraph editing and priority processing: Coming soon (not available yet).",
     "benefits": {
-      "adFree": "Ad-free experience",
-      "unlimitedBatch": "Unlimited batch processing, with no file limits",
-      "largeVideos": "Videos up to 2 GB",
-      "priority": "Priority processing"
+      "adFree": "No ads, including Monetag ads",
+      "unlimitedBatch": "Expanded batches: up to 20 files per batch (3 on Free)",
+      "largeVideos": "Files up to 50 MB, including videos (25 MB on Free)",
+      "ocrExpanded": "Expanded OCR: no 2-page-per-session cap",
+      "studioBeta": "PDF Studio Beta included: edit text, add text, typography and color",
+      "priority": "Priority processing — Coming soon"
     },
     "triggers": {
       "batch": {
         "title": "File limit reached",
-        "description": "The free plan supports up to 3 files per batch. Upgrade to PRO for unlimited batch processing."
+        "description": "The free plan supports up to 3 files per batch. With PRO you can process up to 20 files per batch in the tools that allow it."
       },
       "video": {
         "title": "Video size limit reached",
-        "description": "The free plan supports videos up to 25 MB. Upgrade to PRO to compress videos up to 2 GB."
+        "description": "The free plan supports videos up to 25 MB. With PRO you can upload files up to 50 MB."
       },
       "ocr": {
         "title": "OCR limit reached",
-        "description": "The free plan lets you extract text from up to 2 images per session. Upgrade to PRO for unlimited pages."
+        "description": "The free plan extracts text from up to 2 pages per session. PRO removes that cap."
       },
       "general": {
         "title": "PRO feature",
-        "description": "This feature is available to PRO users only. Upgrade now to enjoy all the benefits."
+        "description": "This feature is available to PRO users only. See the plans to check what is available and what is coming soon."
       }
     },
     "ocrCounter": "Free OCR: {{count}}/{{limit}} pages processed",
-    "ocrLimitReached": "Limit reached: upgrade to PRO for unlimited pages",
+    "ocrLimitReached": "Limit reached: see the PRO plan to expand OCR",
     "success": {
       "noSession": "Payment session ID not found.",
       "verifyFailed": "Unable to verify the payment.",
@@ -111,12 +115,118 @@
       "verifyingTitle": "Verifying your payment...",
       "verifyingDescription": "We're confirming your PRO subscription. Please wait...",
       "title": "Welcome to PRO!",
-      "description": "Your PRO subscription is active. Enjoy all the benefits: ad-free use, unlimited batches, videos up to 2 GB, and priority processing.",
+      "description": "Your PRO access is active in this browser. Enjoy expanded limits, expanded OCR, PDF Studio Beta and no ads.",
       "goToTools": "Go to tools",
       "errorTitle": "Verification error",
       "errorSupport": "If you've already paid, contact support and provide your Stripe session ID.",
       "backHome": "Back to home"
     }
+  },
+  "plans": {
+    "badge": "Clear pricing",
+    "title": "Choose your plan",
+    "description": "Start free with every current tool. PRO adds expanded limits, expanded OCR and an ad-free experience for €5.99 per year.",
+    "badgesHelp": "Labels: what already works, what is still in Beta and what is coming later.",
+    "seoTitle": "Plans and Pricing | Free and PRO | ConvertMyFilePro",
+    "seoDescription": "Compare ConvertMyFilePro Free and PRO: free tools, PDF Studio Beta, expanded limits, expanded OCR and no ads for €5.99 per year.",
+    "perYear": "/ year",
+    "badges": { "available": "Available", "beta": "Beta", "soon": "Coming soon" },
+    "free": {
+      "name": "Free",
+      "period": "forever",
+      "tagline": "Every current tool, no account required.",
+      "cta": "Use free tools",
+      "note": "No card and no sign-up required."
+    },
+    "pro": {
+      "name": "PRO",
+      "recommended": "Recommended",
+      "period": "/ year",
+      "monthly": "{{monthly}}/month, billed annually",
+      "tagline": "More capacity and no ads, still processed in your browser.",
+      "cta": "Get PRO · {{price}}/year",
+      "checkoutNote": "Payment handled by Stripe. Annual subscription: check the final amount before paying.",
+      "active": "PRO active · until {{date}}",
+      "activeHint": "Access stored in this browser. To use it on another device, contact support."
+    },
+    "features": {
+      "freeLimits": {
+        "title": "Free tools with their current limits",
+        "description": "Up to {{freeBatch}} files per batch where the tool allows it, videos up to {{freeVideo}} MB and {{freeOcr}} OCR pages per session."
+      },
+      "studioReplace": {
+        "title": "PDF Studio: basic text replacement",
+        "description": "Select real PDF text and replace it, with no overlays."
+      },
+      "studioAddText": {
+        "title": "PDF Studio: add text",
+        "description": "Add new text and choose font, size and color."
+      },
+      "downloads": {
+        "title": "Downloads",
+        "description": "Download your converted or edited files from the browser."
+      },
+      "ads": {
+        "title": "With ads",
+        "description": "The free version is funded by advertising (Monetag/AdSense)."
+      },
+      "everythingFree": {
+        "title": "Everything in Free",
+        "description": "Every current tool and conversion stays available."
+      },
+      "batch": {
+        "title": "Expanded batches",
+        "description": "Up to {{proBatch}} files per batch in the tools that allow it, versus {{freeBatch}} on Free."
+      },
+      "video": {
+        "title": "Files up to {{proVideo}} MB",
+        "description": "Videos up to {{proVideo}} MB ({{freeVideo}} MB on Free). Each tool's own limit still applies."
+      },
+      "ocr": {
+        "title": "Expanded OCR",
+        "description": "No {{freeOcr}}-page-per-session cap like the free version."
+      },
+      "studio": {
+        "title": "PDF Studio Beta included",
+        "description": "Edit and replace text, add text, choose typography and color. Advanced features will come later."
+      },
+      "noAds": {
+        "title": "No ads",
+        "description": "Ads, including Monetag, are hidden once PRO is activated in the browser."
+      },
+      "advancedEditing": {
+        "title": "Advanced paragraph editing",
+        "description": "Not developed yet; not available."
+      },
+      "priority": {
+        "title": "Priority processing",
+        "description": "Not implemented yet; not advertised as available."
+      }
+    },
+    "notes": {
+      "billing": {
+        "title": "Price and billing",
+        "description": "€5.99 per year (€0.50/month) via an annual Stripe subscription. The final amount and taxes are shown at checkout."
+      },
+      "browserAccess": {
+        "title": "Access in this browser",
+        "description": "PRO is activated after payment verification and stored in this browser for 12 months. There are no accounts or cross-device sync."
+      },
+      "beta": {
+        "title": "PDF Studio Beta",
+        "description": "The editor works best with text PDFs; scans and unusual fonts may not be editable. Always review the result."
+      }
+    },
+    "faq": {
+      "items": [
+        { "question": "How is PRO activated after payment?", "answer": "Stripe returns you to the confirmation page with the session ID. We verify the payment with Stripe and activate PRO in this browser." },
+        { "question": "How long does PRO access last?", "answer": "Browser access lasts 12 months from payment. The annual subscription is managed by Stripe; renewal does not automatically extend the access stored in the browser." },
+        { "question": "Does PRO work on several devices?", "answer": "No. PRO status is stored in the browser where it was activated. If you change device or clear browser data, contact support with your Stripe session ID." },
+        { "question": "What are the Free plan limits?", "answer": "Up to {{freeBatch}} files per batch, videos up to {{freeVideo}} MB and {{freeOcr}} OCR pages per session, with ads." },
+        { "question": "Can I cancel the subscription?", "answer": "The subscription is managed in Stripe. Email info@ConvertMyFilePro.com if you need help cancelling." }
+      ]
+    },
+    "support": "Questions about the plans? Email us:"
   },
   "tools": {
     "categories": {
@@ -229,6 +339,109 @@
       "description": "Convert JPG images to PDF document",
       "seoTitle": "Convert JPG to PDF Online Free | ConvertMyFilePro",
       "seoDescription": "Free online JPG to PDF converter. Convert images to PDF document. Multiple images supported. Fast, secure, and no upload required."
+    },
+    "pngToPdf": {
+      "title": "PNG to PDF",
+      "description": "Convert PNG images to PDF document",
+      "seoTitle": "Convert PNG to PDF Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online PNG to PDF converter. Turn PNG images into a PDF document. Fast, secure, and no upload required."
+    },
+    "htmlToPdf": {
+      "title": "HTML to PDF",
+      "description": "Convert HTML pages to PDF document",
+      "seoTitle": "Convert HTML to PDF Online Free | ConvertMyFilePro",
+      "seoDescription": "Free online HTML to PDF converter. Turn HTML pages into a clean PDF document. Fast, secure, and no upload required."
+    },
+    "pdfStudio": {
+      "title": "PDF Studio",
+      "description": "PDF tools suite: edit the text of your PDFs and use every conversion in one place.",
+      "seoTitle": "PDF Studio | Online PDF Tools | ConvertMyFilePro",
+      "seoDescription": "PDF Studio brings together all ConvertMyFilePro PDF tools: text editor, merge, split, compress and convert. All in your browser.",
+      "beta": "BETA",
+      "heroTitle": "All your PDF tools in one place",
+      "heroDescription": "Edit PDF text and use the conversions you already know, without uploading files to any server.",
+      "editorCardTitle": "Edit PDF text",
+      "editorCardDescription": "Select real PDF text and replace it, or add new text with font, size and color. (Beta)",
+      "editorCta": "Open editor",
+      "toolsTitle": "PDF tools",
+      "conversionsTitle": "Convert to PDF & OCR",
+      "privacyNote": "All processing happens in your browser: no file is uploaded to any server.",
+      "limitationsTitle": "Current editing limitations (Beta)",
+      "limitationsList": [
+        "The editor works best with text PDFs; scanned (image) documents or unusual fonts may not be editable.",
+        "Subset fonts only allow reusing characters already present in the document.",
+        "Text split into several internal chunks may require several edits.",
+        "Conversions to PDF (DOCX, XLSX, TXT, HTML) are text based: HTML keeps its content but not the CSS styling. OCR works with images and runs in your browser.",
+        "Always review the result before using it in an official document."
+      ]
+    },
+    "pdfStudioEdit": {
+      "title": "PDF Studio · Edit text",
+      "description": "Edit the original text of a PDF directly in your browser, with real selection and no overlays.",
+      "seoTitle": "Edit PDF Text Online Free | PDF Studio | ConvertMyFilePro",
+      "seoDescription": "Free online PDF text editor. Edit the original text of your PDFs in the browser with real selection, no overlays and no file uploads.",
+      "uploadTitle": "Select a PDF to edit",
+      "page": "Page {{page}} of {{count}}",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "selectedText": "Selected text",
+      "selectedTextPlaceholder": "Select text in the viewer",
+      "clearSelection": "Clear selection",
+      "addText": "Add text",
+      "addTextHint": "Add-text mode is on: click anywhere on the PDF to place new text. Drag to move, edit or delete the text before saving it.",
+      "saveTexts": "Save added texts",
+      "textsAdded": "{{count}} text(s) added and saved as real PDF content.",
+      "annotationsTitle": "Added texts (not saved yet)",
+      "noAnnotations": "You haven't added text yet. Turn on “Add text” and click on the PDF.",
+      "deleteText": "Delete",
+      "editText": "Edit",
+      "openPdf": "Open another PDF",
+      "selectionHint": "Select any text directly in the PDF viewer, then write the replacement below.",
+      "replaceLabel": "Replace with",
+      "replacePlaceholder": "New text",
+      "apply": "Apply change",
+      "applying": "Applying…",
+      "cancel": "Cancel",
+      "download": "Download edited PDF",
+      "undo": "Undo last change",
+      "editsTitle": "Applied changes",
+      "editCount": "{{count}} replacement(s) on page {{page}}",
+      "noEdits": "No changes applied yet.",
+      "success": "Change applied: {{count}} replacement(s).",
+      "noChange": "The new text is the same as the original.",
+      "sameLength": "Note: same length, no spacing adjustment needed.",
+      "failed": "Not editable",
+      "notes": "All processing happens in your browser: no file is uploaded to any server.",
+      "limitations": "Known limitations: subset fonts only allow reusing glyphs already present in the document, and text split into several internal chunks may require several edits.",
+      "betaBadge": "BETA",
+      "betaNotice": "Beta editor: not yet validated for all kinds of documents. Changes are processed in your browser and you can undo the last edit.",
+      "typographyTitle": "Typography",
+      "font": "Font",
+      "fontSize": "Size",
+      "color": "Color",
+      "fonts": {
+        "helvetica": "Helvetica",
+        "helveticaBold": "Helvetica (bold)",
+        "times": "Times New Roman",
+        "timesBold": "Times New Roman (bold)",
+        "courier": "Courier",
+        "courierBold": "Courier (bold)"
+      },
+      "defaultTypographyHint": "Select an added text in the viewer to adjust its font, size and color. Without a selection, you set the defaults for new text.",
+      "overflowTitle": "Possible overflow",
+      "overflowPageMessage": "The replacement text is wider than the available space (estimated end ≈ {{end}} pt on a {{width}} pt page) and could overflow the right page margin.",
+      "overflowLineMessage": "The replacement text is wider than the current line and could push adjacent text toward the margin.",
+      "applyAnyway": "Apply anyway",
+      "cancelOverflow": "Cancel",
+      "errors": {
+        "notFound": "The text was not found with the expected encoding. It may be split into several internal chunks or use an unsupported font.",
+        "subsetGlyph": "The embedded font is a subset and does not include the glyph \"{{glyph}}\": only characters already present in the document can be used.",
+        "winAnsi": "The character \"{{glyph}}\" is not representable in that font's encoding.",
+        "pageMissing": "The given page does not exist in the document.",
+        "load": "Could not open the PDF: {{message}}",
+        "generic": "Could not edit the text: {{message}}",
+        "unverifiable": "The engine could not verify the result of the change: the original document has been preserved intact."
+      }
     },
     "xlsxToPdf": { "title": "XLSX to PDF", "description": "Convert Excel spreadsheets to PDF." },
     "docxToPdf": {

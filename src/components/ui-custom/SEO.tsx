@@ -4,6 +4,8 @@ import type { SeoMeta } from '@/types';
 
 interface SEOProps extends SeoMeta {
   lang?: string;
+  /** Evita la indexación (robots noindex, follow). Útil para páginas Beta. */
+  noindex?: boolean;
 }
 
 export const SEO: React.FC<SEOProps> = ({
@@ -12,10 +14,13 @@ export const SEO: React.FC<SEOProps> = ({
   keywords = [],
   ogImage = '/og-image.jpg',
   canonical,
-  lang = 'en'
+  lang = 'en',
+  noindex = false
 }) => {
   const siteName = 'ConvertMyFilePro';
   const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
+  const robots = noindex ? 'noindex, follow' : 'index, follow';
+  const botRobots = noindex ? 'noindex, follow' : 'index, follow';
   
   return (
     <Helmet>
@@ -44,9 +49,9 @@ export const SEO: React.FC<SEOProps> = ({
       {ogImage && <meta name="twitter:image" content={ogImage} />}
       
       {/* Additional SEO */}
-      <meta name="robots" content="index, follow" />
-      <meta name="googlebot" content="index, follow" />
-      <meta name="bingbot" content="index, follow" />
+      <meta name="robots" content={robots} />
+      <meta name="googlebot" content={botRobots} />
+      <meta name="bingbot" content={botRobots} />
     </Helmet>
   );
 };
