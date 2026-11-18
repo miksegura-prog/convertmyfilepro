@@ -626,8 +626,8 @@ const PdfStudioEdit: React.FC = () => {
   const handleFilesAdd = useCallback(
     async (list: FileList | null) => {
       if (!list || list.length === 0) return;
-      await addFiles(list);
       const f = list[0];
+await addFiles(list);
       if (!f || !f.type.includes('pdf')) return;
       if (f.size > MAX_FILE_MB * 1024 * 1024) return;
       try {
