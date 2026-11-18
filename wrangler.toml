@@ -1,6 +1,9 @@
+
 name = "convertmyfilepro"
 main = "src/worker.ts"
 compatibility_date = "2024-11-01"
+
+previews = {}
 
 [assets]
 binding = "ASSETS"
