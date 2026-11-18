@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Crown, Sparkles, Upload, Video, Ban, ScanText } from 'lucide-react';
+import { Crown, Sparkles, Upload, Ban, ScanText } from 'lucide-react';
 
 interface ProModalProps {
   open: boolean;
@@ -34,7 +34,6 @@ export const ProModal: React.FC<ProModalProps> = ({
   const benefits = [
     { icon: Ban, text: t('pro.benefits.adFree') },
     { icon: Upload, text: t('pro.benefits.unlimitedBatch') },
-    { icon: Video, text: t('pro.benefits.largeVideos') },
     { icon: ScanText, text: t('pro.benefits.ocrExpanded') },
   ];
 

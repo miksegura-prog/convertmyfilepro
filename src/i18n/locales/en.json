@@ -83,7 +83,7 @@
     "benefits": {
       "adFree": "No ads, including Monetag ads",
       "unlimitedBatch": "Expanded batches: up to 20 files per batch (3 on Free)",
-      "largeVideos": "Files up to 50 MB, including videos (25 MB on Free)",
+      "largeVideos": "Video compression up to 50 MB is also included on Free",
       "ocrExpanded": "Expanded OCR: no 2-page-per-session cap",
       "studioBeta": "PDF Studio Beta included: edit text, add text, typography and color",
       "priority": "Priority processing — Coming soon"
@@ -95,7 +95,7 @@
       },
       "video": {
         "title": "Video size limit reached",
-        "description": "The free plan supports videos up to 25 MB. With PRO you can upload files up to 50 MB."
+        "description": "You can compress videos up to 50 MB for free. This limit is the same on Free and PRO."
       },
       "ocr": {
         "title": "OCR limit reached",
@@ -179,8 +179,8 @@
         "description": "Up to {{proBatch}} files per batch in the tools that allow it, versus {{freeBatch}} on Free."
       },
       "video": {
-        "title": "Files up to {{proVideo}} MB",
-        "description": "Videos up to {{proVideo}} MB ({{freeVideo}} MB on Free). Each tool's own limit still applies."
+        "title": "Video compression up to {{freeVideo}} MB",
+        "description": "Available on Free and PRO: upload videos up to {{freeVideo}} MB and choose the output size. Speed depends on the browser and device."
       },
       "ocr": {
         "title": "Expanded OCR",
