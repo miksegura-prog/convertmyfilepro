@@ -1,4 +1,51 @@
-import lamejs from 'lamejs';
+import lameBundleUrl from 'lamejs/lame.all.js?url';
+
+/**
+ * The npm lamejs CommonJS entry can throw "MPEGMode is not defined" at
+ * runtime (its modules omit several imports). The standalone browser
+ * distribution defines those symbols together in one scope.
+ *
+ * Vite emits this as a same-origin static asset; load it as a classic script
+ * instead of bundling it as an ES module.
+ */
+interface Mp3Encoder {
+  encodeBuffer(left: Int16Array, right?: Int16Array): Int8Array;
+  flush(): Int8Array;
+}
+
+interface LameBrowserBundle {
+  Mp3Encoder: new (channels: number, sampleRate: number, bitrate: number) => Mp3Encoder;
+}
+
+let lameBundlePromise: Promise<LameBrowserBundle> | null = null;
+
+const getLameBrowserBundle = (): Promise<LameBrowserBundle> => {
+  const browser = window as Window & { lamejs?: LameBrowserBundle };
+  if (browser.lamejs?.Mp3Encoder) return Promise.resolve(browser.lamejs);
+
+  if (!lameBundlePromise) {
+    lameBundlePromise = new Promise<LameBrowserBundle>((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = lameBundleUrl;
+      script.async = true;
+      script.onload = () => {
+        const loaded = browser.lamejs;
+        if (loaded?.Mp3Encoder) resolve(loaded);
+        else reject(new Error('El codificador MP3 no se ha cargado correctamente.'));
+      };
+      script.onerror = () => {
+        script.remove();
+        reject(new Error('No se pudo cargar el codificador MP3. Revisa la conexión y vuelve a intentarlo.'));
+      };
+      document.head.appendChild(script);
+    }).catch((error: unknown) => {
+      lameBundlePromise = null; // Allow a retry after a failed asset download.
+      throw error;
+    });
+  }
+  return lameBundlePromise;
+};
+
 
 export interface ConvertAudioOptions {
   bitrate?: 128 | 192 | 256 | 320;
@@ -40,7 +87,8 @@ export const convertAudioToMp3 = async (
   const sampleRate = audioBuffer.sampleRate;
   const samplesLength = audioBuffer.length;
 
-  // Lamejs Mp3Encoder
+  // Load the tested standalone browser build, avoiding lamejs's broken CommonJS entry.
+  const lamejs = await getLameBrowserBundle();
   const mp3encoder = new lamejs.Mp3Encoder(numChannels, sampleRate, bitrate);
   const mp3Data: Uint8Array[] = [];
 
@@ -99,7 +147,7 @@ export const convertAudioToMp3 = async (
 
   onProgress?.(100);
 
-  return new Blob(mp3Data as unknown as BlobPart[], { type: 'audio/mp3' });
+  return new Blob(mp3Data as unknown as BlobPart[], { type: 'audio/mpeg' });
 };
 
 /**
