@@ -731,6 +731,22 @@ const PdfStudioEdit: React.FC = () => {
                 multiple={false}
                 error={error}
               />
+
+{loadingDoc && (
+  <div className="mt-4 text-center text-sm text-blue-600">
+    Abriendo documento PDF...
+  </div>
+)}
+
+{errorMsg && (
+  <div
+    role="alert"
+    className="mt-4 rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-700"
+  >
+    <strong>Error al abrir el PDF:</strong>
+    <p className="mt-2">{errorMsg}</p>
+  </div>
+)}
               <p className="mt-4 text-xs text-[var(--color-muted)] text-center">
                 {t('tools.pdfStudioEdit.notes')}
               </p>
