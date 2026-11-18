@@ -4,6 +4,7 @@ import { ToolLayout } from '@/components/ui-custom/ToolLayout';
 import { compressVideoForWhatsApp } from '@/tools/videoCompressor';
 import type { FileWithPreview } from '@/types';
 import { Label } from '@/components/ui/label';
+import { FREE_VIDEO_MB } from '@/config/plans';
 
 const CompressVideo: React.FC = () => {
   const [targetSizeMB, setTargetSizeMB] = useState<number>(15);
@@ -93,6 +94,10 @@ const CompressVideo: React.FC = () => {
         </button>
       </div>
 
+      <p className="mt-3 text-xs text-[var(--color-muted)]">
+        La compresión gratuita acepta vídeos de hasta {FREE_VIDEO_MB} MB. Se realiza en tu navegador y puede tardar varios minutos según el vídeo y tu equipo.
+      </p>
+
       {statusMessage && (
         <div className="flex items-center gap-2 text-xs text-[var(--color-muted)] p-2 bg-[var(--color-bg)] rounded-lg">
           <AlertCircle className="w-4 h-4 text-blue-500 animate-pulse" />
@@ -106,9 +111,9 @@ const CompressVideo: React.FC = () => {
     <ToolLayout
       toolId="compress-video-whatsapp"
       title="Comprimir Vídeo para WhatsApp"
-      description="Reduce el peso y resolución de vídeos grandes (MP4, MOV, WebM) para enviarlos por WhatsApp sin cortes ni errores, 100% privado en tu navegador."
+      description="Comprime vídeos de hasta 50 MB gratis (MP4, MOV, WebM) en tu navegador. El proceso puede tardar varios minutos."
       seoTitle="Comprimir Vídeo para WhatsApp Online Gratis | ConvertMyFilePro"
-      seoDescription="Reduce vídeos grandes para que pesen menos de 16 MB y compartirlos fácilmente por WhatsApp. Rápido, privado, sin límites y sin enviar nada a servidores."
+      seoDescription="Comprime vídeos de hasta 50 MB gratis desde tu navegador, sin enviar tus archivos a servidores. Elige un tamaño objetivo y descarga el resultado."
       accept="video/*,.mp4,.mov,.webm,.mkv,.avi"
       multiple={false}
       maxFiles={1}
@@ -116,7 +121,6 @@ const CompressVideo: React.FC = () => {
       onConvert={handleConvert}
       outputFormat="mp4"
       keywords={['comprimir video whatsapp', 'compress video for whatsapp', 'reducir video menos 16mb', 'video compressor online']}
-      proRequired={{ maxSizeMB: 25, trigger: 'video' }}
     />
   );
 };
