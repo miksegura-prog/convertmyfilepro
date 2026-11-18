@@ -12,7 +12,7 @@ import { FAQ } from '@/components/ui-custom/FAQ';
 import { useProStatus } from '@/hooks/useProStatus';
 import {
   FREE_BATCH_FILES, FREE_OCR_PAGES, FREE_VIDEO_MB, PRO_BATCH_FILES,
-  PRO_FILE_SIZE_MB, PRO_PAYMENT_LINK, PRO_PRICE_EUR,
+  PRO_PAYMENT_LINK, PRO_PRICE_EUR,
 } from '@/config/plans';
 
 type BadgeKind = 'available' | 'beta' | 'soon';
@@ -40,6 +40,7 @@ const FeatureBadge: React.FC<{ kind: BadgeKind }> = ({ kind }) => {
 
 const FREE_FEATURES: PlanFeature[] = [
   { key: 'freeLimits', icon: Layers, badge: 'available' },
+  { key: 'video', icon: FileText, badge: 'available' },
   { key: 'studioReplace', icon: Type, badge: 'beta' },
   { key: 'studioAddText', icon: Type, badge: 'beta' },
   { key: 'downloads', icon: Download, badge: 'available' },
@@ -49,7 +50,6 @@ const FREE_FEATURES: PlanFeature[] = [
 const PRO_FEATURES: PlanFeature[] = [
   { key: 'everythingFree', icon: Check, badge: 'available' },
   { key: 'batch', icon: Layers, badge: 'available' },
-  { key: 'video', icon: FileText, badge: 'available' },
   { key: 'ocr', icon: ScanText, badge: 'available' },
   { key: 'studio', icon: Type, badge: 'beta' },
   { key: 'noAds', icon: EyeOff, badge: 'available' },
@@ -73,7 +73,6 @@ const Pro: React.FC = () => {
     freeBatch: FREE_BATCH_FILES,
     proBatch: PRO_BATCH_FILES,
     freeVideo: FREE_VIDEO_MB,
-    proVideo: PRO_FILE_SIZE_MB,
     freeOcr: FREE_OCR_PAGES,
     price,
   };
