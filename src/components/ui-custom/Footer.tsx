@@ -209,10 +209,10 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="https://buy.stripe.com/8x214nfpg8CaeL0bFy2Ry08" target="_blank" rel="noopener noreferrer"
+                <Link to="/pro"
                   className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
-                  {t('pro.badge')}
-                </a>
+                  {t('nav.pricing')}
+                </Link>
               </li>
               <li>
                 <Link to="/privacy"

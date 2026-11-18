@@ -51,25 +51,63 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
      crossorigin="anonymous"></script>
     -->
-    <script>(function(s){s.dataset.zone='12234686',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <!-- Monetag + push service worker: only for FREE visitors.
+         PRO users (localStorage `convertmyfilepro_pro` active and not expired) get no ads,
+         including Monetag vignette and push notifications. See src/hooks/useProStatus.ts. -->
+    <script>
+      (function () {
+        var PRO_KEY = 'convertmyfilepro_pro';
+        var isPro = false;
+
+        try {
+          var stored = localStorage.getItem(PRO_KEY);
+          if (stored) {
+            var parsed = JSON.parse(stored);
+            isPro = !!(parsed && parsed.active && parsed.expiresAt && parsed.expiresAt > Date.now());
+          }
+        } catch (e) {
+          isPro = false;
+        }
+
+        // Never serve ads on the checkout-return page while PRO is being verified.
+        var verifyingPayment = window.location.pathname.indexOf('/pro-success') === 0;
+
+        if (!isPro && !verifyingPayment) {
+          (function (s) {
+            s.dataset.zone = '12234686';
+            s.src = 'https://n6wxm.com/vignette.min.js';
+          })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+        }
+
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function () {
+            if (isPro) {
+              // Remove the Monetag push service worker for PRO users.
+              navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                registrations.forEach(function (registration) {
+                  var worker = registration.active || registration.installing || registration.waiting;
+                  if (worker && worker.scriptURL.indexOf('/sw.js') !== -1) {
+                    registration.unregister();
+                  }
+                });
+              }).catch(function () {});
+              return;
+            }
+
+            navigator.serviceWorker.register('/sw.js')
+              .then(function (registration) {
+                console.log('SW registered:', registration);
+              })
+              .catch(function (error) {
+                console.log('SW registration failed:', error);
+              });
+          });
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    
-    <!-- Service Worker Registration for PWA -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-              console.log('SW registered:', registration);
-            })
-            .catch(error => {
-              console.log('SW registration failed:', error);
-            });
-        });
-      }
-    </script>
   </body>
 </html>

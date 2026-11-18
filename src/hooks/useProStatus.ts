@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const STORAGE_KEY = 'convertmyfilepro_pro';
+export const PRO_STORAGE_KEY = 'convertmyfilepro_pro';
+const STORAGE_KEY = PRO_STORAGE_KEY;
+const PRO_STATUS_EVENT = 'convertmyfilepro:pro-status';
 const INITIAL_TIME = Date.now();
 
 interface ProStatus {
@@ -40,8 +42,26 @@ export function useProStatus() {
   const [now, setNow] = useState(INITIAL_TIME);
 
   useEffect(() => {
+    // Keep every hook instance (header, layout, tools) in sync: activation happens
+    // in ProSuccess, but the header must switch to "PRO activo" without a reload.
+    const refresh = () => {
+      setStatus(loadStatus());
+      setNow(Date.now());
+    };
+
+    window.addEventListener('storage', refresh);
+    window.addEventListener(PRO_STATUS_EVENT, refresh);
+    window.addEventListener('focus', refresh);
+    document.addEventListener('visibilitychange', refresh);
+
     const interval = window.setInterval(() => setNow(Date.now()), 60_000);
-    return () => window.clearInterval(interval);
+    return () => {
+      window.clearInterval(interval);
+      window.removeEventListener('storage', refresh);
+      window.removeEventListener(PRO_STATUS_EVENT, refresh);
+      window.removeEventListener('focus', refresh);
+      document.removeEventListener('visibilitychange', refresh);
+    };
   }, []);
 
   const isPro = status.active && status.expiresAt !== null && status.expiresAt > now;
@@ -57,11 +77,15 @@ export function useProStatus() {
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newStatus));
     setStatus(newStatus);
+    setNow(Date.now());
+    window.dispatchEvent(new Event(PRO_STATUS_EVENT));
   }, []);
 
   const deactivatePro = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY);
     setStatus(defaultStatus);
+    setNow(Date.now());
+    window.dispatchEvent(new Event(PRO_STATUS_EVENT));
   }, []);
 
   return {

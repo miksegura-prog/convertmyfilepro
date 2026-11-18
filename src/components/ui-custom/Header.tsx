@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Menu, X, Moon, Sun, Globe, ChevronDown,
   Image, FileText, FileStack, Home, BookOpen, Music, Video,
-  Crown, Sparkles
+  Crown, Sparkles, Tag
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -118,6 +118,7 @@ export const Header: React.FC = () => {
       ]
     },
     { path: '/blog', label: t('nav.blog'), icon: BookOpen },
+    { path: '/pro', label: t('nav.pricing'), icon: Tag },
   ];
   const isActive = (path: string) => location.pathname === path;
   return (
@@ -176,10 +177,10 @@ export const Header: React.FC = () => {
               </Button>
             ) : (
               <Button asChild variant="ghost" size="sm" className="gap-1.5 text-amber-500 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30 font-semibold">
-                <a href="https://buy.stripe.com/8x214nfpg8CaeL0bFy2Ry08" target="_blank" rel="noopener noreferrer">
+                <Link to="/pro">
                   <Sparkles className="w-4 h-4" />
                   <span className="hidden sm:inline">{t('pro.badge')}</span>
-                </a>
+                </Link>
               </Button>
             )}
             <DropdownMenu>
@@ -212,10 +213,10 @@ export const Header: React.FC = () => {
               </Button>
             ) : (
               <Button asChild variant="ghost" size="sm" className="gap-1.5 text-amber-500 font-semibold">
-                <a href="https://buy.stripe.com/8x214nfpg8CaeL0bFy2Ry08" target="_blank" rel="noopener noreferrer" aria-label={t('pro.badge')}>
+                <Link to="/pro" aria-label={t('nav.pricing')}>
                   <Sparkles className="w-4 h-4" />
                   <span className="sr-only">{t('pro.badge')}</span>
-                </a>
+                </Link>
               </Button>
             )}
             <DropdownMenu>
@@ -273,16 +274,14 @@ export const Header: React.FC = () => {
                   {t('pro.active')}
                 </div>
               ) : (
-                <a
-                  href="https://buy.stripe.com/8x214nfpg8CaeL0bFy2Ry08"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/pro"
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg w-full text-left text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/30 font-semibold"
                 >
                   <Sparkles className="w-4 h-4" />
-                  {t('pro.badge')}
-                </a>
+                  {t('nav.pricing')}
+                </Link>
               )}
             </nav>
           </div>

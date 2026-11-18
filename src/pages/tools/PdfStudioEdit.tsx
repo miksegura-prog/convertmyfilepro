@@ -404,11 +404,13 @@ const PdfStudioEdit: React.FC = () => {
             ...prev,
             { id: editIdRef.current, page: selPage, find, replace, count: entry.count },
           ]);
-          setSuccessMsg(t('tools.pdfStudioEdit.success', { count: entry.count }));
           setSelectedText('');
           setReplaceText('');
           selectionRef.current = null;
+          // Recarga el visor ANTES de anunciar el éxito: así el botón de descarga
+          // nunca sirve los bytes antiguos si el usuario pulsa de inmediato.
           await loadPdf(result.bytes);
+          setSuccessMsg(t('tools.pdfStudioEdit.success', { count: entry.count }));
         } else if (entry?.error) {
           // Mostrar el error real del motor (además del mensaje amigable).
           const localized = mapError(entry.error);
@@ -596,8 +598,9 @@ const PdfStudioEdit: React.FC = () => {
       setSelectedId(null);
       setEditingId(null);
       setAddMode(false);
-      setSuccessMsg(t('tools.pdfStudioEdit.textsAdded', { count: result.added }));
+      // Igual que en la sustitución: primero recarga los bytes y luego confirma.
       await loadPdf(result.bytes);
+      setSuccessMsg(t('tools.pdfStudioEdit.textsAdded', { count: result.added }));
     } catch (err) {
       const raw = String((err as Error)?.message || err);
       setErrorMsg(`${mapError(raw)} · [motor] ${raw}`);
