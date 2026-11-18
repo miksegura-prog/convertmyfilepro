@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "test:owner": "node tests/owner-beta/run-tests.mjs",
     "preview": "vite preview",
     "pages:dev": "wrangler pages dev dist --compatibility-date=2024-11-01",
     "deploy": "npm run build && wrangler deploy"

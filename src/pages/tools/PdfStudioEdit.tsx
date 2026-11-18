@@ -733,6 +733,7 @@ await addFiles(list);
                 accept="application/pdf"
                 multiple={false}
                 error={error}
+                maxSizeMB={MAX_FILE_MB}
               />
 
 {loadingDoc && (

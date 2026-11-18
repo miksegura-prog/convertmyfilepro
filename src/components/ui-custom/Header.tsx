@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Menu, X, Moon, Sun, Globe, ChevronDown,
   Image, FileText, FileStack, Home, BookOpen, Music, Video,
-  Crown, Sparkles, Tag
+  Crown, Sparkles, Tag, ShieldCheck
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const { resolvedTheme, toggle } = useTheme();
-  const { isPro } = useProStatus();
+  const { isPro, isOwnerBeta, hasProAccess } = useProStatus();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   interface NavChild {
@@ -175,6 +175,16 @@ export const Header: React.FC = () => {
                 <Crown className="w-4 h-4" />
                 <span className="hidden sm:inline">PRO</span>
               </Button>
+            ) : isOwnerBeta ? (
+              /* OWNER BETA: identificador discreto, sin pago ni Stripe. */
+              <span
+                className="hidden sm:inline-flex items-center gap-1 rounded-full border border-[var(--color-border)]
+                           px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-muted)]"
+                title={t('owner.badgeTitle')}
+              >
+                <ShieldCheck className="w-3 h-3" />
+                {t('owner.badge')}
+              </span>
             ) : (
               <Button asChild variant="ghost" size="sm" className="gap-1.5 text-amber-500 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30 font-semibold">
                 <Link to="/pro">
@@ -211,6 +221,16 @@ export const Header: React.FC = () => {
               >
                 <Crown className="w-4 h-4" />
               </Button>
+            ) : isOwnerBeta ? (
+              <span
+                className="flex items-center gap-1 rounded-full border border-[var(--color-border)]
+                           px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-[var(--color-muted)]"
+                title={t('owner.badgeTitle')}
+                aria-label={t('owner.badge')}
+              >
+                <ShieldCheck className="w-3 h-3" />
+                <span className="sr-only">{t('owner.badge')}</span>
+              </span>
             ) : (
               <Button asChild variant="ghost" size="sm" className="gap-1.5 text-amber-500 font-semibold">
                 <Link to="/pro" aria-label={t('nav.pricing')}>
@@ -268,10 +288,10 @@ export const Header: React.FC = () => {
                 )
               ))}
               {/* Mobile PRO Link */}
-              {isPro ? (
+              {hasProAccess ? (
                 <div className="flex items-center gap-2 px-3 py-2 rounded-lg text-green-600 dark:text-green-400 font-semibold">
-                  <Crown className="w-4 h-4" />
-                  {t('pro.active')}
+                  {isPro ? <Crown className="w-4 h-4" /> : <ShieldCheck className="w-4 h-4" />}
+                  {isPro ? t('pro.active') : t('owner.badge')}
                 </div>
               ) : (
                 <Link

@@ -72,7 +72,17 @@
         // Never serve ads on the checkout-return page while PRO is being verified.
         var verifyingPayment = window.location.pathname.indexOf('/pro-success') === 0;
 
-        if (!isPro && !verifyingPayment) {
+        // OWNER BETA: en desarrollo local (npm run dev) no cargamos anuncios.
+        // Esto NO concede ninguna prestación PRO; solo evita publicidad en el
+        // entorno autorizado del desarrollador.
+        var localDevHost =
+          window.location.hostname === 'localhost' ||
+          window.location.hostname === '127.0.0.1' ||
+          window.location.hostname === '[::1]';
+
+        var adFree = isPro || localDevHost;
+
+        if (!adFree && !verifyingPayment) {
           (function (s) {
             s.dataset.zone = '12234686';
             s.src = 'https://n6wxm.com/vignette.min.js';
@@ -81,8 +91,8 @@
 
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', function () {
-            if (isPro) {
-              // Remove the Monetag push service worker for PRO users.
+            if (isPro || localDevHost) {
+              // Remove the Monetag push service worker for PRO users and local dev.
               navigator.serviceWorker.getRegistrations().then(function (registrations) {
                 registrations.forEach(function (registration) {
                   var worker = registration.active || registration.installing || registration.waiting;

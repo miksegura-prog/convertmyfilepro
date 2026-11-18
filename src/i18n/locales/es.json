@@ -41,6 +41,12 @@
     "lightMode": "Modo Claro",
     "useTool": "Usar herramienta"
   },
+  "owner": {
+    "badge": "OWNER BETA",
+    "badgeTitle": "Modo OWNER experimental: solo desarrollo local o preview autorizada",
+    "videoLimit": "hasta {{size}} MB por vídeo (experimental)",
+    "memoryWarning": "Los vídeos grandes (sobre todo de más de 100 MB) pueden consumir mucha memoria y tardar varios minutos. El procesamiento ocurre en tu navegador y no podemos garantizar que todos los equipos completen los tamaños máximos."
+  },
   "homepage": {
     "convertNow": "Convertir ahora",
     "quickAccess": { "title": "Acceso rápido a herramientas", "description": "Elige una categoría y abre directamente la herramienta que necesitas." },

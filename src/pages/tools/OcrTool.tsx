@@ -17,7 +17,7 @@ import { FAQ } from '@/components/ui-custom/FAQ';
 
 const OcrTool: React.FC = () => {
   const { t } = useTranslation();
-  const { isPro } = useProStatus();
+  const { hasProAccess } = useProStatus();
   const [language, setLanguage] = useState('eng');
   const [result, setResult] = useState<OcrResult | null>(null);
   const [extracting, setExtracting] = useState(false);
@@ -45,7 +45,7 @@ const OcrTool: React.FC = () => {
     if (files.length === 0) return;
 
     // PRO check: limit free users to OCR_FREE_LIMIT pages
-    if (!isPro && ocrCount >= OCR_FREE_LIMIT) {
+    if (!hasProAccess && ocrCount >= OCR_FREE_LIMIT) {
       setProModalOpen(true);
       return;
     }
@@ -124,6 +124,7 @@ const OcrTool: React.FC = () => {
               accept="image/*"
               multiple={false}
               error={error}
+              maxSizeMB={10}
             />
           )}
 
@@ -153,7 +154,7 @@ const OcrTool: React.FC = () => {
           )}
 
           {/* OCR Free counter */}
-          {!isPro && (
+          {!hasProAccess && (
             <div className="mt-4 flex items-center gap-2 text-xs text-[var(--color-muted)] p-2 bg-[var(--color-bg)] rounded-lg">
               <span className="font-medium">
                 {t('pro.ocrCounter', { count: ocrCount, limit: OCR_FREE_LIMIT })}

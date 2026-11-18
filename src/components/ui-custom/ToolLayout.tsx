@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Loader2, Archive, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -16,11 +16,22 @@ import { ProModal } from './ProModal';
 import type { FileWithPreview } from '@/types';
 import { SEO } from './SEO';
 import { downloadBlob } from '@/utils/fileHelpers';
+import { resolveUploadMaxSizeMB } from '@/config/uploadLimits';
 
 interface ProLimits {
   maxFiles?: number;
   maxSizeMB?: number;
   trigger?: 'batch' | 'video' | 'ocr' | 'general';
+}
+
+/**
+ * Límites de carga específicos de la herramienta. Sin `uploadLimits` se aplica
+ * el límite global de 50 MB. `ownerMaxSizeMB` solo surte efecto en OWNER BETA,
+ * así que ninguna herramienta pública puede superar su límite real.
+ */
+interface UploadLimits {
+  maxSizeMB?: number;
+  ownerMaxSizeMB?: number;
 }
 
 interface ToolLayoutProps {
@@ -38,6 +49,7 @@ interface ToolLayoutProps {
   faqItems?: Array<{ question: string; answer: string }>;
   keywords?: string[];
   proRequired?: ProLimits;
+  uploadLimits?: UploadLimits;
 }
 
 export const ToolLayout: React.FC<ToolLayoutProps> = ({
@@ -54,14 +66,31 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
   outputFormat,
   faqItems,
   keywords = [],
-  proRequired
+  proRequired,
+  uploadLimits
 }) => {
   const { t } = useTranslation();
   const { trackConversion, trackDownload } = useAnalytics();
-  const { isPro } = useProStatus();
+  const { hasProAccess, isOwnerBeta } = useProStatus();
   const [proModalOpen, setProModalOpen] = useState(false);
   const [proModalTrigger, setProModalTrigger] = useState<'batch' | 'video' | 'ocr' | 'general'>('general');
-  
+
+  /**
+   * Límite de subida real que se aplica y se muestra al usuario:
+   * - OWNER BETA: `ownerMaxSizeMB` (solo herramientas que lo declaren).
+   * - Free con límite específico (p. ej. vídeo 25 MB): ese límite.
+   * - Resto: `uploadLimits.maxSizeMB` o el global de 50 MB.
+   */
+  const uploadMaxSizeMB = useMemo(
+    () =>
+      resolveUploadMaxSizeMB(uploadLimits, {
+        isOwnerBeta,
+        hasProAccess,
+        freeMaxSizeMB: proRequired?.maxSizeMB,
+      }),
+    [isOwnerBeta, hasProAccess, proRequired?.maxSizeMB, uploadLimits]
+  );
+
   const {
     files,
     isDragging,
@@ -72,7 +101,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
     setIsDragging
   } = useFileUpload({
     maxFiles,
-    maxSizeMB: 50,
+    maxSizeMB: uploadMaxSizeMB,
     allowedTypes: accept.split(','),
     multiple
   });
@@ -87,7 +116,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
     if (files.length === 0) return;
 
     // Check PRO limits before conversion
-    if (!isPro && proRequired) {
+    if (!hasProAccess && proRequired) {
       // Check max files limit
       if (proRequired.maxFiles && files.length > proRequired.maxFiles) {
         setProModalTrigger(proRequired.trigger || 'batch');
@@ -200,6 +229,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
               accept={accept}
               multiple={multiple}
               error={error}
+              maxSizeMB={uploadMaxSizeMB}
             />
           )}
 
