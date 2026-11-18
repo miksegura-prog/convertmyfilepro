@@ -12,9 +12,9 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({
   showSidebarAd = false
 }) => {
-  const { isPro } = useProStatus();
-  // Hide sidebar ad for PRO users
-  const effectiveShowAd = showSidebarAd && !isPro;
+  const { hasProAccess } = useProStatus();
+  // Hide sidebar ad for PRO users and OWNER BETA
+  const effectiveShowAd = showSidebarAd && !hasProAccess;
   
   return (
     <div className="min-h-screen flex flex-col bg-background">

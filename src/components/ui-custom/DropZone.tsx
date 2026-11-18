@@ -15,6 +15,8 @@ interface DropZoneProps {
   accept?: string;
   multiple?: boolean;
   error?: string | null;
+  /** Límite efectivo mostrado al usuario (debe coincidir con el aplicado). */
+  maxSizeMB?: number;
 }
 
 const getFileIcon = (file: File) => {
@@ -35,7 +37,8 @@ export const DropZone: React.FC<DropZoneProps> = ({
   setIsDragging,
   accept = '*/*',
   multiple = true,
-  error
+  error,
+  maxSizeMB = 50
 }) => {
   const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -113,7 +116,7 @@ export const DropZone: React.FC<DropZoneProps> = ({
           </div>
           
           <p className="text-xs text-[var(--color-muted)]">
-            {t('common.fileSizeLimit', { size: 50 })}
+            {t('common.fileSizeLimit', { size: maxSizeMB })}
           </p>
         </div>
       </div>

@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { Smartphone, Sparkles, AlertCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { Smartphone, Sparkles, AlertCircle, AlertTriangle, ShieldCheck } from 'lucide-react';
 import { ToolLayout } from '@/components/ui-custom/ToolLayout';
 import { compressVideoForWhatsApp } from '@/tools/videoCompressor';
+import { useProStatus } from '@/hooks/useProStatus';
+import { OWNER_VIDEO_MB, PRO_FILE_SIZE_MB } from '@/config/plans';
 import type { FileWithPreview } from '@/types';
 import { Label } from '@/components/ui/label';
 
 const CompressVideo: React.FC = () => {
+  const { t } = useTranslation();
+  const { isOwnerBeta } = useProStatus();
   const [targetSizeMB, setTargetSizeMB] = useState<number>(15);
   const [statusMessage, setStatusMessage] = useState<string>('');
 
@@ -93,6 +98,24 @@ const CompressVideo: React.FC = () => {
         </button>
       </div>
 
+      {/* OWNER BETA: único lugar donde se permite superar el límite público */}
+      {isOwnerBeta && (
+        <div className="flex items-center gap-2 rounded-lg border border-dashed border-[var(--color-border)] p-3 text-xs text-[var(--color-muted)]">
+          <ShieldCheck className="w-4 h-4 flex-shrink-0" />
+          <span>
+            <span className="font-semibold text-[var(--color-text)]">{t('owner.badge')}</span>
+            {' · '}
+            {t('owner.videoLimit', { size: OWNER_VIDEO_MB })}
+          </span>
+        </div>
+      )}
+
+      {/* Aviso honesto: tamaño máximo no garantizado en todos los equipos */}
+      <div className="flex items-start gap-2 text-xs text-[var(--color-muted)] p-2 bg-[var(--color-bg)] rounded-lg">
+        <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+        <span>{t('owner.memoryWarning')}</span>
+      </div>
+
       {statusMessage && (
         <div className="flex items-center gap-2 text-xs text-[var(--color-muted)] p-2 bg-[var(--color-bg)] rounded-lg">
           <AlertCircle className="w-4 h-4 text-blue-500 animate-pulse" />
@@ -117,6 +140,7 @@ const CompressVideo: React.FC = () => {
       outputFormat="mp4"
       keywords={['comprimir video whatsapp', 'compress video for whatsapp', 'reducir video menos 16mb', 'video compressor online']}
       proRequired={{ maxSizeMB: 25, trigger: 'video' }}
+      uploadLimits={{ maxSizeMB: PRO_FILE_SIZE_MB, ownerMaxSizeMB: OWNER_VIDEO_MB }}
     />
   );
 };

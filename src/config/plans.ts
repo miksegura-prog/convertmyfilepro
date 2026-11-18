@@ -22,3 +22,11 @@ export const PRO_FILE_SIZE_MB = 50;
 
 /** OCR: Free limita a 2 operaciones por sesión; PRO no tiene ese tope. */
 export const FREE_OCR_PAGES = 2;
+
+/**
+ * OWNER BETA (experimental, no publicado ni anunciado):
+ * entrada máxima del compresor de vídeo para el desarrollador. Solo se aplica
+ * cuando el modo OWNER está verificado (localhost dev o Cloudflare Access).
+ * Los límites públicos Free (25 MB) y PRO (50 MB) no cambian.
+ */
+export const OWNER_VIDEO_MB = 200;

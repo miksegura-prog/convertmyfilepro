@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useOwnerBeta } from './useOwnerBeta';
 
 export const PRO_STORAGE_KEY = 'convertmyfilepro_pro';
 const STORAGE_KEY = PRO_STORAGE_KEY;
@@ -40,6 +41,7 @@ function loadStatus(): ProStatus {
 export function useProStatus() {
   const [status, setStatus] = useState<ProStatus>(loadStatus);
   const [now, setNow] = useState(INITIAL_TIME);
+  const { isOwnerBeta } = useOwnerBeta();
 
   useEffect(() => {
     // Keep every hook instance (header, layout, tools) in sync: activation happens
@@ -66,6 +68,11 @@ export function useProStatus() {
 
   const isPro = status.active && status.expiresAt !== null && status.expiresAt > now;
 
+  // El modo OWNER BETA desbloquea las prestaciones PRO sin pasar por Stripe.
+  // El acceso de los clientes de pago no cambia: `isPro` sigue dependiendo
+  // exclusivamente de la sesión verificada de Stripe.
+  const hasProAccess = isPro || isOwnerBeta;
+
   const activatePro = useCallback((sessionId: string, expiresAt?: number) => {
     // Default PRO: 1 year from now if no expiration provided
     const expiry = expiresAt || Date.now() + 365 * 24 * 60 * 60 * 1000;
@@ -90,6 +97,8 @@ export function useProStatus() {
 
   return {
     isPro,
+    isOwnerBeta,
+    hasProAccess,
     isProVisible: true,
     activatePro,
     deactivatePro,

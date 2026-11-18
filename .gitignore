@@ -33,3 +33,5 @@ wrangler.jsonc
  
 # Vercel (migrated to Cloudflare)
 .vercel
+
+tests/owner-beta/.tmp/

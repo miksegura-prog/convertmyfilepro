@@ -8,7 +8,51 @@ export interface CompressVideoOptions {
   onLog?: (msg: string) => void;
 }
 
+/** A partir de este tamaño de entrada avisamos de consumo de memoria/tiempo. */
+export const LARGE_VIDEO_WARNING_MB = 50;
+
+/** Mensaje mostrado al usuario cuando el navegador no tiene memoria suficiente. */
+export const OUT_OF_MEMORY_MESSAGE =
+  'Memoria insuficiente para procesar este vídeo en tu navegador. Cierra otras pestañas, ' +
+  'prueba con un archivo más pequeño o reduce la resolución del original.';
+
 let ffmpegInstance: FFmpeg | null = null;
+
+/**
+ * FFmpeg WebAssembly falla con mensajes distintos según el navegador cuando se
+ * agota la memoria. Los detectamos para no mostrar un error críptico.
+ */
+const MEMORY_ERROR_PATTERNS = [
+  /out of memory/i,
+  /outofmemory/i,
+  /\boom\b/i,
+  /cannot allocate/i,
+  /failed to allocate/i,
+  /allocation failed/i,
+  /memory access out of bounds/i,
+  /array buffer allocation failed/i,
+];
+
+export const isMemoryError = (error: unknown): boolean => {
+  const message =
+    error instanceof Error ? `${error.name}: ${error.message}` : String(error ?? '');
+  return MEMORY_ERROR_PATTERNS.some((pattern) => pattern.test(message));
+};
+
+/**
+ * Libera la instancia actual de FFmpeg. Necesario tras un fallo por memoria:
+ * el WebAssembly queda en un estado inválido y hay que recargar el core.
+ */
+export const terminateFFmpeg = (): void => {
+  if (ffmpegInstance) {
+    try {
+      ffmpegInstance.terminate();
+    } catch {
+      // La instancia ya estaba terminada
+    }
+    ffmpegInstance = null;
+  }
+};
 
 /**
  * Returns single-threaded FFmpeg instance loaded via CDN or local core
@@ -69,6 +113,24 @@ export const getVideoMetadata = (file: File): Promise<{ duration: number; width:
 };
 
 /**
+ * Memoria aproximada declarada por el navegador (no está disponible en todos).
+ * Solo se usa para avisar al usuario, nunca para bloquear.
+ */
+const getDeviceMemoryGB = (): number | null => {
+  const value = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+  return typeof value === 'number' ? value : null;
+};
+
+/** Borra un archivo del sistema de archivos virtual sin propagar errores. */
+const deleteVirtualFile = async (ffmpeg: FFmpeg, name: string): Promise<void> => {
+  try {
+    await ffmpeg.deleteFile(name);
+  } catch {
+    // El archivo puede no existir (fallo previo) o FFmpeg estar terminado.
+  }
+};
+
+/**
  * Compresses video for WhatsApp or custom size limit (<= 16 MB)
  */
 export const compressVideoForWhatsApp = async (
@@ -77,10 +139,26 @@ export const compressVideoForWhatsApp = async (
 ): Promise<Blob> => {
   const { targetSizeMB = 15, onProgress, onLog } = options;
 
-  onLog?.('Reading video metadata...');
+  if (!file || file.size === 0) {
+    throw new Error('El archivo de vídeo está vacío o no se pudo leer.');
+  }
+
+  const fileMB = Math.round((file.size / (1024 * 1024)) * 10) / 10;
+  onLog?.(`Reading video metadata... (${fileMB} MB)`);
   onProgress?.(5);
 
   const { duration, width, height } = await getVideoMetadata(file);
+
+  // Aviso temprano: los vídeos grandes pueden no caber en la memoria del
+  // navegador. No prometemos que el tamaño máximo se procese en todos los
+  // dispositivos.
+  if (file.size > LARGE_VIDEO_WARNING_MB * 1024 * 1024) {
+    onLog?.(`Vídeo grande (${fileMB} MB): puede consumir mucha memoria y tardar varios minutos.`);
+    const deviceMemoryGB = getDeviceMemoryGB();
+    if (deviceMemoryGB !== null && deviceMemoryGB < 8) {
+      onLog?.(`Este dispositivo declara ~${deviceMemoryGB} GB de RAM: si falla, usa un vídeo más pequeño.`);
+    }
+  }
 
   // WhatsApp limit is typically 16MB. We aim for targetSizeMB (e.g. 15MB) for safety
   // Total bits = targetSizeMB * 8 * 1024 * 1024 bits
@@ -117,15 +195,9 @@ export const compressVideoForWhatsApp = async (
     onProgress?.(mapped);
   });
 
-  const inputName = 'input_' + file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-  const outputName = 'output_whatsapp.mp4';
-
-  onLog?.('Writing file to virtual filesystem...');
-  const fileData = await fetchFile(file);
-  await ffmpeg.writeFile(inputName, fileData);
-
-  onProgress?.(15);
-  onLog?.('Compressing video with H.264 / AAC...');
+  // Nombre único: evita colisiones si se comprime más de un vídeo seguido.
+  const inputName = 'input_' + `${Date.now()}_` + file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+  const outputName = `output_${Date.now()}.mp4`;
 
   const ffmpegArgs = [
     '-i', inputName,
@@ -142,23 +214,45 @@ export const compressVideoForWhatsApp = async (
     outputName
   ];
 
-  await ffmpeg.exec(ffmpegArgs);
+  let outputBlob: Blob | null = null;
 
-  onProgress?.(95);
-  onLog?.('Reading compressed video result...');
-
-  const outputData = await ffmpeg.readFile(outputName);
-
-  // Cleanup virtual files
   try {
-    await ffmpeg.deleteFile(inputName);
-    await ffmpeg.deleteFile(outputName);
-  } catch {
-    // Ignore cleanup error
+    onLog?.('Writing file to virtual filesystem...');
+    const fileData = await fetchFile(file);
+    await ffmpeg.writeFile(inputName, fileData);
+
+    onProgress?.(15);
+    onLog?.('Compressing video with H.264 / AAC...');
+    await ffmpeg.exec(ffmpegArgs);
+
+    onProgress?.(95);
+    onLog?.('Reading compressed video result...');
+
+    const outputData = await ffmpeg.readFile(outputName);
+    const outputBytes = new Uint8Array(outputData as unknown as ArrayBuffer);
+
+    if (outputBytes.byteLength === 0) {
+      throw new Error('FFmpeg no generó ningún archivo de salida. Prueba con otro vídeo.');
+    }
+
+    outputBlob = new Blob([outputBytes], { type: 'video/mp4' });
+  } catch (error) {
+    if (isMemoryError(error)) {
+      // El core queda inutilizable: se descarta para que el siguiente intento
+      // cargue una instancia limpia.
+      terminateFFmpeg();
+      throw new Error(OUT_OF_MEMORY_MESSAGE);
+    }
+    throw error instanceof Error
+      ? error
+      : new Error('No se pudo comprimir el vídeo.');
+  } finally {
+    // Se ejecuta siempre, también cuando la conversión falla: no dejamos
+    // archivos temporales en el sistema de archivos virtual de FFmpeg.
+    await deleteVirtualFile(ffmpeg, inputName);
+    await deleteVirtualFile(ffmpeg, outputName);
   }
 
   onProgress?.(100);
-
-  const outputBytes = new Uint8Array(outputData as unknown as ArrayBuffer);
-  return new Blob([outputBytes], { type: 'video/mp4' });
+  return outputBlob;
 };

@@ -41,6 +41,12 @@
     "lightMode": "Light Mode",
     "useTool": "Use tool"
   },
+  "owner": {
+    "badge": "OWNER BETA",
+    "badgeTitle": "Experimental OWNER mode: local development or authorized preview only",
+    "videoLimit": "up to {{size}} MB per video (experimental)",
+    "memoryWarning": "Large videos (especially over 100 MB) can consume a lot of memory and take several minutes. Processing happens in your browser and we cannot guarantee every device can complete the maximum sizes."
+  },
   "homepage": {
     "convertNow": "Convert now",
     "quickAccess": { "title": "Quick access to tools", "description": "Choose a category and open the tool you need." },
