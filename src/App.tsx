@@ -42,6 +42,8 @@ const OggToMp3 = lazy(() => import('@/pages/tools/OggToMp3'));
 const WavToFlac = lazy(() => import('@/pages/tools/WavToFlac'));
 
 const OcrTool = lazy(() => import('@/pages/tools/OcrTool'));
+const PdfStudio = lazy(() => import('@/pages/PdfStudio'));
+const PdfStudioEdit = lazy(() => import('@/pages/tools/PdfStudioEdit'));
 
 const SeoToolPage = lazy(() => import('@/pages/SeoToolPage'));
 
@@ -137,6 +139,25 @@ function App() {
                   </Suspense>
                 }
               />
+
+              <Route
+                path="pdf-studio"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PdfStudio />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="pdf-studio/edit"
+                element={
+                  <Suspense fallback={<PageLoader />}>
+                    <PdfStudioEdit />
+                  </Suspense>
+                }
+              />
+
 
               <Route
                 path="docx-to-pdf"

@@ -19,7 +19,7 @@ const Home: React.FC = () => {
       ['wavToMp3','/wav-to-mp3'],['flacToMp3','/flac-to-mp3'],['oggToMp3','/ogg-to-mp3'],['wavToFlac','/wav-to-flac'],
     ].map(([id,path]) => ({ id, path, category:'audio' as const, title:t(`tools.${id}.title`), description:t(`tools.${id}.description`), icon:'audio', color:'from-purple-500 to-indigo-600' })),
     ...[
-      ['mergePdf','/merge-pdf','pdf'],['splitPdf','/split-pdf','pdf'],['jpgToPdf','/jpg-to-pdf','pdf'],['docxToPdf','/docx-to-pdf','documents'],['xlsxToPdf','/xlsx-to-pdf','documents'],['txtToPdf','/txt-to-pdf','documents'],['ocr','/ocr','documents'],['srtToVtt','/srt-to-vtt','documents'],['vttToSrt','/vtt-to-srt','documents'],['txtToSrt','/txt-to-srt','documents'],
+      ['pdfStudio','/pdf-studio','pdf'],['mergePdf','/merge-pdf','pdf'],['splitPdf','/split-pdf','pdf'],['jpgToPdf','/jpg-to-pdf','pdf'],['docxToPdf','/docx-to-pdf','documents'],['xlsxToPdf','/xlsx-to-pdf','documents'],['txtToPdf','/txt-to-pdf','documents'],['ocr','/ocr','documents'],['srtToVtt','/srt-to-vtt','documents'],['vttToSrt','/vtt-to-srt','documents'],['txtToSrt','/txt-to-srt','documents'],
     ].map(([id,path,type]) => ({ id, path, category:type as Tool['category'], title:t(`tools.${id}.title`), description:t(`tools.${id}.description`), icon:'file', color:'from-violet-500 to-blue-600' })),
   ];
   const categories = [

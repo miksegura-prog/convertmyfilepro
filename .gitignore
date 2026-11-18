@@ -23,6 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
+# PDF Studio feasibility test artifacts (fixtures, salidas y PDFs de terceros)
+tests/pdf-studio-feasibility/artifacts/
+
 # Cloudflare
 .wrangler
 worker

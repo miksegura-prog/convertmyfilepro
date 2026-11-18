@@ -24,11 +24,34 @@ export const Header: React.FC = () => {
   const { isPro } = useProStatus();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  interface NavChild {
+    path: string;
+    label: string;
+    icon: React.ElementType;
+    badge?: string;
+  }
+
+  interface NavMenu {
+    path?: string;
+    label: string;
+    icon: React.ElementType;
+    children: NavChild[];
+  }
+
+  interface NavLink {
+    path: string;
+    label: string;
+    icon: React.ElementType;
+    children?: never;
+  }
+
+  type NavItem = NavMenu | NavLink;
+
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
   };
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { path: '/', label: t('nav.home'), icon: Home },
     {
       label: t('nav.images'),
@@ -49,6 +72,8 @@ export const Header: React.FC = () => {
       label: t('nav.pdf'),
       icon: FileText,
       children: [
+        { path: '/pdf-studio', label: t('tools.pdfStudio.title'), icon: FileText, badge: t('tools.pdfStudio.beta') },
+        { path: '/pdf-studio/edit', label: t('tools.pdfStudioEdit.title'), icon: FileText, badge: t('tools.pdfStudio.beta') },
         { path: '/merge-pdf', label: t('tools.mergePdf.title'), icon: FileText },
         { path: '/split-pdf', label: t('tools.splitPdf.title'), icon: FileText },
         { path: '/jpg-to-pdf', label: t('tools.jpgToPdf.title'), icon: FileText },
@@ -119,6 +144,11 @@ export const Header: React.FC = () => {
                       <DropdownMenuItem key={child.path} asChild>
                         <Link to={child.path} className="flex items-center gap-2 cursor-pointer">
                           <child.icon className="w-4 h-4" />{child.label}
+                          {child.badge && (
+                            <span className="ml-auto rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold uppercase text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+                              {child.badge}
+                            </span>
+                          )}
                         </Link>
                       </DropdownMenuItem>
                     ))}
@@ -221,6 +251,11 @@ export const Header: React.FC = () => {
                       <Link key={child.path} to={child.path} onClick={() => setMobileMenuOpen(false)}
                         className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm ${isActive(child.path) ? 'bg-[var(--color-primary)] text-white' : 'hover:bg-[var(--color-bg)]'}`}>
                         <child.icon className="w-4 h-4" />{child.label}
+                        {child.badge && (
+                          <span className="ml-auto rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold uppercase text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+                            {child.badge}
+                          </span>
+                        )}
                       </Link>
                     ))}
                   </div>
