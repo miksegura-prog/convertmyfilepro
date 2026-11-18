@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 import { inspectAttr } from "kimi-plugin-inspect-react";
 
 export default defineConfig({
-  base: "./",
+  base: "/",
 
   // Caché fuera de Dropbox para evitar errores EBUSY
   cacheDir: process.env.LOCALAPPDATA
