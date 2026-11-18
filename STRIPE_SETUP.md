@@ -71,7 +71,7 @@ STRIPE_SECRET_KEY = SU_STRIPE_SECRET_KEY_AQUI
 |---|---|---|
 | Anuncios (AdSlot, Monetag vignette/push, AdSense) | Visibles | Ocultos al activar PRO en el navegador |
 | Archivos por lote | Máximo 3 | Hasta 20 en las herramientas que lo permiten |
-| Tamaño máximo de archivo/vídeo | 25 MB (vídeo) | 50 MB |
+| Compresión de vídeo (archivo de entrada) | 50 MB | 50 MB (misma velocidad de compresión) |
 | OCR (imagen a texto) | 2 páginas/sesión | Sin ese tope |
 | PDF Studio Beta | Incluido (edición básica) | Incluido |
 
