@@ -16,8 +16,8 @@ export const PRO_PRICE_EUR = 5.99;
 export const FREE_BATCH_FILES = 3;
 export const PRO_BATCH_FILES = 20;
 
-/** Tamaño máximo de archivo (ToolLayout usa 50 MB); Free limita el vídeo a 25 MB. */
-export const FREE_VIDEO_MB = 25;
+/** Tamaño máximo de archivo para compresión de vídeo en Free y PRO: 50 MB. */
+export const FREE_VIDEO_MB = 50;
 export const PRO_FILE_SIZE_MB = 50;
 
 /** OCR: Free limita a 2 operaciones por sesión; PRO no tiene ese tope. */
