@@ -1,3 +1,5 @@
+import { sendInviteViaBrevo, type InviteLanguage } from './brevo-email';
+
 /**
  * Owner (real, production) + 90-day Pro Beta invitations.
  *
@@ -21,6 +23,7 @@ export interface OwnerEnv {
   OWNER_ACCESS_AUD?: string;
   OWNER_EMAILS?: string;
   OWNER_SESSION_SECRET?: string;
+  BREVO_API_KEY?: string;
 }
 
 type Claims = { aud?: string | string[]; email?: string; exp?: number; nbf?: number; iss?: string };
@@ -244,6 +247,7 @@ export async function handleOwnerOrBetaApi(request: Request, env: OwnerEnv): Pro
     if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return json({ error: 'Valid email required' }, 400);
     }
+    const language: InviteLanguage = body?.language === 'en' ? 'en' : 'es';
     const token = randomToken();
     const id = crypto.randomUUID();
     await env.DB.prepare(
@@ -251,10 +255,19 @@ export async function handleOwnerOrBetaApi(request: Request, env: OwnerEnv): Pro
        (id, email, note, token_hash, created_at, redeemed_at, expires_at, revoked_at, session_hash)
        VALUES (?, ?, ?, ?, ?, NULL, NULL, NULL, NULL)`
     ).bind(id, email, note || null, await sha256(token), Date.now()).run();
-    // Raw token is returned exactly once; subsequent list requests only show metadata.
+    const inviteUrl = `https://www.convertmyfilepro.com/invite/${token}`;
+    // Invitation is saved even if Brevo is temporarily unavailable. In this
+    // case show a manual fallback link, without silently losing the invitation.
+    const delivery = await sendInviteViaBrevo(env.BREVO_API_KEY, email, inviteUrl, language);
+    // A "sent" response only means accepted by the Brevo API, not delivered.
+    // Raw token is returned to the authenticated Owner exactly once.
     return json({
       success: true, id, email,
-      url: `${url.origin}/invite/${token}`,
+      url: inviteUrl,
+      emailStatus: delivery.ok ? 'accepted' : 'failed',
+      emailError: !delivery.ok
+        ? (delivery.reason === 'not_configured' ? 'Email service not configured' : 'Email service unavailable')
+        : null,
       durationDays: 90, redeemWithinDays: 14,
     }, 201);
   }
