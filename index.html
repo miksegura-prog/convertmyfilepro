@@ -51,58 +51,61 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
      crossorigin="anonymous"></script>
     -->
-    <!-- Monetag + push service worker: only for FREE visitors.
-         PRO users (localStorage `convertmyfilepro_pro` active and not expired) get no ads,
-         including Monetag vignette and push notifications. See src/hooks/useProStatus.ts. -->
+    <!-- Pro ads decision: verify the HttpOnly Owner/Beta session before loading Monetag.
+         Do not show ads on private Owner/invitation pages. Paid Stripe users are
+         checked by the existing, backward-compatible localStorage marker. -->
     <script>
       (function () {
-        var PRO_KEY = 'convertmyfilepro_pro';
-        var isPro = false;
-
+        var paid = false;
         try {
-          var stored = localStorage.getItem(PRO_KEY);
-          if (stored) {
-            var parsed = JSON.parse(stored);
-            isPro = !!(parsed && parsed.active && parsed.expiresAt && parsed.expiresAt > Date.now());
+          var saved = JSON.parse(localStorage.getItem('convertmyfilepro_pro') || 'null');
+          paid = !!(saved && saved.active && saved.expiresAt > Date.now());
+        } catch (_) { paid = false; }
+        var privatePage = /^\/(owner|invite)(\/|$)/.test(location.pathname);
+        var localDev = ['localhost', '127.0.0.1', '[::1]'].indexOf(location.hostname) >= 0;
+        var verifying = location.pathname.indexOf('/pro-success') === 0;
+
+        function removePush() {
+          if (!('serviceWorker' in navigator)) return;
+          navigator.serviceWorker.getRegistrations().then(function (registrations) {
+            registrations.forEach(function (registration) {
+              var worker = registration.active || registration.installing || registration.waiting;
+              if (worker && worker.scriptURL.indexOf('/sw.js') !== -1) registration.unregister();
+            });
+          }).catch(function () {});
+        }
+
+        function loadFreeAds() {
+          if (!document.body && !document.documentElement) return;
+          var script = document.createElement('script');
+          script.dataset.zone = '12234686';
+          script.src = 'https://n6wxm.com/vignette.min.js';
+          (document.body || document.documentElement).appendChild(script);
+          if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+              navigator.serviceWorker.register('/sw.js').catch(function () {});
+            });
           }
-        } catch (e) {
-          isPro = false;
         }
 
-        // Never serve ads on the checkout-return page while PRO is being verified.
-        var verifyingPayment = window.location.pathname.indexOf('/pro-success') === 0;
-
-        if (!isPro && !verifyingPayment) {
-          (function (s) {
-            s.dataset.zone = '12234686';
-            s.src = 'https://n6wxm.com/vignette.min.js';
-          })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+        if (paid || privatePage || localDev || verifying) {
+          removePush();
+          return;
         }
 
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', function () {
-            if (isPro) {
-              // Remove the Monetag push service worker for PRO users.
-              navigator.serviceWorker.getRegistrations().then(function (registrations) {
-                registrations.forEach(function (registration) {
-                  var worker = registration.active || registration.installing || registration.waiting;
-                  if (worker && worker.scriptURL.indexOf('/sw.js') !== -1) {
-                    registration.unregister();
-                  }
-                });
-              }).catch(function () {});
-              return;
-            }
-
-            navigator.serviceWorker.register('/sw.js')
-              .then(function (registration) {
-                console.log('SW registered:', registration);
-              })
-              .catch(function (error) {
-                console.log('SW registration failed:', error);
-              });
-          });
-        }
+        fetch('/api/pro-beta/status', {
+          credentials: 'same-origin', cache: 'no-store',
+          headers: { Accept: 'application/json' }
+        }).then(function (res) {
+          if (!res.ok) throw new Error('Unable to verify Pro session');
+          return res.json();
+        }).then(function (data) {
+          if (data.owner || data.beta) removePush();
+          else loadFreeAds();
+        }).catch(function () {
+          // Fail closed on network errors: never accidentally inject free-user
+          // ads into an active Owner/Pro Beta session.
+        });
       })();
     </script>
   </head>
