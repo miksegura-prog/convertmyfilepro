@@ -65,10 +65,13 @@ function toBase64Url(bytes: Uint8Array): string {
   for (const byte of bytes) out += String.fromCharCode(byte);
   return btoa(out).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
 }
-function fromBase64Url(s: string): Uint8Array {
+function fromBase64Url(s: string): ArrayBuffer {
   const normalized = s.replace(/-/g, '+').replace(/_/g, '/');
   const decoded = atob(normalized + '='.repeat((4 - normalized.length % 4) % 4));
-  return Uint8Array.from(decoded, c => c.charCodeAt(0));
+  const buffer = new ArrayBuffer(decoded.length);
+  const bytes = new Uint8Array(buffer);
+  for (let i = 0; i < decoded.length; i += 1) bytes[i] = decoded.charCodeAt(i);
+  return buffer;
 }
 async function sha256(value: string): Promise<string> {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
