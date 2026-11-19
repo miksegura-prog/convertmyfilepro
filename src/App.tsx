@@ -50,6 +50,8 @@ const SeoToolPage = lazy(() => import('@/pages/SeoToolPage'));
 const ProSuccess = lazy(() => import('@/pages/ProSuccess'));
 const Pro = lazy(() => import('@/pages/Pro'));
 const LegalPage = lazy(() => import('@/pages/LegalPage'));
+const Owner = lazy(() => import('@/pages/Owner'));
+const ProInvite = lazy(() => import('@/pages/ProInvite'));
 
 const PageLoader: React.FC = () => (
   <div className="flex items-center justify-center min-h-[400px]">
@@ -284,6 +286,10 @@ function App() {
                   </Suspense>
                 }
               />
+
+              <Route path="owner" element={<Suspense fallback={<PageLoader />}><Owner /></Suspense>} />
+              <Route path="invite/:token" element={<Suspense fallback={<PageLoader />}><ProInvite /></Suspense>} />
+              <Route path="invite" element={<Suspense fallback={<PageLoader />}><ProInvite /></Suspense>} />
 
               <Route path="pro" element={<Suspense fallback={<PageLoader />}><Pro /></Suspense>} />
               <Route path="privacy" element={<Suspense fallback={<PageLoader />}><LegalPage /></Suspense>} />

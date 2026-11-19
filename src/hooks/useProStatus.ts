@@ -5,6 +5,40 @@ const STORAGE_KEY = PRO_STORAGE_KEY;
 const PRO_STATUS_EVENT = 'convertmyfilepro:pro-status';
 const INITIAL_TIME = Date.now();
 
+// The production Worker validates both Owner (signed HttpOnly cookie) and
+// invitation sessions (revocable D1 entry). Never trust localStorage for Beta.
+interface VerifiedAccess {
+  owner: boolean;
+  beta: boolean;
+  expiresAt: number | null;
+}
+const noVerifiedAccess: VerifiedAccess = { owner: false, beta: false, expiresAt: null };
+let accessPromise: Promise<VerifiedAccess> | null = null;
+let accessCachedAt = 0;
+let accessCached: VerifiedAccess = noVerifiedAccess;
+
+function getVerifiedAccess(force = false): Promise<VerifiedAccess> {
+  if (!force && Date.now() - accessCachedAt < 10_000) return Promise.resolve(accessCached);
+  if (accessPromise) return accessPromise;
+  accessPromise = fetch('/api/pro-beta/status', {
+    credentials: 'same-origin', cache: 'no-store', headers: { Accept: 'application/json' },
+  }).then(async res => {
+    if (!res.ok) return noVerifiedAccess;
+    const data = await res.json() as Partial<VerifiedAccess>;
+    return {
+      owner: data.owner === true,
+      beta: data.beta === true,
+      expiresAt: typeof data.expiresAt === 'number' ? data.expiresAt : null,
+    };
+  }).catch(() => noVerifiedAccess).then(data => {
+    accessCached = data;
+    accessCachedAt = Date.now();
+    return data;
+  }).finally(() => { accessPromise = null; });
+  return accessPromise;
+}
+
+
 interface ProStatus {
   active: boolean;
   expiresAt: number | null;
@@ -40,22 +74,33 @@ function loadStatus(): ProStatus {
 export function useProStatus() {
   const [status, setStatus] = useState<ProStatus>(loadStatus);
   const [now, setNow] = useState(INITIAL_TIME);
+  const [verifiedAccess, setVerifiedAccess] = useState<VerifiedAccess>(noVerifiedAccess);
 
   useEffect(() => {
     // Keep every hook instance (header, layout, tools) in sync: activation happens
     // in ProSuccess, but the header must switch to "PRO activo" without a reload.
+    let mounted = true;
     const refresh = () => {
+      accessCachedAt = 0;
+      void getVerifiedAccess().then(data => { if (mounted) setVerifiedAccess(data); });
       setStatus(loadStatus());
       setNow(Date.now());
     };
 
+    refresh();
     window.addEventListener('storage', refresh);
     window.addEventListener(PRO_STATUS_EVENT, refresh);
     window.addEventListener('focus', refresh);
     document.addEventListener('visibilitychange', refresh);
 
-    const interval = window.setInterval(() => setNow(Date.now()), 60_000);
+    // Revalidate revocations while a tab stays open (not only on focus).
+    const interval = window.setInterval(() => {
+      setNow(Date.now());
+      accessCachedAt = 0;
+      void getVerifiedAccess().then(data => { if (mounted) setVerifiedAccess(data); });
+    }, 60_000);
     return () => {
+      mounted = false;
       window.clearInterval(interval);
       window.removeEventListener('storage', refresh);
       window.removeEventListener(PRO_STATUS_EVENT, refresh);
@@ -65,6 +110,9 @@ export function useProStatus() {
   }, []);
 
   const isPro = status.active && status.expiresAt !== null && status.expiresAt > now;
+  const isOwner = verifiedAccess.owner;
+  const isBetaPro = verifiedAccess.beta && verifiedAccess.expiresAt !== null && verifiedAccess.expiresAt > now;
+  const hasProAccess = isPro || isOwner || isBetaPro;
 
   const activatePro = useCallback((sessionId: string, expiresAt?: number) => {
     // Default PRO: 1 year from now if no expiration provided
@@ -90,6 +138,10 @@ export function useProStatus() {
 
   return {
     isPro,
+    isOwner,
+    isBetaPro,
+    hasProAccess,
+    betaExpiresAt: verifiedAccess.expiresAt,
     isProVisible: true,
     activatePro,
     deactivatePro,

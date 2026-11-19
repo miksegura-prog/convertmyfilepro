@@ -38,6 +38,7 @@ interface ToolLayoutProps {
   faqItems?: Array<{ question: string; answer: string }>;
   keywords?: string[];
   proRequired?: ProLimits;
+  uploadLimits?: { ownerMaxSizeMB?: number };
 }
 
 export const ToolLayout: React.FC<ToolLayoutProps> = ({
@@ -54,11 +55,13 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
   outputFormat,
   faqItems,
   keywords = [],
-  proRequired
+  proRequired,
+  uploadLimits
 }) => {
   const { t } = useTranslation();
   const { trackConversion, trackDownload } = useAnalytics();
-  const { isPro } = useProStatus();
+  const { hasProAccess, isOwner } = useProStatus();
+  const maxUploadMB = isOwner && uploadLimits?.ownerMaxSizeMB ? uploadLimits.ownerMaxSizeMB : 50;
   const [proModalOpen, setProModalOpen] = useState(false);
   const [proModalTrigger, setProModalTrigger] = useState<'batch' | 'video' | 'ocr' | 'general'>('general');
   
@@ -72,7 +75,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
     setIsDragging
   } = useFileUpload({
     maxFiles,
-    maxSizeMB: 50,
+    maxSizeMB: maxUploadMB,
     allowedTypes: accept.split(','),
     multiple
   });
@@ -87,7 +90,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
     if (files.length === 0) return;
 
     // Check PRO limits before conversion
-    if (!isPro && proRequired) {
+    if (!hasProAccess && proRequired) {
       // Check max files limit
       if (proRequired.maxFiles && files.length > proRequired.maxFiles) {
         setProModalTrigger(proRequired.trigger || 'batch');
@@ -200,6 +203,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
               accept={accept}
               multiple={multiple}
               error={error}
+              maxSizeMB={maxUploadMB}
             />
           )}
 

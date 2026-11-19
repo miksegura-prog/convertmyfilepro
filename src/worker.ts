@@ -1,3 +1,5 @@
+import { handleOwnerOrBetaApi, type OwnerEnv } from './owner/owner-api';
+
 /**
  * Cloudflare Worker entry point — serves static assets from ./dist
  * and handles the /api/verify-stripe endpoint.
@@ -6,7 +8,7 @@
  * This Worker intercepts only /api/* routes.
  */
 
-export interface Env {
+export interface Env extends OwnerEnv {
   STRIPE_SECRET_KEY: string;
   ASSETS: { fetch(request: Request): Promise<Response> };
 }
@@ -40,13 +42,25 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
+    const protectedApiResponse = await handleOwnerOrBetaApi(request, env);
+    if (protectedApiResponse) return protectedApiResponse;
+
     // Handle /api/verify-stripe route
     if (url.pathname === '/api/verify-stripe') {
       return handleVerifyStripe(request, env);
     }
 
     // Forward static files and client-side routes to the configured assets binding.
-    return env.ASSETS.fetch(request);
+    const staticResponse = await env.ASSETS.fetch(request);
+    if (url.pathname === '/owner' || url.pathname.startsWith('/owner/') ||
+        url.pathname === '/invite' || url.pathname.startsWith('/invite/')) {
+      const headers = new Headers(staticResponse.headers);
+      headers.set('X-Robots-Tag', 'noindex, nofollow');
+      headers.set('Referrer-Policy', 'no-referrer');
+      headers.set('Cache-Control', 'private, no-store');
+      return new Response(staticResponse.body, { status: staticResponse.status, headers });
+    }
+    return staticResponse;
   },
 };
 

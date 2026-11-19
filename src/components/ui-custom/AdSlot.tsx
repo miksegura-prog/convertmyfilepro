@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { isProSync } from '@/hooks/useProStatus';
+import { useProStatus } from '@/hooks/useProStatus';
 
 declare global {
   interface Window {
@@ -20,9 +20,10 @@ export const AdSlot: React.FC<AdSlotProps> = ({
   id 
 }) => {
   const { t } = useTranslation();
-  
+  const { hasProAccess } = useProStatus();
+
   // Hide ads for PRO users
-  if (isProSync()) {
+  if (hasProAccess) {
     return null;
   }
   
@@ -61,9 +62,10 @@ export const AdSlot: React.FC<AdSlotProps> = ({
 
 // Google AdSense initialization hook
 export const useAdSense = () => {
+  const { hasProAccess } = useProStatus();
   React.useEffect(() => {
     // Skip loading AdSense for PRO users
-    if (isProSync()) return;
+    if (hasProAccess) return;
 
     // Check if AdSense script is already loaded
     const existingScript = document.getElementById('adsense-script');
@@ -86,7 +88,7 @@ export const useAdSense = () => {
         }
       };
     }
-  }, []);
+  }, [hasProAccess]);
 };
 
 // Initialize ads on a specific element
