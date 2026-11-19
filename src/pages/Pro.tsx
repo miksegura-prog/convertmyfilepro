@@ -66,7 +66,7 @@ const money = (value: number, language: string) =>
 
 const Pro: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const { isPro, expiresAt } = useProStatus();
+  const { isPro, hasProAccess, isOwner, expiresAt, betaExpiresAt } = useProStatus();
 
   const price = money(PRO_PRICE_EUR, i18n.language);
   const featureValues = {
@@ -78,10 +78,10 @@ const Pro: React.FC = () => {
   };
 
   const expiryLabel =
-    isPro && expiresAt
+    hasProAccess && (isPro ? expiresAt : betaExpiresAt)
       ? new Intl.DateTimeFormat(i18n.language === 'es' ? 'es-ES' : 'en-GB', {
           dateStyle: 'long',
-        }).format(new Date(expiresAt))
+        }).format(new Date((isPro ? expiresAt : betaExpiresAt) as number))
       : null;
 
   const faqItems = t('plans.faq.items', { returnObjects: true, ...featureValues }) as Array<{
@@ -194,11 +194,11 @@ const Pro: React.FC = () => {
             </ul>
 
             <div className="mt-auto">
-              {isPro ? (
+              {hasProAccess ? (
                 <>
                   <Button disabled className="w-full bg-emerald-600 py-6 font-semibold text-white">
                     <Check className="mr-2 h-4 w-4" />
-                    {t('plans.pro.active', { date: expiryLabel || '' })}
+                    {isOwner ? 'OWNER · PRO activo' : t('plans.pro.active', { date: expiryLabel || '' })}
                   </Button>
                   <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs text-[var(--color-muted)]">
                     <CalendarDays className="h-3.5 w-3.5" />
