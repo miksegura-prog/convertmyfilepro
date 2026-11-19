@@ -114,3 +114,25 @@ Publicar **solo después de revisar el PR**, comprobar la compilación y validar
 ## Métricas sin Umami
 
 Cloudflare Web Analytics + Google Search Console siguen funcionando sin cambios. Para saber cuántas conversiones triunfan o fallan podemos implementar eventos agregados en Cloudflare o conectar GA4 en una mejora posterior. Este PR no añade un cuarto sitio en Umami.
+
+## Envío automático de invitaciones con Brevo
+
+El formulario Owner ahora permite seleccionar **Español** o **English** y envía las invitaciones con la API transaccional de Brevo desde `info@convertmyfilepro.com`.
+
+1. En Brevo, autenticar `convertmyfilepro.com` y verificar el remitente `info@convertmyfilepro.com`.
+2. Crear una clave API v3 **restringida a Emails transaccionales**.
+3. Guardarla mediante `npx wrangler secret put BREVO_API_KEY` en el Worker `convertmyfilepro`. **No introducirla en GitHub ni en variables públicas `VITE_*`.**
+4. Desde VS Code en la rama `feature/owner-production-invites-90d`:
+   ```powershell
+   git pull --ff-only
+   npm run build
+   npx wrangler deploy --dry-run
+   ```
+5. Después de las verificaciones, desplegar con `npx wrangler deploy` y probar desde Owner enviando una invitación a un correo propio distinto, sin sesión Owner.
+6. Si Brevo **acepta** el mensaje, Owner lo indica, aunque la recepción real debe comprobarse en el correo y en el historial de Brevo.
+7. Si Brevo **falla** (p. ej., remitente no habilitado, cupo o red), la invitación se crea igualmente y Owner muestra el enlace personal **para envío manual**. No se debe crear otra invitación para el mismo destinatario por un fallo de envío; utiliza el enlace mostrado o revoca la anterior antes de emitir otra.
+8. Verificar en incógnito el acceso Pro de 90 días, y que el enlace no se pueda reutilizar, que la revocación se aplica y que `/owner` no es accesible sin Cloudflare Access.
+
+La clave expira según los ajustes elegidos en Brevo y puede caducar antes tras un período de inactividad. La rotación se realiza creando otra clave y sobrescribiendo `BREVO_API_KEY` mediante Wrangler.
+
+**Nota:** la función no envía mensajes en masa ni publica invitados en listas de marketing. Solo envía un correo al destinatario expresamente introducido por Owner, cuando se solicita una invitación. Para seguimiento posterior de entregas, rebotes y aperturas, utilizar los registros transaccionales de Brevo.
