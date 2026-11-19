@@ -19,8 +19,9 @@ import { ProModal } from '@/components/ui-custom/ProModal';
 import { FAQ } from '@/components/ui-custom/FAQ';
 import { downloadBlob } from '@/utils/fileHelpers';
 import type { OcrResult } from '@/types';
+import { FREE_OCR_PAGES } from '@/config/plans';
 
-const FREE_PER_DAY = 5;
+const FREE_PER_DAY = FREE_OCR_PAGES;
 const MAX_ITEMS_PER_JOB = 40;
 const USAGE_KEY = 'cmfp_ocr_daily_v2';
 
