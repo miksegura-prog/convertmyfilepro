@@ -11,7 +11,7 @@ Esta funcionalidad se desarrolla sobre `main`, **no** sobre la antigua rama `fea
 - Caducidad del enlace si no se usa en **14 días**.
 - **90 días de Pro Beta a partir de la activación** del enlace, no de la creación.
 - Sesión Pro Beta mediante cookie `HttpOnly; Secure; SameSite=Lax`, verificada contra D1 en cada consulta.
-- Revocación inmediata, o expiración automática a los 90 días.
+- Revocación por Owner (se refleja tras la próxima comprobación de sesión: al recargar o, si la pestaña permanece abierta, en un máximo aproximado de 60 segundos), o expiración automática a los 90 días.
 - No se almacena el token de invitación en texto claro; solo su SHA-256. El enlace completo se muestra una sola vez en Owner.
 - Owner puede usar los conversores PRO en la web pública durante **24 horas por sesión Owner**, renovando al entrar a `/owner`.
 - El compresor de vídeo admite **200 MB para Owner**; Free y Pro conservan 50 MB. El navegador puede fallar por RAM y el proceso puede ser lento.
@@ -97,7 +97,7 @@ Publicar **solo después de revisar el PR**, comprobar la compilación y validar
 4. Ábrelo en navegador incógnito, activa el enlace y comprueba que Pro Beta funciona, sin anuncios.
 5. Verifica que el enlace no se pueda canjear por segunda vez.
 6. Comprueba que el invitado no puede entrar a `/owner` ni gestionar invitaciones.
-7. Revoca la licencia desde Owner: al refrescar la web invitada debe pasar a Free.
+7. Revoca la licencia desde Owner: al refrescar la web invitada debe pasar a Free; sin refrescar, la comprobación periódica debe retirar el acceso en torno a 60 segundos.
 8. Comprueba que Stripe y las herramientas públicas mantienen el funcionamiento anterior.
 9. Comprueba que Owner puede utilizar 200 MB en vídeo y que Free/Pro no supera 50 MB.
 10. Revisa cookies, política de privacidad y procedimiento de borrado de datos antes de invitar a terceros.
