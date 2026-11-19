@@ -41,8 +41,6 @@ export async function sendInviteViaBrevo(
     ? 'Gracias por ayudarnos a mejorar ConvertMyFilePro.'
     : 'Thank you for helping us improve ConvertMyFilePro.';
   const safeLink = escapeHtml(link);
-  const text = [intro, '', instruction, link, '', conditions, '', note, '', closing,
-    '', 'ConvertMyFilePro — https://www.convertmyfilepro.com'].join('\n');
   const html = `<!doctype html><html lang="${language}"><body style="font-family:Arial,sans-serif;color:#17303c;line-height:1.6;margin:0;padding:24px">
     <div style="max-width:600px;margin:auto">
       <h1 style="font-size:22px">ConvertMyFilePro · PRO Beta</h1>
@@ -69,7 +67,6 @@ export async function sendInviteViaBrevo(
         to: [{ email: to }],
         replyTo: { name: 'ConvertMyFilePro', email: 'info@convertmyfilepro.com' },
         subject,
-        textContent: text,
         htmlContent: html,
         tags: ['cmfp-beta-invite'],
       }),
