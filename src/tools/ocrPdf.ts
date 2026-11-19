@@ -9,15 +9,17 @@ import {
 pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
 async function openDocument(file: File) {
-  return pdfjs.getDocument({ data: new Uint8Array(await file.arrayBuffer()) }).promise;
+  const loadingTask = pdfjs.getDocument({ data: new Uint8Array(await file.arrayBuffer()) });
+  const document = await loadingTask.promise;
+  return { document, close: () => loadingTask.destroy() };
 }
 
 export async function getOcrPdfPageCount(file: File): Promise<number> {
-  const document = await openDocument(file);
+  const { document, close } = await openDocument(file);
   try {
     return document.numPages;
   } finally {
-    await document.destroy();
+    await close();
   }
 }
 
@@ -55,7 +57,7 @@ export async function extractTextFromPdfPages(
   onPage: (pageNumber: number, result: OcrResult) => void | Promise<void>,
   cancelled?: () => boolean,
 ): Promise<void> {
-  const document = await openDocument(file);
+  const { document, close } = await openDocument(file);
   try {
     for (const pageNumber of pages) {
       if (cancelled?.()) break;
@@ -90,6 +92,6 @@ export async function extractTextFromPdfPages(
       }
     }
   } finally {
-    await document.destroy();
+    await close();
   }
 }
