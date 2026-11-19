@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const { resolvedTheme, toggle } = useTheme();
-  const { isPro } = useProStatus();
+  const { isOwner, hasProAccess } = useProStatus();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   interface NavChild {
@@ -163,8 +163,9 @@ export const Header: React.FC = () => {
                 </Link>
               )
             ))}
+            {isOwner && <Link to="/owner" className="text-xs font-bold text-emerald-700 px-2 py-2 hover:underline">OWNER</Link>}
             {/* PRO Button Desktop */}
-            {isPro ? (
+            {hasProAccess ? (
               <Button
                 variant="ghost"
                 size="sm"
@@ -200,8 +201,9 @@ export const Header: React.FC = () => {
             </Button>
           </nav>
           <div className="flex md:hidden items-center gap-2">
+            {isOwner && <Link to="/owner" className="text-xs font-bold text-emerald-700 px-2">OWNER</Link>}
             {/* Mobile PRO Button */}
-            {isPro ? (
+            {hasProAccess ? (
               <Button
                 variant="ghost"
                 size="sm"
@@ -267,8 +269,10 @@ export const Header: React.FC = () => {
                   </Link>
                 )
               ))}
+              {isOwner && <Link to="/owner" onClick={() => setMobileMenuOpen(false)}
+                className="px-3 py-2 font-semibold text-emerald-700">Panel Owner</Link>}
               {/* Mobile PRO Link */}
-              {isPro ? (
+              {hasProAccess ? (
                 <div className="flex items-center gap-2 px-3 py-2 rounded-lg text-green-600 dark:text-green-400 font-semibold">
                   <Crown className="w-4 h-4" />
                   {t('pro.active')}
