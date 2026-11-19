@@ -84,7 +84,7 @@
       "adFree": "No ads, including Monetag ads",
       "unlimitedBatch": "Expanded batches: up to 20 files per batch (3 on Free)",
       "largeVideos": "Video compression up to 50 MB is also included on Free",
-      "ocrExpanded": "Expanded OCR: no 2-page-per-session cap",
+      "ocrExpanded": "Unlimited OCR images and pages per day, with exactly the same quality as Free",
       "studioBeta": "PDF Studio Beta included: edit text, add text, typography and color",
       "priority": "Priority processing — Coming soon"
     },
@@ -99,14 +99,14 @@
       },
       "ocr": {
         "title": "OCR limit reached",
-        "description": "The free plan extracts text from up to 2 pages per session. PRO removes that cap."
+        "description": "Every OCR option is free for up to 5 images or scanned PDF pages per day. PRO only removes the quantity limit."
       },
       "general": {
         "title": "PRO feature",
         "description": "This feature is available to PRO users only. See the plans to check what is available and what is coming soon."
       }
     },
-    "ocrCounter": "Free OCR: {{count}}/{{limit}} pages processed",
+    "ocrCounter": "Free OCR: {{count}}/{{limit}} images or pages used today",
     "ocrLimitReached": "Limit reached: see the PRO plan to expand OCR",
     "success": {
       "noSession": "Payment session ID not found.",
@@ -466,7 +466,7 @@
       "title": "OCR - Image to Text",
       "description": "Extract text from images using OCR",
       "seoTitle": "OCR Online Free | Extract Text from Image | ConvertMyFilePro",
-      "seoDescription": "Free online OCR tool. Extract text from images and scanned documents. Supports multiple languages. Fast and secure.",
+      "seoDescription": "Free browser-based OCR for images and scanned PDFs. Multi-language, batch jobs, contrast improvements and editable TXT or Word export. PRO only increases volume.",
       "extracting": "Extracting text...",
       "result": "Extracted Text",
       "noText": "No text found in image",
