@@ -160,7 +160,7 @@ const OcrTool: React.FC = () => {
     ],
   };
 
-  const updateSetting = <K extends keyof OcrSettings>(key: K, value: OcrSettings[K]) => {
+  const updateSetting = <K extends keyof OcrSettings,>(key: K, value: OcrSettings[K]) => {
     setSettings(previous => ({ ...previous, [key]: value }));
   };
 
