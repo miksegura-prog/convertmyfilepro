@@ -84,7 +84,7 @@
       "adFree": "Sin publicidad, incluidos los anuncios de Monetag",
       "unlimitedBatch": "Lotes ampliados: hasta 20 archivos por lote (3 en Free)",
       "largeVideos": "La compresión de vídeo hasta 50 MB está incluida también en Free",
-      "ocrExpanded": "OCR ampliado: sin el tope de 2 páginas por sesión",
+      "ocrExpanded": "OCR sin límite diario de imágenes o páginas, con la misma calidad que Gratis",
       "studioBeta": "PDF Studio Beta incluido: editar texto, añadir texto, tipografía y color",
       "priority": "Procesamiento prioritario — Próximamente"
     },
@@ -99,14 +99,14 @@
       },
       "ocr": {
         "title": "Límite de OCR alcanzado",
-        "description": "La versión gratuita permite extraer texto de hasta 2 páginas por sesión. Con PRO no existe ese tope."
+        "description": "Todas las opciones de OCR son gratis: hasta 5 imágenes o páginas PDF al día. PRO elimina únicamente el límite de cantidad."
       },
       "general": {
         "title": "Función PRO",
         "description": "Esta función solo está disponible para usuarios PRO. Consulta los planes para ver qué está disponible y qué llegará próximamente."
       }
     },
-    "ocrCounter": "OCR gratis: {{count}}/{{limit}} páginas procesadas",
+    "ocrCounter": "OCR gratis: {{count}}/{{limit}} imágenes o páginas utilizadas hoy",
     "ocrLimitReached": "Límite alcanzado: consulta el plan PRO para ampliar el OCR",
     "success": {
       "noSession": "No se encontró el ID de sesión de pago.",
@@ -466,7 +466,7 @@
       "title": "OCR - Imagen a Texto",
       "description": "Extrae texto de imágenes usando OCR",
       "seoTitle": "OCR Online Gratis | Extraer Texto de Imagen | ConvertMyFilePro",
-      "seoDescription": "Herramienta OCR gratuita en línea. Extrae texto de imágenes y documentos escaneados. Soporta múltiples idiomas. Rápido y seguro.",
+      "seoDescription": "OCR gratis en tu navegador: imágenes, PDF escaneados, varios idiomas y lotes. Mejora contraste, edita y descarga TXT o Word. PRO solo amplía la cantidad.",
       "extracting": "Extrayendo texto...",
       "result": "Texto Extraído",
       "noText": "No se encontró texto en la imagen",
