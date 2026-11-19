@@ -20,5 +20,5 @@ export const PRO_BATCH_FILES = 20;
 export const FREE_VIDEO_MB = 50;
 export const PRO_FILE_SIZE_MB = 50;
 
-/** OCR: Free limita a 2 operaciones por sesión; PRO no tiene ese tope. */
-export const FREE_OCR_PAGES = 2;
+/** OCR: 5 imágenes o páginas al día en Free; PRO sin límite diario. Mismas funciones/calidad. */
+export const FREE_OCR_PAGES = 5;
