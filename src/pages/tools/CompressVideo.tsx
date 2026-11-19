@@ -120,6 +120,7 @@ const CompressVideo: React.FC = () => {
       renderOptions={renderOptions}
       onConvert={handleConvert}
       outputFormat="mp4"
+      uploadLimits={{ ownerMaxSizeMB: 200 }}
       keywords={['comprimir video whatsapp', 'compress video for whatsapp', 'reducir video menos 16mb', 'video compressor online']}
     />
   );
