@@ -42,7 +42,7 @@ export async function initializeOcr(language = 'eng'): Promise<Worker> {
 
   if (!worker) {
     loadedLanguage = language;
-    worker = createWorker(language).catch(error => {
+    worker = createWorker(language.includes('+') ? language.split('+') : language).catch(error => {
       worker = null;
       loadedLanguage = '';
       throw error;
