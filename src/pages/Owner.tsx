@@ -30,6 +30,9 @@ const Owner: React.FC = () => {
   const [items, setItems] = useState<Invitation[]>([]);
   const [email, setEmail] = useState('');
   const [note, setNote] = useState('');
+  const [language, setLanguage] = useState<'es' | 'en'>('es');
+  const [emailStatus, setEmailStatus] = useState<'accepted' | 'failed' | ''>('');
+  const [createdRecipient, setCreatedRecipient] = useState('');
   const [createdUrl, setCreatedUrl] = useState('');
   const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -68,15 +71,18 @@ const Owner: React.FC = () => {
     setBusy(true);
     setError('');
     setCreatedUrl('');
+    setEmailStatus('');
     try {
       const response = await fetch('/api/owner/invitations', {
         method: 'POST', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, note }),
+        body: JSON.stringify({ email, note, language }),
       });
-      const data = await response.json() as { url?: string; error?: string };
+      const data = await response.json() as { url?: string; emailStatus?: 'accepted' | 'failed'; error?: string };
       if (!response.ok || !data.url) throw new Error(data.error || 'No se pudo crear la invitación');
       setCreatedUrl(data.url);
+      setCreatedRecipient(email);
+      setEmailStatus(data.emailStatus === 'accepted' ? 'accepted' : 'failed');
       setEmail('');
       setNote('');
       await refresh();
@@ -126,7 +132,7 @@ const Owner: React.FC = () => {
           ) : (
             <>
               <Card className="space-y-4 p-5">
-                <div className="flex items-center gap-2"><MailPlus className="h-5 w-5" /><h2 className="text-xl font-semibold">Crear invitación de 90 días</h2></div>
+                <div className="flex items-center gap-2"><MailPlus className="h-5 w-5" /><h2 className="text-xl font-semibold">Crear y enviar invitación de 90 días</h2></div>
                 <p className="text-sm text-[var(--color-muted)]">El enlace es de un solo uso y debe activarse antes de 14 días. Los 90 días comienzan cuando el usuario activa Pro Beta.</p>
                 <form onSubmit={createInvite} className="grid gap-3">
                   <input type="email" required maxLength={254} value={email} onChange={e => setEmail(e.target.value)}
@@ -135,11 +141,20 @@ const Owner: React.FC = () => {
                   <input type="text" maxLength={500} value={note} onChange={e => setNote(e.target.value)}
                     placeholder="Nota interna (opcional)"
                     className="w-full rounded-xl border border-[var(--color-border)] bg-transparent p-3" />
-                  <Button type="submit" disabled={busy} className="w-full sm:w-fit"><MailPlus className="mr-2 h-4 w-4" />Generar invitación Pro Beta</Button>
+                  <label className="flex flex-col gap-1 text-sm">Idioma del correo de invitación
+                    <select value={language} onChange={e => setLanguage(e.target.value === 'en' ? 'en' : 'es')}
+                      className="w-full rounded-xl border border-[var(--color-border)] bg-transparent p-3 sm:w-56">
+                      <option value="es">Español</option><option value="en">English</option>
+                    </select>
+                  </label>
+                  <Button type="submit" disabled={busy} className="w-full sm:w-fit"><MailPlus className="mr-2 h-4 w-4" />{busy ? 'Creando y enviando…' : 'Crear y enviar invitación Pro Beta'}</Button>
                 </form>
                 {createdUrl && (
                   <div className="space-y-2 rounded-xl border border-emerald-300 p-4">
-                    <strong>Invitación creada. Guarda o comparte el enlace ahora:</strong>
+                    {emailStatus === 'accepted'
+                      ? <p className="font-semibold text-emerald-700">Brevo ha aceptado el envío a {createdRecipient}. Comprueba su recepción; esto no garantiza la entrega en la bandeja.</p>
+                      : <p role="alert" className="font-semibold text-amber-700">Invitación creada, pero Brevo no ha aceptado el correo. Copia y envía el enlace manualmente; no crees otra invitación por este fallo.</p>}
+                    <strong>Enlace personal (de un solo uso):</strong>
                     <p className="break-all text-sm">{createdUrl}</p>
                     <Button type="button" variant="outline" onClick={() => navigator.clipboard.writeText(createdUrl)}>
                       <Copy className="mr-2 h-4 w-4" />Copiar enlace
