@@ -93,7 +93,12 @@ export function useProStatus() {
     window.addEventListener('focus', refresh);
     document.addEventListener('visibilitychange', refresh);
 
-    const interval = window.setInterval(() => setNow(Date.now()), 60_000);
+    // Revalidate revocations while a tab stays open (not only on focus).
+    const interval = window.setInterval(() => {
+      setNow(Date.now());
+      accessCachedAt = 0;
+      void getVerifiedAccess().then(data => { if (mounted) setVerifiedAccess(data); });
+    }, 60_000);
     return () => {
       mounted = false;
       window.clearInterval(interval);
