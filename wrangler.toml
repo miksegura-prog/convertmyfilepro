@@ -9,3 +9,9 @@ previews = {}
 binding = "ASSETS"
 directory = "./dist"
 not_found_handling = "single-page-application"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "convertmyfilepro-owner"
+database_id = "636f87d7-6c01-4e3a-960b-008740501d9c"
+migrations_dir = "migrations"
