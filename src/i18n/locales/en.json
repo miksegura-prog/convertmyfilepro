@@ -107,7 +107,7 @@
       }
     },
     "ocrCounter": "Free OCR: {{count}}/{{limit}} images or pages used today",
-    "ocrLimitReached": "Limit reached: see the PRO plan to expand OCR",
+    "ocrLimitReached": "Daily limit reached: PRO lets you process more images with exactly the same OCR features",
     "success": {
       "noSession": "Payment session ID not found.",
       "verifyFailed": "Unable to verify the payment.",
@@ -115,7 +115,7 @@
       "verifyingTitle": "Verifying your payment...",
       "verifyingDescription": "We're confirming your PRO subscription. Please wait...",
       "title": "Welcome to PRO!",
-      "description": "Your PRO access is active in this browser. Enjoy expanded limits, expanded OCR, PDF Studio Beta and no ads.",
+      "description": "Your PRO access is active in this browser. Enjoy a higher daily OCR volume, expanded limits and no ads.",
       "goToTools": "Go to tools",
       "errorTitle": "Verification error",
       "errorSupport": "If you've already paid, contact support and provide your Stripe session ID.",
@@ -125,10 +125,10 @@
   "plans": {
     "badge": "Clear pricing",
     "title": "Choose your plan",
-    "description": "Start free with every current tool. PRO adds expanded limits, expanded OCR and an ad-free experience for €5.99 per year.",
+    "description": "Start free with every current tool and every OCR feature. PRO increases your daily image volume and removes ads for €5.99 per year.",
     "badgesHelp": "Labels: what already works, what is still in Beta and what is coming later.",
     "seoTitle": "Plans and Pricing | Free and PRO | ConvertMyFilePro",
-    "seoDescription": "Compare ConvertMyFilePro Free and PRO: free tools, PDF Studio Beta, expanded limits, expanded OCR and no ads for €5.99 per year.",
+    "seoDescription": "Compare ConvertMyFilePro Free and PRO: every OCR feature free with 5 daily images or pages; PRO removes the OCR volume limit and ads for €5.99 per year.",
     "perYear": "/ year",
     "badges": { "available": "Available", "beta": "Beta", "soon": "Coming soon" },
     "free": {
@@ -152,7 +152,7 @@
     "features": {
       "freeLimits": {
         "title": "Free tools with their current limits",
-        "description": "Up to {{freeBatch}} files per batch where the tool allows it, videos up to {{freeVideo}} MB and {{freeOcr}} OCR pages per session."
+        "description": "Tools with their batch limits, videos up to {{freeVideo}} MB and full OCR with {{freeOcr}} images or PDF pages per day."
       },
       "studioReplace": {
         "title": "PDF Studio: basic text replacement",
@@ -183,8 +183,8 @@
         "description": "Available on Free and PRO: upload videos up to {{freeVideo}} MB and choose the output size. Speed depends on the browser and device."
       },
       "ocr": {
-        "title": "Expanded OCR",
-        "description": "No {{freeOcr}}-page-per-session cap like the free version."
+        "title": "Unlimited daily OCR",
+        "description": "Process more than {{freeOcr}} images or pages per day. Accuracy, OCR modes and downloads are identical on Free and PRO."
       },
       "studio": {
         "title": "PDF Studio Beta included",
@@ -222,7 +222,7 @@
         { "question": "How is PRO activated after payment?", "answer": "Stripe returns you to the confirmation page with the session ID. We verify the payment with Stripe and activate PRO in this browser." },
         { "question": "How long does PRO access last?", "answer": "Browser access lasts 12 months from payment. The annual subscription is managed by Stripe; renewal does not automatically extend the access stored in the browser." },
         { "question": "Does PRO work on several devices?", "answer": "No. PRO status is stored in the browser where it was activated. If you change device or clear browser data, contact support with your Stripe session ID." },
-        { "question": "What are the Free plan limits?", "answer": "Up to {{freeBatch}} files per batch, videos up to {{freeVideo}} MB and {{freeOcr}} OCR pages per session, with ads." },
+        { "question": "What are the Free plan limits?", "answer": "Up to {{freeBatch}} files per batch in regular tools, videos up to {{freeVideo}} MB and {{freeOcr}} OCR images or pages per day, with ads. All OCR features are free." },
         { "question": "Can I cancel the subscription?", "answer": "The subscription is managed in Stripe. Email info@ConvertMyFilePro.com if you need help cancelling." }
       ]
     },
