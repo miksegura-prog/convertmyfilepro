@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, Image, FileText, FileStack, Music, Video } from 'lucide-react';
+import { ArrowRight, Image, FileText, FileStack, Music, Video, ScanText } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { SEO } from '@/components/ui-custom/SEO';
 import type { Tool } from '@/types';
@@ -100,9 +100,10 @@ const ToolCategory: React.FC = () => {
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${tool.color} 
                                 flex items-center justify-center mb-4
                                 group-hover:scale-110 transition-transform`}>
-                  {tool.category === 'images' && <Image className="w-6 h-6 text-white" />}
+                  {tool.id === 'ocr' && <ScanText className="w-6 h-6 text-white" />}
+                  {tool.category === 'images' && tool.id !== 'ocr' && <Image className="w-6 h-6 text-white" />}
                   {tool.category === 'pdf' && <FileText className="w-6 h-6 text-white" />}
-                  {tool.category === 'documents' && <FileStack className="w-6 h-6 text-white" />}
+                  {tool.category === 'documents' && tool.id !== 'ocr' && <FileStack className="w-6 h-6 text-white" />}
                   {(tool.category === 'audioVideo' || tool.category === 'audio') && <Music className="w-6 h-6 text-white" />}
                   {tool.category === 'video' && <Video className="w-6 h-6 text-white" />}
                   {tool.category === 'bonus' && <Icon className="w-6 h-6 text-white" />}
