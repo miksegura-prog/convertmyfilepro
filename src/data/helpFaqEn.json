@@ -1,0 +1,510 @@
+{
+  "title": "Help Center · Frequently Asked Questions",
+  "description": "Practical answers about supported formats, OCR, PDF, audio, video, subtitles, plans and Pro Beta access at ConvertMyFilePro.",
+  "subtitle": "Search your question or choose a category. Tools and limits reflect the current version.",
+  "searchPlaceholder": "Search formats, errors or questions…",
+  "all": "All",
+  "results": "available questions",
+  "noResults": "No matching questions found. Try different keywords.",
+  "clear": "Clear search",
+  "toolLink": "Open tool",
+  "contactTitle": "Still need help?",
+  "contactText": "For technical issues, billing or Pro Beta access, email us with the relevant details. Never include passwords or payment card details.",
+  "contactButton": "Contact support",
+  "topics": {
+    "start": "Getting started",
+    "images": "Images and formats",
+    "ocr": "OCR · Image to text",
+    "pdf": "PDF and PDF Studio",
+    "documents": "Documents",
+    "audio": "Audio",
+    "video": "Video",
+    "subtitles": "Subtitles",
+    "plans": "Free and PRO plans",
+    "invites": "Pro Beta invitations",
+    "privacy": "Privacy and security",
+    "issues": "Troubleshooting"
+  },
+  "items": [
+    {
+      "id": "start-how",
+      "topic": "start",
+      "question": "How do I convert a file?",
+      "answer": "Open the appropriate tool, choose a file, adjust any available options and click Convert. Download the result when it is ready. Renaming a file extension alone does not change its format.",
+      "path": "/tools/images"
+    },
+    {
+      "id": "start-install",
+      "topic": "start",
+      "question": "Do I need to install software?",
+      "answer": "No. ConvertMyFilePro works in a modern browser. Some features download technical components on first use, but you do not need to install a desktop application."
+    },
+    {
+      "id": "start-register",
+      "topic": "start",
+      "question": "Do I need an account to use Free?",
+      "answer": "No account is required for free tools. Paid PRO is activated in your browser after payment verification; Pro Beta invitations use a personal activation link.",
+      "path": "/pro"
+    },
+    {
+      "id": "start-browsers",
+      "topic": "start",
+      "question": "Which browsers are compatible?",
+      "answer": "Try recent versions of Chrome, Edge, Firefox or Safari. Actual support varies by format and by the media features available in each browser."
+    },
+    {
+      "id": "start-download",
+      "topic": "start",
+      "question": "Where is my converted file saved?",
+      "answer": "Usually in your browser's Downloads folder, unless you have chosen another location. Your original file is not automatically overwritten."
+    },
+    {
+      "id": "start-batches",
+      "topic": "start",
+      "question": "Can I process several files together?",
+      "answer": "Yes, in tools that offer batch processing. The number varies: certain conversions allow up to three files on Free and expanded batches on PRO; some tools accept one file at a time.",
+      "path": "/pro"
+    },
+    {
+      "id": "img-formats",
+      "topic": "images",
+      "question": "Which image conversions are available?",
+      "answer": "You can find JPG↔PNG, WebP→PNG/JPG, AVIF→PNG/JPG and HEIC→JPG, as well as image resizing and compression. Final compatibility can depend on your browser.",
+      "path": "/tools/images"
+    },
+    {
+      "id": "img-jpgpng",
+      "topic": "images",
+      "question": "What is the difference between JPG and PNG?",
+      "answer": "JPG is often smaller but does not support transparency. PNG can preserve transparency and is useful for screenshots, logos and graphics, although it may use more storage.",
+      "path": "/jpg-to-png"
+    },
+    {
+      "id": "img-transparent",
+      "topic": "images",
+      "question": "Is transparency preserved when converting PNG or WebP to JPG?",
+      "answer": "No. JPG does not support an alpha channel, so transparent areas become a background colour. Choose PNG if you need to preserve transparency from the source.",
+      "path": "/png-to-jpg"
+    },
+    {
+      "id": "img-webp",
+      "topic": "images",
+      "question": "Why would I convert WebP?",
+      "answer": "WebP is common on websites. Convert it to JPG for apps with limited WebP support, or to PNG if you need an image format that supports transparency.",
+      "path": "/convert/webp-to-jpg"
+    },
+    {
+      "id": "img-heic",
+      "topic": "images",
+      "question": "Can I convert HEIC photos from an iPhone?",
+      "answer": "There is a HEIC→JPG tool. If a particular photo cannot be opened, try exporting it differently from your iPhone. Not all HEIC variations decode equally in every browser.",
+      "path": "/convert/heic-to-jpg"
+    },
+    {
+      "id": "img-resize",
+      "topic": "images",
+      "question": "Is resizing the same as compressing an image?",
+      "answer": "No. Resizing changes pixel dimensions; compression tries to reduce the file's storage size. You may need both, and lossy compression can affect quality.",
+      "path": "/resize-image"
+    },
+    {
+      "id": "ocr-purpose",
+      "topic": "ocr",
+      "question": "What does OCR do?",
+      "answer": "It recognizes text in images and scanned PDF pages so you can copy, correct or export it as TXT or Word. Perfect recognition is not guaranteed.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-files",
+      "topic": "ocr",
+      "question": "Which files can OCR process?",
+      "answer": "You can upload common image files such as JPG, PNG or WebP and scanned PDFs. The interface supports up to 10 files per job and 20 MB per file; PDFs are processed page by page.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-free",
+      "topic": "ocr",
+      "question": "Which OCR features are free?",
+      "answer": "All of them: languages, layout modes, contrast improvements, rotation, batches, editing and export. Free allows five images or PDF pages per day; PRO only removes that daily limit.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-languages",
+      "topic": "ocr",
+      "question": "Which languages does OCR recognize?",
+      "answer": "The selector includes Spanish, English, Catalan, French, German and other languages. A combined Spanish + English option is available. Select the correct language before processing.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-accuracy",
+      "topic": "ocr",
+      "question": "Why are some recognized words incorrect?",
+      "answer": "Results depend on image resolution, lighting, contrast, typography and layout. Try rotating the image or switching between automatic, original and black-and-white processing. Always proofread the result.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-pdf-pages",
+      "topic": "ocr",
+      "question": "Can I OCR only selected pages from a PDF?",
+      "answer": "Yes. Enter ranges such as 1-3,5. Each page counts as one image, and the technical per-job limit is 40 pages/images for both plans, to keep browsers responsive.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-tables",
+      "topic": "ocr",
+      "question": "Does OCR preserve tables, columns and the original layout?",
+      "answer": "Not reliably. OCR extracts text, but may mix up columns, tables and headings. The exported Word file is editable; it does not automatically recreate the source page layout.",
+      "path": "/ocr"
+    },
+    {
+      "id": "pdf-merge",
+      "topic": "pdf",
+      "question": "How do I merge PDF documents?",
+      "answer": "Use Merge PDF, add the documents in the desired order and download the combined file. Password-protected or damaged PDFs may not work.",
+      "path": "/merge-pdf"
+    },
+    {
+      "id": "pdf-split",
+      "topic": "pdf",
+      "question": "Can I extract pages from a PDF?",
+      "answer": "Yes. Split PDF lets you choose pages or ranges. Check the resulting page order and content before using the exported document.",
+      "path": "/split-pdf"
+    },
+    {
+      "id": "pdf-images",
+      "topic": "pdf",
+      "question": "Can I turn images into a PDF?",
+      "answer": "Yes. JPG to PDF creates a PDF from compatible image files. If you want to turn a PDF into images, check that a dedicated tool is available before assuming it is supported.",
+      "path": "/jpg-to-pdf"
+    },
+    {
+      "id": "pdf-studio",
+      "topic": "pdf",
+      "question": "What is PDF Studio Beta?",
+      "answer": "It is an experimental PDF text editor that can replace selectable text and add text with font and colour options. It is not a full-featured professional PDF editor.",
+      "path": "/pdf-studio"
+    },
+    {
+      "id": "pdf-scanned",
+      "topic": "pdf",
+      "question": "Can I directly edit text in a scanned PDF?",
+      "answer": "Scans generally contain images, not editable characters. Use OCR first to extract the text. PDF Studio works best with documents containing a real text layer.",
+      "path": "/ocr"
+    },
+    {
+      "id": "pdf-limitations",
+      "topic": "pdf",
+      "question": "What are PDF Studio's limitations?",
+      "answer": "Embedded fonts, font subsets and text stored in separate internal fragments can make editing difficult. Always review the exported PDF, particularly for important documents.",
+      "path": "/pdf-studio/edit"
+    },
+    {
+      "id": "doc-available",
+      "topic": "documents",
+      "question": "Which document formats can I convert to PDF?",
+      "answer": "Dedicated tools exist for DOCX→PDF, XLSX→PDF and TXT→PDF. Other formats may be mentioned on informational pages, but should not be assumed to work without a specific tool.",
+      "path": "/tools/documents"
+    },
+    {
+      "id": "doc-format",
+      "topic": "documents",
+      "question": "Will Word or Excel formatting look exactly the same in PDF?",
+      "answer": "An exact match cannot be guaranteed. Complex tables, fonts, charts, page breaks and styles may change. Compare the PDF with the original before sharing it.",
+      "path": "/docx-to-pdf"
+    },
+    {
+      "id": "doc-old",
+      "topic": "documents",
+      "question": "Can I convert an older .DOC Word file?",
+      "answer": "The main Word converter targets DOCX. If your .DOC file is not accepted, open and save it as .DOCX using a word processor first.",
+      "path": "/docx-to-pdf"
+    },
+    {
+      "id": "doc-excel",
+      "topic": "documents",
+      "question": "What happens with large Excel workbooks?",
+      "answer": "Workbooks with many sheets, charts or complex cells may take longer or need layout adjustments. Review page breaks and data in the resulting PDF.",
+      "path": "/xlsx-to-pdf"
+    },
+    {
+      "id": "doc-txt",
+      "topic": "documents",
+      "question": "How do I convert plain text to PDF?",
+      "answer": "Upload a TXT file in TXT to PDF and download the result. If you need to read text from a photograph, use OCR rather than TXT to PDF.",
+      "path": "/txt-to-pdf"
+    },
+    {
+      "id": "audio-formats",
+      "topic": "audio",
+      "question": "Which audio converters are listed?",
+      "answer": "WAV→MP3, FLAC→MP3 and OGG→MP3 are available. Additional source audio formats might work if your browser can decode them, but compatibility is not universal.",
+      "path": "/tools/audio"
+    },
+    {
+      "id": "audio-bitrate",
+      "topic": "audio",
+      "question": "Which MP3 quality settings can I choose?",
+      "answer": "Tools such as WAV to MP3 offer 128 and 192 kbps. Higher bitrate usually increases file size and can improve perceived quality, but cannot restore previously lost information.",
+      "path": "/wav-to-mp3"
+    },
+    {
+      "id": "audio-wavmp3",
+      "topic": "audio",
+      "question": "Can I convert WAV to MP3 without installing anything?",
+      "answer": "Yes. Your browser decodes and encodes the audio. Larger files may take more time, especially on devices with limited memory.",
+      "path": "/wav-to-mp3"
+    },
+    {
+      "id": "audio-flac",
+      "topic": "audio",
+      "question": "How is FLAC different from MP3?",
+      "answer": "FLAC uses lossless compression; MP3 discards some audio information. Converting FLAC to MP3 makes smaller files for sharing but does not preserve mathematical losslessness.",
+      "path": "/flac-to-mp3"
+    },
+    {
+      "id": "audio-wavflac",
+      "topic": "audio",
+      "question": "Does the tool labelled “WAV to FLAC” currently create FLAC?",
+      "answer": "Not yet. The current implementation of that link outputs uncompressed WAV, not FLAC. Do not use it when you need a FLAC file. We will correct the tool before advertising FLAC output."
+    },
+    {
+      "id": "audio-error",
+      "topic": "audio",
+      "question": "Why does an audio file fail even with a supported extension?",
+      "answer": "The container and actual audio codec may differ. Your browser must decode the audio before conversion. Try a standard source file or export it again from your audio editor.",
+      "path": "/wav-to-mp3"
+    },
+    {
+      "id": "video-tool",
+      "topic": "video",
+      "question": "What does the video compressor do?",
+      "answer": "It reduces video size for easier sharing, with approximate output targets of 15, 25 or 50 MB. Actual results depend on duration, resolution and visual complexity.",
+      "path": "/compress-video-whatsapp"
+    },
+    {
+      "id": "video-limit",
+      "topic": "video",
+      "question": "What is the free video-compression limit?",
+      "answer": "The public Free tool accepts videos up to 50 MB. Other tools can have different limits; consult the text beside each file selector.",
+      "path": "/compress-video-whatsapp"
+    },
+    {
+      "id": "video-time",
+      "topic": "video",
+      "question": "Why does video compression take so long?",
+      "answer": "It runs FFmpeg WebAssembly inside your browser and depends on device performance. Videos of a few dozen megabytes can take several minutes. Keep the tab open while processing.",
+      "path": "/compress-video-whatsapp"
+    },
+    {
+      "id": "video-formats",
+      "topic": "video",
+      "question": "Can I upload MP4, MOV or WebM?",
+      "answer": "The interface accepts several common formats, including MP4, MOV and WebM. Whether a particular file works depends on its internal codecs and the browser.",
+      "path": "/compress-video-whatsapp"
+    },
+    {
+      "id": "video-quality",
+      "topic": "video",
+      "question": "Why does my compressed video look less sharp?",
+      "answer": "Strong compression may reduce bitrate or resolution. If the result looks too soft, choose a larger output target and always keep your original file.",
+      "path": "/compress-video-whatsapp"
+    },
+    {
+      "id": "sub-srtvtt",
+      "topic": "subtitles",
+      "question": "Can I convert SRT subtitles to VTT?",
+      "answer": "Yes. You can convert SRT→WebVTT and VTT→SRT. Afterwards, check timing and formatting tags if your video uses special subtitle features.",
+      "path": "/srt-to-vtt"
+    },
+    {
+      "id": "sub-txt",
+      "topic": "subtitles",
+      "question": "Can I create SRT subtitles from a TXT file?",
+      "answer": "Yes, with TXT→SRT. It is a basic conversion and does not replace manually syncing subtitles to audio. Check that timings match the video.",
+      "path": "/txt-to-srt"
+    },
+    {
+      "id": "sub-translate",
+      "topic": "subtitles",
+      "question": "Does the converter automatically translate subtitles?",
+      "answer": "No. It changes format or prepares subtitle blocks; it does not translate the text into another language.",
+      "path": "/srt-to-vtt"
+    },
+    {
+      "id": "sub-sync",
+      "topic": "subtitles",
+      "question": "Why are my subtitles out of sync?",
+      "answer": "Format conversion does not fix existing timing errors. Open the result in a subtitle editor and check start times, end times and frame rates.",
+      "path": "/vtt-to-srt"
+    },
+    {
+      "id": "plan-free",
+      "topic": "plans",
+      "question": "Is there a free plan?",
+      "answer": "Yes. Free tools can be used without an account or payment card, subject to each tool's limits. Every OCR quality option is available for free.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-price",
+      "topic": "plans",
+      "question": "How much does PRO cost?",
+      "answer": "The pricing page currently lists €5.99 per year via Stripe. Check taxes and the final total in Checkout before confirming payment.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-benefit",
+      "topic": "plans",
+      "question": "What does PRO offer over Free?",
+      "answer": "Mainly higher processing capacity: unlimited daily OCR and larger batches in tools that support them. OCR quality is exactly the same on both plans.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-ad",
+      "topic": "plans",
+      "question": "Are there ads on the Free plan?",
+      "answer": "Third-party advertising is currently disabled on both Free and PRO while site security is being reviewed. It is not an active difference between plans.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-pay",
+      "topic": "plans",
+      "question": "How do I activate PRO after payment?",
+      "answer": "Stripe returns your browser to a payment confirmation and the site verifies the payment session. After verification, PRO access is stored in that browser.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-annual",
+      "topic": "plans",
+      "question": "Does PRO renew every year?",
+      "answer": "The product is configured as an annual Stripe subscription. Browser-based access lasts 12 months from activation; renewal does not guarantee automatic synchronization of your local status. Contact support if you need help.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-devices",
+      "topic": "plans",
+      "question": "Can I use paid PRO on several devices?",
+      "answer": "There is currently no PRO account that syncs across devices. Paid access stays in the browser where it was activated. If you change devices or clear browser data, contact support with proof of payment, never your complete card details.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-cancel",
+      "topic": "plans",
+      "question": "How do I cancel or enquire about my subscription?",
+      "answer": "Payments are handled by Stripe. For cancellation or billing help, email info@convertmyfilepro.com with your payment email and approximate date. Never share passwords or full payment-card numbers.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-what",
+      "topic": "invites",
+      "question": "What is a Pro Beta invitation?",
+      "answer": "It is a complimentary invitation to try PRO without paying. The initial period is normally 90 days from activation. Some tools may still be in Beta.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-validity",
+      "topic": "invites",
+      "question": "When does an invitation link expire?",
+      "answer": "You must activate it within 14 days of creation and it can only be redeemed once. The 90-day trial begins when you redeem the link.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-payment",
+      "topic": "invites",
+      "question": "Do I need a payment card to activate Pro Beta?",
+      "answer": "No. A Pro Beta invitation needs no payment and does not itself create a Stripe subscription.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-browser",
+      "topic": "invites",
+      "question": "Why does Pro Beta work in only one browser?",
+      "answer": "Activation creates a session cookie tied to that browser. Clearing cookies, changing browsers or losing that session may mean you need a new invitation from the owner.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-renew",
+      "topic": "invites",
+      "question": "Can I receive additional complimentary months?",
+      "answer": "Yes. The owner can restore an already-redeemed invite and gift 1, 2, 3, 6 or 12 additional months from the private Owner panel. Old links cannot be reused; request a new one if your session is lost.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-revoke",
+      "topic": "invites",
+      "question": "Why did my Pro Beta access disappear?",
+      "answer": "The period may have expired, the owner may have revoked it or your browser cookie may have been lost. Contact the person who invited you and explain the issue; you do not need to send repeated requests.",
+      "path": "/pro"
+    },
+    {
+      "id": "privacy-files",
+      "topic": "privacy",
+      "question": "Are files uploaded to a server for conversion?",
+      "answer": "The current converters are designed to process files in the browser. Some download libraries or language models; that is not the same as uploading your document. See the privacy policy as well.",
+      "path": "/privacy"
+    },
+    {
+      "id": "privacy-data",
+      "topic": "privacy",
+      "question": "What information might the site record?",
+      "answer": "Your browser and infrastructure services may process technical data and cookies. Stripe handles payments, while Cloudflare supports security and site operation. See the privacy policy for details.",
+      "path": "/privacy"
+    },
+    {
+      "id": "privacy-secure",
+      "topic": "privacy",
+      "question": "Does HTTPS guarantee there will never be security issues?",
+      "answer": "No. HTTPS protects data in transit but cannot prevent every browser, file, extension or third-party risk. Keep original backups and avoid sharing unnecessary sensitive information.",
+      "path": "/privacy"
+    },
+    {
+      "id": "privacy-sensitive",
+      "topic": "privacy",
+      "question": "Can I use confidential files?",
+      "answer": "Consider the risks and your legal duties before processing sensitive documents. Even when conversion happens locally, security also depends on your own device and browser.",
+      "path": "/privacy"
+    },
+    {
+      "id": "privacy-account",
+      "topic": "privacy",
+      "question": "Are my converted files stored in a cloud account?",
+      "answer": "There is currently no personal cloud archive of conversions. Download the result and store it wherever you prefer; the app cannot retrieve it later."
+    },
+    {
+      "id": "issues-empty",
+      "topic": "issues",
+      "question": "I clicked Convert but nothing happens. What should I do?",
+      "answer": "Check that you selected a valid file within the size limit and that your browser supports the format. Reload the tool and try a different sample file."
+    },
+    {
+      "id": "issues-blank",
+      "topic": "issues",
+      "question": "What if the page is blank?",
+      "answer": "Try a hard reload, a private window or an updated browser. If the issue persists, email support with the URL, browser and error message; do not send keys or personal secrets."
+    },
+    {
+      "id": "issues-large",
+      "topic": "issues",
+      "question": "What if my file is too large?",
+      "answer": "Reduce or split the original where possible. Limits vary by tool: OCR allows 20 MB per file, Free video compression allows up to 50 MB, and other tools may differ.",
+      "path": "/pro"
+    },
+    {
+      "id": "issues-download",
+      "topic": "issues",
+      "question": "Why can't I find my downloaded file?",
+      "answer": "Check your browser's Downloads folder and download history. Also check whether the browser blocked pop-ups or multiple downloads."
+    },
+    {
+      "id": "issues-report",
+      "topic": "issues",
+      "question": "How do I report a technical issue?",
+      "answer": "Email info@convertmyfilepro.com with the tool URL, input/output format, browser and steps to reproduce the problem. Avoid attaching files with personal or confidential data."
+    },
+    {
+      "id": "issues-security",
+      "topic": "issues",
+      "question": "What if Chrome shows a security warning?",
+      "answer": "Do not bypass the warning or enter payment details. Wait until the issue is reviewed and, if you want to report it, email support with the affected page URL and date."
+    }
+  ]
+}
