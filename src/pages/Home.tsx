@@ -11,6 +11,7 @@ const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
   const spanish = i18n.language.startsWith('es');
   const tools: Tool[] = [
+    { id: 'ocr', path: '/ocr', category: 'images' as const, title: t('tools.ocr.title'), description: t('tools.ocr.description'), icon: 'image', color: 'from-teal-500 to-cyan-600' },
     ...[
       ['jpgToPng','/jpg-to-png'],['pngToJpg','/png-to-jpg'],['avifToJpg','/avif-to-jpg'],['avifToPng','/avif-to-png'],['webpToPng','/webp-to-png'],['webpToJpg','/convert/webp-to-jpg'],['heicToJpg','/convert/heic-to-jpg'],['resizeImage','/resize-image'],['compressImage','/compress-image'], 
     ].map(([id,path]) => ({ id, path, category:'images' as const, title:t(`tools.${id}.title`), description:t(`tools.${id}.description`), icon:'image', color:'from-blue-500 to-cyan-500' })),
@@ -19,7 +20,7 @@ const Home: React.FC = () => {
       ['wavToMp3','/wav-to-mp3'],['flacToMp3','/flac-to-mp3'],['oggToMp3','/ogg-to-mp3'],['wavToFlac','/wav-to-flac'],
     ].map(([id,path]) => ({ id, path, category:'audio' as const, title:t(`tools.${id}.title`), description:t(`tools.${id}.description`), icon:'audio', color:'from-purple-500 to-indigo-600' })),
     ...[
-      ['pdfStudio','/pdf-studio','pdf'],['mergePdf','/merge-pdf','pdf'],['splitPdf','/split-pdf','pdf'],['jpgToPdf','/jpg-to-pdf','pdf'],['docxToPdf','/docx-to-pdf','documents'],['xlsxToPdf','/xlsx-to-pdf','documents'],['txtToPdf','/txt-to-pdf','documents'],['ocr','/ocr','documents'],['srtToVtt','/srt-to-vtt','documents'],['vttToSrt','/vtt-to-srt','documents'],['txtToSrt','/txt-to-srt','documents'],
+      ['pdfStudio','/pdf-studio','pdf'],['mergePdf','/merge-pdf','pdf'],['splitPdf','/split-pdf','pdf'],['jpgToPdf','/jpg-to-pdf','pdf'],['docxToPdf','/docx-to-pdf','documents'],['xlsxToPdf','/xlsx-to-pdf','documents'],['txtToPdf','/txt-to-pdf','documents'],['srtToVtt','/srt-to-vtt','documents'],['vttToSrt','/vtt-to-srt','documents'],['txtToSrt','/txt-to-srt','documents'],
     ].map(([id,path,type]) => ({ id, path, category:type as Tool['category'], title:t(`tools.${id}.title`), description:t(`tools.${id}.description`), icon:'file', color:'from-violet-500 to-blue-600' })),
   ];
   const categories = [
