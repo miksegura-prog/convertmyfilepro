@@ -1,7 +1,7 @@
 name: Validate ConvertMyFilePro Pull Requests
 on:
   pull_request:
-    branches: [main]
+    branches: [main, feature/owner-production-invites-90d]
   workflow_dispatch:
 jobs:
   build:

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Crown, Loader2, MailPlus, RefreshCw, ShieldCheck, Trash2 } from 'lucide-react';
+import { CalendarPlus, Copy, Crown, History, Loader2, MailPlus, RefreshCw, RotateCcw, ShieldCheck, Trash2 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -14,6 +14,11 @@ type Invitation = {
   revoked_at: number | null;
 };
 type OwnerStatus = { owner?: boolean; email?: string; databaseReady?: boolean; error?: string };
+type AccessEvent = {
+  id: string; invite_id: string; email: string; actor_email: string;
+  action: 'revoke' | 'reactivate' | 'grant';
+  months: number | null; new_expires_at: number | null; created_at: number;
+};
 
 const formatDate = (value: number | null) =>
   value ? new Date(value).toLocaleString('es-ES', { dateStyle: 'medium', timeStyle: 'short' }) : '—';
@@ -28,6 +33,13 @@ const label = (item: Invitation) => {
 const Owner: React.FC = () => {
   const [owner, setOwner] = useState<OwnerStatus | null>(null);
   const [items, setItems] = useState<Invitation[]>([]);
+  const [history, setHistory] = useState<AccessEvent[]>([]);
+  const [historyIssue, setHistoryIssue] = useState('');
+  const [giftMonths, setGiftMonths] = useState<Record<string, number>>({});
+  const [noticeLanguages, setNoticeLanguages] = useState<Record<string, 'es' | 'en'>>({});
+  const [noticeMessage, setNoticeMessage] = useState('');
+  const [noticeFailed, setNoticeFailed] = useState(false);
+  const [actionMessage, setActionMessage] = useState('');
   const [email, setEmail] = useState('');
   const [note, setNote] = useState('');
   const [language, setLanguage] = useState<'es' | 'en'>('es');
@@ -43,6 +55,18 @@ const Owner: React.FC = () => {
     const data = await response.json() as { invitations?: Invitation[]; error?: string };
     if (!response.ok) throw new Error(data.error || 'Error al consultar las invitaciones');
     setItems(data.invitations || []);
+    try {
+      const eventsResponse = await fetch('/api/owner/access-events', { credentials: 'same-origin', cache: 'no-store' });
+      if (!eventsResponse.ok) {
+        setHistoryIssue('Historial no disponible: ejecuta la migración D1 de accesos.');
+      } else {
+        const eventsData = await eventsResponse.json() as { events?: AccessEvent[] };
+        setHistory(eventsData.events || []);
+        setHistoryIssue('');
+      }
+    } catch {
+      setHistoryIssue('No se pudo consultar el historial de cambios.');
+    }
   }, []);
 
   useEffect(() => {
@@ -72,6 +96,7 @@ const Owner: React.FC = () => {
     setError('');
     setCreatedUrl('');
     setEmailStatus('');
+    setActionMessage('');
     try {
       const response = await fetch('/api/owner/invitations', {
         method: 'POST', credentials: 'same-origin',
@@ -90,19 +115,55 @@ const Owner: React.FC = () => {
     finally { setBusy(false); }
   };
 
-  const revoke = async (invite: Invitation) => {
-    if (!window.confirm(`¿Revocar el acceso Pro Beta de ${invite.email}?`)) return;
+  const ownerAction = async (
+    invite: Invitation, action: 'revoke' | 'reactivate' | 'grant', months?: number,
+  ) => {
+    const question = action === 'revoke'
+      ? `¿Revocar inmediatamente el acceso de ${invite.email}?`
+      : action === 'reactivate'
+        ? `¿Reactivar el acceso existente de ${invite.email} hasta su fecha de caducidad?`
+        : `¿Regalar ${months} mes(es) adicionales a ${invite.email}? Si está revocado, también se reactivará.`;
+    if (!window.confirm(question)) return;
     setBusy(true);
     setError('');
+    setActionMessage('');
+    setNoticeMessage('');
+    setNoticeFailed(false);
     try {
-      const response = await fetch('/api/owner/invitations/revoke', {
+      const response = await fetch(`/api/owner/invitations/${action}`, {
         method: 'POST', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: invite.id }),
+        body: JSON.stringify({ id: invite.id,
+          ...(action === 'grant' ? { months } : {}),
+          language: noticeLanguages[invite.id] || 'es',
+        }),
       });
-      if (!response.ok) throw new Error('No se ha podido revocar la invitación');
-      await refresh();
-    } catch (err) { setError(err instanceof Error ? err.message : 'Error al revocar'); }
+      const data = await response.json() as {
+        success?: boolean; error?: string; expiresAt?: number;
+        emailStatus?: 'accepted' | 'failed';
+      };
+      if (!response.ok || !data.success) throw new Error(data.error || 'No se pudo modificar el acceso');
+      // Confirm the committed mutation BEFORE reloading the list. If a later
+      // refresh fails, never suggest repeating a gift (which would double it).
+      if (action !== 'revoke') {
+        const accepted = data.emailStatus === 'accepted';
+        setNoticeFailed(!accepted);
+        setNoticeMessage(accepted
+          ? 'Brevo ha aceptado el correo de notificación. Esto no confirma su entrega en la bandeja.'
+          : 'El acceso se ha actualizado, pero Brevo no ha aceptado el mensaje. Avisa personalmente si es necesario; NO repitas la ampliación para reenviar el correo.');
+      }
+      setActionMessage(
+        action === 'revoke' ? `Acceso revocado: ${invite.email}`
+          : action === 'reactivate' ? `Acceso reactivado: ${invite.email}`
+            : `${months} mes(es) regalados a ${invite.email}. Acceso hasta ${formatDate(data.expiresAt || null)}.`,
+      );
+      try {
+        await refresh();
+      } catch {
+        setNoticeFailed(true);
+        setNoticeMessage('Acceso actualizado, pero no se pudo recargar la lista. Recarga el panel. NO repitas una ampliación de meses.');
+      }
+    } catch (err) { setError(err instanceof Error ? err.message : 'Error al modificar el acceso'); }
     finally { setBusy(false); }
   };
 
@@ -119,7 +180,9 @@ const Owner: React.FC = () => {
         <Button asChild variant="outline"><Link to="/"><Crown className="mr-2 h-4 w-4" />Ir a conversores</Link></Button>
       </div>
       {loading && <div className="flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" />Verificando Cloudflare Access…</div>}
-      {error && <Card className="p-4 text-red-600">{error}</Card>}
+      {error && <Card className="p-4 text-red-600" role="alert">{error}</Card>}
+      {actionMessage && <Card className="p-4 text-emerald-700" role="status">{actionMessage}</Card>}
+      {noticeMessage && <Card className={noticeFailed ? 'p-4 text-amber-700' : 'p-4 text-emerald-700'} role="status">{noticeMessage}</Card>}
       {owner && (
         <>
           <Card className="p-4 text-sm">
@@ -165,9 +228,14 @@ const Owner: React.FC = () => {
               </Card>
               <Card className="space-y-3 p-5">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold">Invitaciones ({items.length})</h2>
+                  <h2 className="text-xl font-semibold">Invitaciones y accesos ({items.length})</h2>
                   <Button variant="outline" size="sm" onClick={() => void refresh()}><RefreshCw className="mr-2 h-4 w-4" />Actualizar</Button>
                 </div>
+                <p className="text-xs text-[var(--color-muted)]">
+                  Puedes regalar meses a quienes ya hayan activado su invitación. Si están revocados,
+                  regalar meses también los reactiva. Si borraron sus cookies o nunca activaron el
+                  enlace, necesitarán una invitación nueva (los enlaces usados no se recuperan).
+                </p>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-sm">
                     <thead><tr className="border-b border-[var(--color-border)]">
@@ -180,15 +248,85 @@ const Owner: React.FC = () => {
                         <td className="p-2 whitespace-nowrap">{formatDate(item.created_at)}</td>
                         <td className="p-2 whitespace-nowrap">{formatDate(item.expires_at)}</td>
                         <td className="p-2">
-                          {!item.revoked_at && (
-                            <Button variant="ghost" size="sm" disabled={busy} onClick={() => void revoke(item)}
-                              title="Revocar inmediatamente"><Trash2 className="mr-1 h-4 w-4" />Revocar</Button>
-                          )}
+                          <div className="flex min-w-[240px] flex-wrap items-center gap-2">
+                            {!item.revoked_at && (
+                              <Button variant="outline" size="sm" disabled={busy}
+                                onClick={() => void ownerAction(item, 'revoke')}
+                                title="Suspender el acceso inmediatamente">
+                                <Trash2 className="mr-1 h-4 w-4" />Revocar
+                              </Button>
+                            )}
+                            {item.revoked_at !== null && item.redeemed_at !== null &&
+                              item.expires_at !== null && item.expires_at > Date.now() && (
+                                <Button variant="outline" size="sm" disabled={busy}
+                                  onClick={() => void ownerAction(item, 'reactivate')}
+                                  title="Recuperar la sesión vigente de este colaborador">
+                                  <RotateCcw className="mr-1 h-4 w-4" />Reactivar
+                                </Button>
+                            )}
+                            {item.redeemed_at !== null ? (
+                              <>
+                                <select aria-label={`Idioma del aviso a ${item.email}`}
+                                  className="rounded-lg border border-[var(--color-border)] bg-transparent px-2 py-1.5 text-sm"
+                                  value={noticeLanguages[item.id] || 'es'}
+                                  disabled={busy}
+                                  onChange={event => setNoticeLanguages(current => ({
+                                    ...current, [item.id]: event.target.value === 'en' ? 'en' : 'es',
+                                  }))}>
+                                  <option value="es">Aviso ES</option><option value="en">Email EN</option>
+                                </select>
+                                <select aria-label={`Meses a regalar a ${item.email}`}
+                                  className="rounded-lg border border-[var(--color-border)] bg-transparent px-2 py-1.5 text-sm"
+                                  value={giftMonths[item.id] || 1}
+                                  disabled={busy}
+                                  onChange={event => setGiftMonths(current => ({ ...current, [item.id]: Number(event.target.value) }))}>
+                                  {[1, 2, 3, 6, 12].map(months => (
+                                    <option key={months} value={months}>{months} {months === 1 ? 'mes' : 'meses'}</option>
+                                  ))}
+                                </select>
+                                <Button variant="outline" size="sm" disabled={busy}
+                                  onClick={() => void ownerAction(item, 'grant', giftMonths[item.id] || 1)}
+                                  title="Ampliar la fecha de caducidad y reactivar si está revocado">
+                                  <CalendarPlus className="mr-1 h-4 w-4" />Regalar
+                                </Button>
+                              </>
+                            ) : (
+                              <span className="text-xs text-[var(--color-muted)]">
+                                {item.revoked_at ? 'Para reinvitar, crea un enlace nuevo.' : 'Pendiente de activación'}
+                              </span>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     ))}</tbody>
                   </table>
                   {items.length === 0 && <p className="p-4 text-sm text-[var(--color-muted)]">Todavía no hay invitaciones.</p>}
+                </div>
+              </Card>
+              <Card className="space-y-3 p-5">
+                <div className="flex items-center gap-2">
+                  <History className="h-5 w-5" />
+                  <h2 className="text-lg font-semibold">Historial de accesos</h2>
+                </div>
+                {historyIssue && <p className="text-sm text-amber-700">{historyIssue}</p>}
+                {!historyIssue && history.length === 0 && (
+                  <p className="text-sm text-[var(--color-muted)]">Todavía no hay revocaciones ni ampliaciones registradas.</p>
+                )}
+                <div className="max-h-64 space-y-2 overflow-auto">
+                  {history.map(event => (
+                    <div className="flex flex-wrap justify-between gap-2 border-b border-[var(--color-border)] py-2 text-sm" key={event.id}>
+                      <div>
+                        <span className="font-medium">{event.email}</span> ·{' '}
+                        {event.action === 'grant'
+                          ? `Regalados ${event.months} mes(es)`
+                          : event.action === 'reactivate' ? 'Acceso reactivado' : 'Acceso revocado'}
+                      </div>
+                      <span className="text-[var(--color-muted)]">
+                        {formatDate(event.created_at)}
+                        {event.action === 'grant' && ` · Hasta ${formatDate(event.new_expires_at)}`}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </Card>
             </>

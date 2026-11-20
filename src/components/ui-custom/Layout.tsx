@@ -1,43 +1,35 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { AdSlot } from './AdSlot';
-import { useProStatus } from '@/hooks/useProStatus';
+import { BlackFridaySidebar } from './BlackFridaySidebar';
+import { isBlackFridayActive } from '@/config/plans';
 
-interface LayoutProps {
-  showSidebarAd?: boolean;
-}
+export const Layout: React.FC = () => {
+  const { pathname } = useLocation();
+  // First-party promo: homepage only, desktop only, and automatically ends.
+  // Never overlays upload, payment, conversion or download controls.
+  const showCampaign = pathname === '/' && isBlackFridayActive();
 
-export const Layout: React.FC<LayoutProps> = ({
-  showSidebarAd = false
-}) => {
-  const { hasProAccess } = useProStatus();
-  // Hide sidebar ad for PRO users
-  const effectiveShowAd = showSidebarAd && !hasProAccess;
-  
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
-      
       <main className="flex-1 container mx-auto px-4 py-8">
-        <div className={`flex gap-8 ${effectiveShowAd ? '' : 'justify-center'}`}>
-          {/* Main Content */}
-          <div className={`${effectiveShowAd ? 'flex-1' : 'max-w-4xl w-full'}`}>
+        {showCampaign ? (
+          <div className="mx-auto w-full max-w-7xl xl:grid xl:grid-cols-[minmax(0,1fr)_270px] xl:items-start xl:gap-8">
+            <div className="mx-auto w-full max-w-4xl min-w-0">
+              <Outlet />
+            </div>
+            <div className="hidden xl:block">
+              <BlackFridaySidebar />
+            </div>
+          </div>
+        ) : (
+          <div className="mx-auto max-w-4xl w-full">
             <Outlet />
           </div>
-          
-          {/* Sidebar Ad */}
-          {effectiveShowAd && (
-            <aside className="hidden lg:block w-[300px] flex-shrink-0">
-              <div className="sticky top-24">
-                <AdSlot position="sidebar" id="sidebar-ad" />
-              </div>
-            </aside>
-          )}
-        </div>
+        )}
       </main>
-      
       <Footer />
     </div>
   );

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   FileStack, Mail, Instagram,
   Image, FileText, Music,
-  BookOpen, Shield, FileCheck, Grid
+  BookOpen, Shield, FileCheck, Grid, HelpCircle
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -13,6 +13,7 @@ export const Footer: React.FC = () => {
 
   const toolLinks = {
     images: [
+      { path: '/ocr', label: t('tools.ocr.title') },
       { path: '/jpg-to-png', label: t('tools.jpgToPng.title') },
       { path: '/png-to-jpg', label: t('tools.pngToJpg.title') },
       { path: '/resize-image', label: t('tools.resizeImage.title') },
@@ -68,6 +69,7 @@ export const Footer: React.FC = () => {
     { path: '/privacy', label: t('footer.privacy'), icon: Shield },
     { path: '/terms', label: t('footer.terms'), icon: FileCheck },
     { path: '/blog', label: t('nav.blog'), icon: BookOpen },
+    { path: '/faq', label: t('nav.faq'), icon: HelpCircle },
   ];
 
   return (
@@ -206,6 +208,12 @@ export const Footer: React.FC = () => {
                 <Link to="/blog"
                   className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
                   {t('blog.title')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/faq"
+                  className="text-sm text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors">
+                  {t('nav.faq')}
                 </Link>
               </li>
               <li>

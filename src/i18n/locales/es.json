@@ -15,6 +15,7 @@
     "audioVideo": "Audio y Vídeo",
     "blog": "Blog",
     "pricing": "Planes",
+    "faq": "Ayuda", 
     "about": "Nosotros",
     "contact": "Contacto"
   },
@@ -81,10 +82,10 @@
     "upgrade": "Ver planes y precios",
     "comingSoonNote": "Edición avanzada de párrafos y procesamiento prioritario: Próximamente (aún no disponibles).",
     "benefits": {
-      "adFree": "Sin publicidad, incluidos los anuncios de Monetag",
+      "adFree": "Sin publicidad de terceros actualmente, tanto en Free como en PRO",
       "unlimitedBatch": "Lotes ampliados: hasta 20 archivos por lote (3 en Free)",
       "largeVideos": "La compresión de vídeo hasta 50 MB está incluida también en Free",
-      "ocrExpanded": "OCR ampliado: sin el tope de 2 páginas por sesión",
+      "ocrExpanded": "OCR sin límite diario de imágenes o páginas, con la misma calidad que Gratis",
       "studioBeta": "PDF Studio Beta incluido: editar texto, añadir texto, tipografía y color",
       "priority": "Procesamiento prioritario — Próximamente"
     },
@@ -99,15 +100,15 @@
       },
       "ocr": {
         "title": "Límite de OCR alcanzado",
-        "description": "La versión gratuita permite extraer texto de hasta 2 páginas por sesión. Con PRO no existe ese tope."
+        "description": "Todas las opciones de OCR son gratis: hasta 5 imágenes o páginas PDF al día. PRO elimina únicamente el límite de cantidad."
       },
       "general": {
         "title": "Función PRO",
         "description": "Esta función solo está disponible para usuarios PRO. Consulta los planes para ver qué está disponible y qué llegará próximamente."
       }
     },
-    "ocrCounter": "OCR gratis: {{count}}/{{limit}} páginas procesadas",
-    "ocrLimitReached": "Límite alcanzado: consulta el plan PRO para ampliar el OCR",
+    "ocrCounter": "OCR gratis: {{count}}/{{limit}} imágenes o páginas utilizadas hoy",
+    "ocrLimitReached": "Límite diario alcanzado: PRO permite procesar más imágenes, con las mismas opciones de OCR",
     "success": {
       "noSession": "No se encontró el ID de sesión de pago.",
       "verifyFailed": "No se pudo verificar el pago.",
@@ -115,7 +116,7 @@
       "verifyingTitle": "Verificando tu pago...",
       "verifyingDescription": "Estamos confirmando tu suscripción PRO. Un momento...",
       "title": "¡Te damos la bienvenida a PRO!",
-      "description": "Tu acceso PRO está activo en este navegador. Disfruta de límites ampliados, OCR ampliado, PDF Studio Beta y sin publicidad.",
+      "description": "Tu acceso PRO está activo en este navegador. Disfruta de más capacidad diaria de OCR, límites ampliados y sin publicidad.",
       "goToTools": "Ir a las herramientas",
       "errorTitle": "Error de verificación",
       "errorSupport": "Si ya realizaste el pago, contacta con soporte e indícales tu ID de sesión de Stripe.",
@@ -125,10 +126,10 @@
   "plans": {
     "badge": "Precios claros",
     "title": "Elige tu plan",
-    "description": "Empieza gratis con todas las herramientas actuales. PRO añade límites ampliados, OCR ampliado y una experiencia sin anuncios por 5,99 € al año.",
+    "description": "Empieza gratis con todas las herramientas actuales y todas las opciones de OCR. PRO amplía la cantidad diaria de imágenes y los límites de lote por 5,99 € al año. La publicidad externa está desactivada en todos los planes.",
     "badgesHelp": "Etiquetas: lo que ya funciona, lo que sigue en Beta y lo que llegará más adelante.",
     "seoTitle": "Planes y precios | Gratis y PRO | ConvertMyFilePro",
-    "seoDescription": "Compara el plan Free y el plan PRO de ConvertMyFilePro: herramientas gratuitas, PDF Studio Beta, límites ampliados, OCR ampliado y sin publicidad por 5,99 € al año.",
+    "seoDescription": "Compara ConvertMyFilePro Free y PRO: OCR completo gratis con 5 imágenes o páginas al día; PRO sin límite diario de OCR y con lotes ampliados por 5,99 € al año.",
     "perYear": "/ año",
     "badges": { "available": "Disponible", "beta": "Beta", "soon": "Próximamente" },
     "free": {
@@ -143,7 +144,7 @@
       "recommended": "Recomendado",
       "period": "/ año",
       "monthly": "{{monthly}}/mes, facturado anualmente",
-      "tagline": "Más capacidad y sin anuncios, manteniendo el procesamiento en tu navegador.",
+      "tagline": "Más capacidad y mayores límites, manteniendo el procesamiento en tu navegador.",
       "cta": "Activar PRO · {{price}}/año",
       "checkoutNote": "Pago gestionado por Stripe. Suscripción anual: revisa el importe final antes de pagar.",
       "active": "PRO activo · hasta {{date}}",
@@ -152,7 +153,7 @@
     "features": {
       "freeLimits": {
         "title": "Herramientas gratuitas con sus límites actuales",
-        "description": "Hasta {{freeBatch}} archivos por lote donde la herramienta lo permite, vídeos de {{freeVideo}} MB y {{freeOcr}} páginas OCR por sesión."
+        "description": "Herramientas con sus límites por lote, vídeos de {{freeVideo}} MB y OCR completo con hasta {{freeOcr}} imágenes o páginas PDF al día."
       },
       "studioReplace": {
         "title": "PDF Studio: sustitución básica de texto",
@@ -168,7 +169,7 @@
       },
       "ads": {
         "title": "Con anuncios",
-        "description": "La versión gratuita se financia con publicidad (Monetag/AdSense)."
+        "description": "Actualmente no mostramos publicidad externa mientras revisamos la seguridad del sitio."
       },
       "everythingFree": {
         "title": "Todo lo incluido en Free",
@@ -183,8 +184,8 @@
         "description": "Disponible gratis en Free y PRO: sube vídeos de hasta {{freeVideo}} MB y elige el tamaño de salida. La velocidad depende del navegador y del equipo."
       },
       "ocr": {
-        "title": "OCR ampliado",
-        "description": "Sin el tope de {{freeOcr}} páginas por sesión de la versión gratuita."
+        "title": "OCR sin límite diario",
+        "description": "Procesa más de {{freeOcr}} imágenes o páginas al día; la precisión, los modos de OCR y las descargas son idénticos en Free y PRO."
       },
       "studio": {
         "title": "PDF Studio Beta incluido",
@@ -192,7 +193,7 @@
       },
       "noAds": {
         "title": "Sin publicidad",
-        "description": "Se ocultan los anuncios, incluidos los de Monetag, al activar PRO en el navegador."
+        "description": "La publicidad externa está desactivada temporalmente en Free y PRO."
       },
       "advancedEditing": {
         "title": "Edición avanzada de párrafos",
@@ -222,7 +223,7 @@
         { "question": "¿Cómo se activa PRO después del pago?", "answer": "Stripe te devuelve a la página de confirmación con el identificador de la sesión. Comprobamos el pago con Stripe y activamos PRO en este navegador." },
         { "question": "¿Cuánto dura el acceso PRO?", "answer": "El acceso en el navegador dura 12 meses desde el pago. La suscripción anual se gestiona en Stripe; la renovación no amplía automáticamente el acceso guardado en el navegador." },
         { "question": "¿PRO funciona en varios dispositivos?", "answer": "No. El estado PRO se guarda en el navegador donde se activó. Si cambias de dispositivo o borras los datos del navegador, contacta con soporte con tu ID de sesión de Stripe." },
-        { "question": "¿Qué límites tiene el plan Free?", "answer": "Hasta {{freeBatch}} archivos por lote, vídeos de {{freeVideo}} MB y {{freeOcr}} páginas OCR por sesión, con anuncios." },
+        { "question": "¿Qué límites tiene el plan Free?", "answer": "Hasta {{freeBatch}} archivos por lote en las herramientas habituales, vídeos de {{freeVideo}} MB y {{freeOcr}} imágenes o páginas OCR al día. Todas las funciones de OCR son gratis; no se muestran anuncios externos." },
         { "question": "¿Puedo cancelar la suscripción?", "answer": "La suscripción se gestiona en Stripe. Escríbenos a info@ConvertMyFilePro.com si necesitas ayuda con la cancelación." }
       ]
     },
@@ -464,9 +465,9 @@
     },
     "ocr": {
       "title": "OCR - Imagen a Texto",
-      "description": "Extrae texto de imágenes usando OCR",
+      "description": "Extrae texto de imágenes y PDF escaneados con OCR gratuito, varios idiomas y exportación Word o TXT",
       "seoTitle": "OCR Online Gratis | Extraer Texto de Imagen | ConvertMyFilePro",
-      "seoDescription": "Herramienta OCR gratuita en línea. Extrae texto de imágenes y documentos escaneados. Soporta múltiples idiomas. Rápido y seguro.",
+      "seoDescription": "OCR gratis en tu navegador: imágenes, PDF escaneados, varios idiomas y lotes. Mejora contraste, edita y descarga TXT o Word. PRO solo amplía la cantidad.",
       "extracting": "Extrayendo texto...",
       "result": "Texto Extraído",
       "noText": "No se encontró texto en la imagen",
@@ -575,32 +576,33 @@
       "faq3": { "q": "¿Es OGG mejor que MP3?", "a": "OGG Vorbis ofrece calidad ligeramente superior. Pero MP3 es el estándar universal para compartir." }
     },
     "wavToFlac": {
-      "title": "WAV a WAV",
-      "description": "Convierte archivos de audio a formato WAV sin comprimir",
-      "seoTitle": "Convertir WAV a WAV Online Gratis | ConvertMyFilePro",
-      "seoDescription": "Conversor gratuito de WAV. Convierte y normaliza archivos de audio a formato WAV estándar. Sin pérdida, privado, sin subir archivos.",
-      "faq1": { "q": "¿Qué es WAV?", "a": "WAV es un formato de audio sin comprimir desarrollado por Microsoft e IBM. Preserva la calidad total sin pérdida de datos." },
-      "faq2": { "q": "¿Por qué convertir a WAV?", "a": "WAV es el formato estándar para edición de audio profesional. Mantiene calidad PCM de 16-bit completa." },
-      "faq3": { "q": "¿WAV es sin pérdida?", "a": "Sí. WAV es un formato sin pérdida. Los datos de audio se preservan bit por bit." }
+      "title": "WAV a FLAC",
+      "description": "Convierte archivos WAV a FLAC comprimido sin pérdida, directamente en el navegador",
+      "seoTitle": "Convertir WAV a FLAC Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convierte WAV a FLAC auténtico con compresión sin pérdida. Conversor de audio gratuito en tu navegador.",
+      "faq1": {"q":"¿Qué es FLAC?","a":"FLAC es un formato de compresión de audio sin pérdida. Normalmente ocupa menos que WAV sin comprimir."},
+      "faq2": {"q":"¿Por qué convertir WAV a FLAC?","a":"Para guardar una señal de audio sin compresión con pérdida, utilizando normalmente menos espacio que WAV."},
+      "faq3": {"q":"¿Necesito instalar FFmpeg?","a":"No. El navegador descarga el componente de codificación en la primera conversión y genera un archivo FLAC auténtico."}
     }
   },
   "faq": {
     "title": "Preguntas Frecuentes",
+    "helpCenterLink": "Ver todas las preguntas frecuentes y el centro de ayuda", 
     "secure": {
       "question": "¿Mis datos están seguros?",
-      "answer": "¡Sí! Todo el procesamiento de archivos ocurre directamente en tu navegador. Tus archivos nunca abandonan tu dispositivo ni se suben a ningún servidor."
+      "answer": "Las conversiones actuales se realizan principalmente en el navegador. Algunos componentes técnicos se descargan y proveedores como Cloudflare o Stripe gestionan datos de infraestructura o pagos; consulta la política de privacidad."
     },
     "free": {
       "question": "¿Este servicio es gratuito?",
-      "answer": "¡Sí, todas nuestras herramientas básicas son completamente gratuitas! Podemos introducir funciones premium en el futuro para necesidades avanzadas."
+      "answer": "Sí. Puedes usar las herramientas Free sin registro, con límites según la función. PRO amplía la cantidad de OCR y los lotes donde estén disponibles; los detalles están en Planes."
     },
     "limits": {
       "question": "¿Hay límites de tamaño de archivo?",
-      "answer": "Sí, para garantizar un rendimiento óptimo en tu navegador, limitamos el tamaño de los archivos a 50MB por archivo para la mayoría de las herramientas."
+      "answer": "Los límites varían según la utilidad: el OCR admite 20 MB por archivo y hasta 5 imágenes/páginas al día en Free; el compresor de vídeo Free acepta hasta 50 MB. Consulta cada herramienta."
     },
     "quality": {
       "question": "¿Se verá afectada la calidad de mi imagen?",
-      "answer": "Nuestras herramientas están diseñadas para mantener la mayor calidad posible. Para compresión, puedes ajustar el control deslizante de calidad para encontrar el equilibrio perfecto."
+      "answer": "Depende de la conversión. JPG y los métodos de compresión con pérdida pueden alterar la imagen. Guarda siempre el original y revisa el resultado."
     }
   },
   "ads": {

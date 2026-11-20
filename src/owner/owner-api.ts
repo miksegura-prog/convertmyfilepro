@@ -1,4 +1,4 @@
-import { sendInviteViaBrevo, type InviteLanguage } from './brevo-email';
+import { sendInviteViaBrevo, sendAccessUpdateViaBrevo, type InviteLanguage } from './brevo-email';
 
 /**
  * Owner (real, production) + 90-day Pro Beta invitations.
@@ -31,6 +31,48 @@ type Invite = {
   id: string; email: string; note: string | null; created_at: number;
   redeemed_at: number | null; expires_at: number | null; revoked_at: number | null;
 };
+type AdminInvite = {
+  id: string;
+  email: string;
+  redeemed_at: number | null;
+  revoked_at: number | null;
+  expires_at: number | null;
+  session_hash: string | null;
+};
+const GIFT_MONTHS = new Set([1, 2, 3, 6, 12]);
+
+function addGiftMonths(from: number, months: number): number {
+  // Calendar months, clamping the final day (Jan 31 + 1 month -> Feb 28/29).
+  const start = new Date(from);
+  const y = start.getUTCFullYear(), m = start.getUTCMonth();
+  const targetFirst = new Date(Date.UTC(y, m + months, 1));
+  const lastDay = new Date(Date.UTC(y, m + months + 1, 0)).getUTCDate();
+  const target = new Date(from);
+  target.setUTCFullYear(targetFirst.getUTCFullYear(), targetFirst.getUTCMonth(), Math.min(start.getUTCDate(), lastDay));
+  return target.getTime();
+}
+
+async function logAccessEvent(
+  env: OwnerEnv, id: string, actor: string, action: 'revoke' | 'reactivate' | 'grant',
+  months: number | null, previousExpiry: number | null, newExpiry: number | null,
+): Promise<void> {
+  try {
+    await env.DB!.prepare(
+      'INSERT INTO pro_beta_access_events (id, invite_id, actor_email, action, months, previous_expires_at, new_expires_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+    ).bind(crypto.randomUUID(), id, actor, action, months, previousExpiry, newExpiry, Date.now()).run();
+  } catch {
+    // Access action is already committed. Report but never retry the action:
+    // retrying a grant would gift the same months twice.
+    console.error('Owner access event could not be recorded. Check D1 migration status.');
+  }
+}
+
+async function getAdminInvite(env: OwnerEnv, id: string): Promise<AdminInvite | null> {
+  return env.DB!.prepare(
+    'SELECT id, email, redeemed_at, revoked_at, expires_at, session_hash FROM pro_beta_invites WHERE id = ?'
+  ).bind(id).first<AdminInvite>();
+}
+
 const DAY = 86_400_000;
 const OWNER_TTL = DAY;
 const BETA_TTL = 90 * DAY;
@@ -194,7 +236,17 @@ export async function handleOwnerOrBetaApi(request: Request, env: OwnerEnv): Pro
   if (path === '/api/pro-beta/status' && request.method === 'GET') {
     try {
       const [owner, beta] = await Promise.all([isOwnerSession(request, env), betaStatus(request, env)]);
-      return json({ owner, beta: beta.active, expiresAt: beta.expiresAt });
+      // Renew the existing anonymous Beta cookie while the D1 grant is active.
+      // A gifted extension can outlast the original 90-day cookie otherwise.
+      const betaToken = cookies(request)[BETA_COOKIE];
+      const remaining = beta.active && beta.expiresAt
+        ? Math.max(1, Math.ceil((beta.expiresAt - Date.now()) / 1000)) : 0;
+      return json(
+        { owner, beta: beta.active, expiresAt: beta.expiresAt },
+        200,
+        betaToken && remaining > 0
+          ? { 'Set-Cookie': setCookie(BETA_COOKIE, betaToken, remaining) } : {},
+      );
     } catch (error) {
       console.error('Pro access status failed', error);
       return json({ owner: false, beta: false, expiresAt: null }, 503);
@@ -271,14 +323,80 @@ export async function handleOwnerOrBetaApi(request: Request, env: OwnerEnv): Pro
       durationDays: 90, redeemWithinDays: 14,
     }, 201);
   }
+  if (path === '/api/owner/access-events' && request.method === 'GET') {
+    try {
+      const events = await env.DB.prepare(
+        'SELECT e.id, e.invite_id, i.email, e.actor_email, e.action, e.months, e.new_expires_at, e.created_at FROM pro_beta_access_events e JOIN pro_beta_invites i ON i.id = e.invite_id ORDER BY e.created_at DESC LIMIT 50'
+      ).all();
+      return json({ events: events.results });
+    } catch {
+      return json({ events: [], error: 'Access history is not configured yet' }, 503);
+    }
+  }
   if (path === '/api/owner/invitations/revoke' && request.method === 'POST') {
     const body = await readJson(request);
     const id = body?.id;
     if (typeof id !== 'string' || !/^[0-9a-f-]{36}$/i.test(id)) return json({ error: 'Invalid ID' }, 400);
+    const row = await getAdminInvite(env, id);
+    if (!row || row.revoked_at !== null) return json({ error: 'Invitation already revoked or not found' }, 409);
     const result = await env.DB.prepare(
       'UPDATE pro_beta_invites SET revoked_at = ? WHERE id = ? AND revoked_at IS NULL'
     ).bind(Date.now(), id).run();
-    return json({ success: result.meta?.changes === 1 }, result.meta?.changes === 1 ? 200 : 404);
+    if (result.meta?.changes !== 1) return json({ error: 'Invitation changed. Refresh and try again.' }, 409);
+    await logAccessEvent(env, id, ownerEmail, 'revoke', null, row.expires_at, row.expires_at);
+    return json({ success: true });
+  }
+  if (path === '/api/owner/invitations/reactivate' && request.method === 'POST') {
+    const body = await readJson(request);
+    const id = body?.id;
+    if (typeof id !== 'string' || !/^[0-9a-f-]{36}$/i.test(id)) return json({ error: 'Invalid ID' }, 400);
+    const row = await getAdminInvite(env, id);
+    if (!row || row.revoked_at === null) return json({ error: 'Access is not revoked' }, 409);
+    if (!row.redeemed_at || !row.session_hash) {
+      return json({ error: 'Invitation was never activated. Create a new single-use invitation.' }, 409);
+    }
+    if (!row.expires_at || row.expires_at <= Date.now()) {
+      return json({ error: 'Access has expired. Gift new months to reactivate it.' }, 409);
+    }
+    const result = await env.DB.prepare(
+      'UPDATE pro_beta_invites SET revoked_at = NULL WHERE id = ? AND revoked_at = ? AND redeemed_at IS NOT NULL AND expires_at > ?'
+    ).bind(id, row.revoked_at, Date.now()).run();
+    if (result.meta?.changes !== 1) return json({ error: 'Access changed. Refresh and try again.' }, 409);
+    await logAccessEvent(env, id, ownerEmail, 'reactivate', null, row.expires_at, row.expires_at);
+    // Do not repeat the D1 mutation when only email delivery fails.
+    const language: InviteLanguage = body?.language === 'en' ? 'en' : 'es';
+    const delivery = await sendAccessUpdateViaBrevo(
+      env.BREVO_API_KEY, row.email, 'reactivate', row.expires_at, language,
+    );
+    return json({ success: true, expiresAt: row.expires_at,
+      emailStatus: delivery.ok ? 'accepted' : 'failed' });
+  }
+  if (path === '/api/owner/invitations/grant' && request.method === 'POST') {
+    const body = await readJson(request);
+    const id = body?.id, months = body?.months;
+    if (typeof id !== 'string' || !/^[0-9a-f-]{36}$/i.test(id) ||
+        typeof months !== 'number' || !Number.isInteger(months) || !GIFT_MONTHS.has(months)) {
+      return json({ error: 'Invalid ID or months (choose 1, 2, 3, 6 or 12)' }, 400);
+    }
+    const row = await getAdminInvite(env, id);
+    if (!row) return json({ error: 'Invitation not found' }, 404);
+    if (!row.redeemed_at || !row.session_hash || !row.expires_at) {
+      return json({ error: 'Invitation was never activated. Send a new invitation instead.' }, 409);
+    }
+    const newExpiry = addGiftMonths(Math.max(Date.now(), row.expires_at), months);
+    // Reinstates revoked access as well, but cannot regenerate an old invite link.
+    const result = await env.DB.prepare(
+      'UPDATE pro_beta_invites SET expires_at = ?, revoked_at = NULL WHERE id = ? AND expires_at = ? AND revoked_at IS ? AND redeemed_at IS NOT NULL'
+    ).bind(newExpiry, id, row.expires_at, row.revoked_at).run();
+    if (result.meta?.changes !== 1) return json({ error: 'Access changed. Refresh and try again.' }, 409);
+    await logAccessEvent(env, id, ownerEmail, 'grant', months, row.expires_at, newExpiry);
+    // Send once after the expiry update succeeds. Never repeat a gift just to retry email.
+    const language: InviteLanguage = body?.language === 'en' ? 'en' : 'es';
+    const delivery = await sendAccessUpdateViaBrevo(
+      env.BREVO_API_KEY, row.email, 'grant', newExpiry, language, months,
+    );
+    return json({ success: true, expiresAt: newExpiry,
+      reactivated: row.revoked_at !== null, emailStatus: delivery.ok ? 'accepted' : 'failed' });
   }
   return json({ error: 'Not found' }, 404);
 }

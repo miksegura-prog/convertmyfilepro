@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, Image, FileText, FileStack, Music, Video } from 'lucide-react';
+import { ArrowRight, Image, FileText, FileStack, Music, Video, ScanText } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { SEO } from '@/components/ui-custom/SEO';
 import type { Tool } from '@/types';
@@ -12,6 +12,7 @@ const ToolCategory: React.FC = () => {
 
   const allTools: Record<string, Tool[]> = {
     images: [
+      { id: 'ocr', title: t('tools.ocr.title'), description: t('tools.ocr.description'), category: 'images', icon: 'image', path: '/ocr', color: 'from-teal-500 to-cyan-600' },
       { id: 'jpg-to-png', title: t('tools.jpgToPng.title'), description: t('tools.jpgToPng.description'), category: 'images', icon: 'image', path: '/jpg-to-png', color: 'from-blue-500 to-cyan-500' },
       { id: 'png-to-jpg', title: t('tools.pngToJpg.title'), description: t('tools.pngToJpg.description'), category: 'images', icon: 'image', path: '/png-to-jpg', color: 'from-green-500 to-emerald-500' },
       { id: 'webp-to-jpg', title: t('tools.webpToJpg.title'), description: t('tools.webpToJpg.description'), category: 'images', icon: 'image', path: '/convert/webp-to-jpg', color: 'from-violet-500 to-purple-500' },
@@ -99,9 +100,10 @@ const ToolCategory: React.FC = () => {
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${tool.color} 
                                 flex items-center justify-center mb-4
                                 group-hover:scale-110 transition-transform`}>
-                  {tool.category === 'images' && <Image className="w-6 h-6 text-white" />}
+                  {tool.id === 'ocr' && <ScanText className="w-6 h-6 text-white" />}
+                  {tool.category === 'images' && tool.id !== 'ocr' && <Image className="w-6 h-6 text-white" />}
                   {tool.category === 'pdf' && <FileText className="w-6 h-6 text-white" />}
-                  {tool.category === 'documents' && <FileStack className="w-6 h-6 text-white" />}
+                  {tool.category === 'documents' && tool.id !== 'ocr' && <FileStack className="w-6 h-6 text-white" />}
                   {(tool.category === 'audioVideo' || tool.category === 'audio') && <Music className="w-6 h-6 text-white" />}
                   {tool.category === 'video' && <Video className="w-6 h-6 text-white" />}
                   {tool.category === 'bonus' && <Icon className="w-6 h-6 text-white" />}

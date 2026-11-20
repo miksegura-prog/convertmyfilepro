@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import {
   Accordion,
   AccordionContent,
@@ -66,6 +67,11 @@ export const FAQ: React.FC<FAQProps> = ({ items }) => {
             </AccordionItem>
           ))}
         </Accordion>
+        <p className="mt-6 text-center text-sm">
+          <Link to="/faq" className="font-semibold text-[var(--color-primary)] hover:underline">
+            {t('faq.helpCenterLink')}
+          </Link>
+        </p>
       </div>
     </section>
   );

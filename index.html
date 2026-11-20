@@ -46,66 +46,31 @@
     <script defer data-domain="convertmyfilepro.com" src="https://plausible.io/js/script.js"></script>
     -->
     
-    <!-- Google AdSense (replace with your publisher ID) -->
-    <!--
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-     crossorigin="anonymous"></script>
-    -->
-    <!-- Pro ads decision: verify the HttpOnly Owner/Beta session before loading Monetag.
-         Do not show ads on private Owner/invitation pages. Paid Stripe users are
-         checked by the existing, backward-compatible localStorage marker. -->
+    <!-- External advertising networks have been disabled.
+         On all pages, remove any old Monetag push subscription and its
+         legacy /sw.js registration, which may persist after deployment.
+         Do not unregister unrelated service workers. -->
     <script>
       (function () {
-        var paid = false;
-        try {
-          var saved = JSON.parse(localStorage.getItem('convertmyfilepro_pro') || 'null');
-          paid = !!(saved && saved.active && saved.expiresAt > Date.now());
-        } catch (_) { paid = false; }
-        var privatePage = /^\/(owner|invite)(\/|$)/.test(location.pathname);
-        var localDev = ['localhost', '127.0.0.1', '[::1]'].indexOf(location.hostname) >= 0;
-        var verifying = location.pathname.indexOf('/pro-success') === 0;
-
-        function removePush() {
-          if (!('serviceWorker' in navigator)) return;
-          navigator.serviceWorker.getRegistrations().then(function (registrations) {
-            registrations.forEach(function (registration) {
-              var worker = registration.active || registration.installing || registration.waiting;
-              if (worker && worker.scriptURL.indexOf('/sw.js') !== -1) registration.unregister();
+        if (!('serviceWorker' in navigator)) return;
+        navigator.serviceWorker.getRegistrations().then(function (registrations) {
+          registrations.forEach(function (registration) {
+            var worker = registration.active || registration.waiting || registration.installing;
+            if (!worker) return;
+            try {
+              var workerUrl = new URL(worker.scriptURL);
+              if (workerUrl.origin !== location.origin || workerUrl.pathname !== '/sw.js') return;
+            } catch (_) { return; }
+            var unsubscribe = registration.pushManager
+              ? registration.pushManager.getSubscription().then(function (subscription) {
+                  if (subscription) return subscription.unsubscribe();
+                }).catch(function () {})
+              : Promise.resolve();
+            unsubscribe.finally(function () {
+              registration.unregister().catch(function () {});
             });
-          }).catch(function () {});
-        }
-
-        function loadFreeAds() {
-          if (!document.body && !document.documentElement) return;
-          var script = document.createElement('script');
-          script.dataset.zone = '12234686';
-          script.src = 'https://n6wxm.com/vignette.min.js';
-          (document.body || document.documentElement).appendChild(script);
-          if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-              navigator.serviceWorker.register('/sw.js').catch(function () {});
-            });
-          }
-        }
-
-        if (paid || privatePage || localDev || verifying) {
-          removePush();
-          return;
-        }
-
-        fetch('/api/pro-beta/status', {
-          credentials: 'same-origin', cache: 'no-store',
-          headers: { Accept: 'application/json' }
-        }).then(function (res) {
-          if (!res.ok) throw new Error('Unable to verify Pro session');
-          return res.json();
-        }).then(function (data) {
-          if (data.owner || data.beta) removePush();
-          else loadFreeAds();
-        }).catch(function () {
-          // Fail closed on network errors: never accidentally inject free-user
-          // ads into an active Owner/Pro Beta session.
-        });
+          });
+        }).catch(function () {});
       })();
     </script>
   </head>

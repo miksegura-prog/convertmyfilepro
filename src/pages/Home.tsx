@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, FileStack, FileText, Globe, Image, Lock, Music, Shield, Subtitles, Video, Zap } from 'lucide-react';
+import { ArrowRight, FileStack, FileText, Globe, Image, Lock, Music, ScanText, Shield, Subtitles, Video, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SEO } from '@/components/ui-custom/SEO';
@@ -11,6 +11,7 @@ const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
   const spanish = i18n.language.startsWith('es');
   const tools: Tool[] = [
+    { id: 'ocr', path: '/ocr', category: 'images' as const, title: t('tools.ocr.title'), description: t('tools.ocr.description'), icon: 'image', color: 'from-teal-500 to-cyan-600' },
     ...[
       ['jpgToPng','/jpg-to-png'],['pngToJpg','/png-to-jpg'],['avifToJpg','/avif-to-jpg'],['avifToPng','/avif-to-png'],['webpToPng','/webp-to-png'],['webpToJpg','/convert/webp-to-jpg'],['heicToJpg','/convert/heic-to-jpg'],['resizeImage','/resize-image'],['compressImage','/compress-image'], 
     ].map(([id,path]) => ({ id, path, category:'images' as const, title:t(`tools.${id}.title`), description:t(`tools.${id}.description`), icon:'image', color:'from-blue-500 to-cyan-500' })),
@@ -19,7 +20,7 @@ const Home: React.FC = () => {
       ['wavToMp3','/wav-to-mp3'],['flacToMp3','/flac-to-mp3'],['oggToMp3','/ogg-to-mp3'],['wavToFlac','/wav-to-flac'],
     ].map(([id,path]) => ({ id, path, category:'audio' as const, title:t(`tools.${id}.title`), description:t(`tools.${id}.description`), icon:'audio', color:'from-purple-500 to-indigo-600' })),
     ...[
-      ['pdfStudio','/pdf-studio','pdf'],['mergePdf','/merge-pdf','pdf'],['splitPdf','/split-pdf','pdf'],['jpgToPdf','/jpg-to-pdf','pdf'],['docxToPdf','/docx-to-pdf','documents'],['xlsxToPdf','/xlsx-to-pdf','documents'],['txtToPdf','/txt-to-pdf','documents'],['ocr','/ocr','documents'],['srtToVtt','/srt-to-vtt','documents'],['vttToSrt','/vtt-to-srt','documents'],['txtToSrt','/txt-to-srt','documents'],
+      ['pdfStudio','/pdf-studio','pdf'],['mergePdf','/merge-pdf','pdf'],['splitPdf','/split-pdf','pdf'],['jpgToPdf','/jpg-to-pdf','pdf'],['docxToPdf','/docx-to-pdf','documents'],['xlsxToPdf','/xlsx-to-pdf','documents'],['txtToPdf','/txt-to-pdf','documents'],['srtToVtt','/srt-to-vtt','documents'],['vttToSrt','/vtt-to-srt','documents'],['txtToSrt','/txt-to-srt','documents'],
     ].map(([id,path,type]) => ({ id, path, category:type as Tool['category'], title:t(`tools.${id}.title`), description:t(`tools.${id}.description`), icon:'file', color:'from-violet-500 to-blue-600' })),
   ];
   const categories = [
@@ -45,7 +46,7 @@ const Home: React.FC = () => {
         <header className="text-center"><h2 id="quick-access" className="text-2xl font-bold md:text-3xl">{t('homepage.quickAccess.title')}</h2><p className="mt-2 text-[var(--color-muted)]">{t('homepage.quickAccess.description')}</p></header>
         {categories.map(({id,path,icon:CategoryIcon})=><section key={id}>
           <div className="mb-5 flex flex-wrap items-end justify-between gap-3"><div className="flex items-center gap-3"><CategoryIcon className="h-6 w-6 text-[var(--color-primary)]"/><div><h3 className="text-xl font-bold">{t(`homepage.categories.${id}.title`)}</h3><p className="text-sm text-[var(--color-muted)]">{t(`homepage.categories.${id}.description`)}</p></div></div><Link className="inline-flex items-center gap-1 text-sm text-[var(--color-accent)]" to={path}>{t('homepage.viewAll')}<ArrowRight className="h-4 w-4"/></Link></div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">{tools.filter(tool=>id==='documents'?tool.category==='documents'||tool.category==='pdf':tool.category===id).map(tool=>{const Icon=iconFor(tool.category);return <Link key={tool.id} to={tool.path} className="group h-full"><Card className="h-full border border-[var(--color-border)] p-5 transition-all group-hover:-translate-y-1 group-hover:shadow-card-hover"><Icon aria-hidden="true" className="mb-4 h-6 w-6 text-[var(--color-primary)]"/><h4 className="mb-2 font-semibold">{tool.title}</h4><p className="mb-4 text-sm text-[var(--color-muted)]">{tool.description}</p><span className="inline-flex items-center text-sm text-[var(--color-accent)]">{t('homepage.convertNow')}<ArrowRight className="ml-1 h-4 w-4"/></span></Card></Link>})}</div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">{tools.filter(tool=>id==='documents'?tool.category==='documents'||tool.category==='pdf':tool.category===id).map(tool=>{const Icon=tool.id==='ocr'?ScanText:iconFor(tool.category);return <Link key={tool.id} to={tool.path} className="group h-full"><Card className="h-full border border-[var(--color-border)] p-5 transition-all group-hover:-translate-y-1 group-hover:shadow-card-hover"><Icon aria-hidden="true" className="mb-4 h-6 w-6 text-[var(--color-primary)]"/><h4 className="mb-2 font-semibold">{tool.title}</h4><p className="mb-4 text-sm text-[var(--color-muted)]">{tool.description}</p><span className="inline-flex items-center text-sm text-[var(--color-accent)]">{t('homepage.convertNow')}<ArrowRight className="ml-1 h-4 w-4"/></span></Card></Link>})}</div>
         </section>)}
       </section>
       <section className="-mx-4 rounded-3xl bg-[var(--color-bg)] px-4 py-10"><h2 className="mb-10 text-center text-2xl font-bold">{t('homepage.features.title',{appName:t('app.name')})}</h2><div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">{featureItems.map(({icon:Icon,title,text})=><div key={title} className="text-center"><Icon className="mx-auto mb-4 h-8 w-8 text-[var(--color-primary)]"/><h3 className="mb-2 font-semibold">{title}</h3><p className="text-sm text-[var(--color-muted)]">{text}</p></div>)}</div></section>

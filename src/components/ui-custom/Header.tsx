@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Menu, X, Moon, Sun, Globe, ChevronDown,
   Image, FileText, FileStack, Home, BookOpen, Music, Video,
-  Crown, Sparkles, Tag
+  Crown, Sparkles, Tag, ScanText, HelpCircle
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -57,6 +57,7 @@ export const Header: React.FC = () => {
       label: t('nav.images'),
       icon: Image,
       children: [
+        { path: '/ocr', label: t('tools.ocr.title'), icon: ScanText },
         { path: '/jpg-to-png', label: t('tools.jpgToPng.title'), icon: Image },
         { path: '/png-to-jpg', label: t('tools.pngToJpg.title'), icon: Image },
         { path: '/resize-image', label: t('tools.resizeImage.title'), icon: Image },
@@ -72,6 +73,7 @@ export const Header: React.FC = () => {
       label: t('nav.pdf'),
       icon: FileText,
       children: [
+        { path: '/ocr', label: t('tools.ocr.title'), icon: ScanText },
         { path: '/pdf-studio', label: t('tools.pdfStudio.title'), icon: FileText, badge: t('tools.pdfStudio.beta') },
         { path: '/pdf-studio/edit', label: t('tools.pdfStudioEdit.title'), icon: FileText, badge: t('tools.pdfStudio.beta') },
         { path: '/merge-pdf', label: t('tools.mergePdf.title'), icon: FileText },
@@ -110,6 +112,7 @@ export const Header: React.FC = () => {
       label: t('nav.tools'),
       icon: FileStack,
       children: [
+        { path: '/ocr', label: t('tools.ocr.title'), icon: ScanText },
         { path: '/tools/images', label: t('nav.images'), icon: Image },
         { path: '/tools/pdf', label: t('nav.pdf'), icon: FileText },
         { path: '/tools/documents', label: t('homepage.categories.documents.title'), icon: FileStack },
@@ -118,6 +121,7 @@ export const Header: React.FC = () => {
       ]
     },
     { path: '/blog', label: t('nav.blog'), icon: BookOpen },
+    { path: '/faq', label: t('nav.faq'), icon: HelpCircle },
     { path: '/pro', label: t('nav.pricing'), icon: Tag },
   ];
   const isActive = (path: string) => location.pathname === path;

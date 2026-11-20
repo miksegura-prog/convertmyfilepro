@@ -1,0 +1,510 @@
+{
+  "title": "Centro de ayuda · Preguntas frecuentes",
+  "description": "Respuestas prácticas sobre los formatos compatibles, OCR, PDF, audio, vídeo, subtítulos, planes y acceso Pro Beta de ConvertMyFilePro.",
+  "subtitle": "Busca tu duda o elige una categoría. Las herramientas y los límites se describen según la versión actual.",
+  "searchPlaceholder": "Buscar por formato, error o pregunta…",
+  "all": "Todas",
+  "results": "preguntas disponibles",
+  "noResults": "No hemos encontrado preguntas que coincidan. Prueba con otras palabras.",
+  "clear": "Limpiar búsqueda",
+  "toolLink": "Abrir herramienta",
+  "contactTitle": "¿No encuentras la respuesta?",
+  "contactText": "Si se trata de una incidencia técnica, un pago o un acceso Pro Beta, escríbenos con los detalles necesarios. No incluyas contraseñas ni datos de tarjetas.",
+  "contactButton": "Contactar con soporte",
+  "topics": {
+    "start": "Primeros pasos",
+    "images": "Imágenes y formatos",
+    "ocr": "OCR · Imagen a texto",
+    "pdf": "PDF y PDF Studio",
+    "documents": "Documentos",
+    "audio": "Audio",
+    "video": "Vídeo",
+    "subtitles": "Subtítulos",
+    "plans": "Planes Free y PRO",
+    "invites": "Invitaciones Pro Beta",
+    "privacy": "Privacidad y seguridad",
+    "issues": "Errores y soluciones"
+  },
+  "items": [
+    {
+      "id": "start-how",
+      "topic": "start",
+      "question": "¿Cómo convierto un archivo?",
+      "answer": "Entra en la herramienta correspondiente, selecciona el archivo, ajusta las opciones si aparecen y pulsa Convertir. Descarga el resultado cuando termine. No cambies la extensión manualmente: utiliza el conversor adecuado.",
+      "path": "/tools/images"
+    },
+    {
+      "id": "start-install",
+      "topic": "start",
+      "question": "¿Tengo que instalar un programa?",
+      "answer": "No. ConvertMyFilePro funciona desde un navegador moderno. Algunas funciones descargan componentes técnicos al ejecutarse por primera vez, pero no requieren instalar una aplicación."
+    },
+    {
+      "id": "start-register",
+      "topic": "start",
+      "question": "¿Hace falta una cuenta para usar Free?",
+      "answer": "No. Las herramientas gratuitas funcionan sin registro. PRO de pago se activa después de verificar el pago en el navegador; las invitaciones Pro Beta se activan desde un enlace personal.",
+      "path": "/pro"
+    },
+    {
+      "id": "start-browsers",
+      "topic": "start",
+      "question": "¿Qué navegadores son compatibles?",
+      "answer": "Prueba con versiones recientes de Chrome, Edge, Firefox o Safari. El soporte real depende del formato y de las funciones multimedia que admita cada navegador."
+    },
+    {
+      "id": "start-download",
+      "topic": "start",
+      "question": "¿Dónde se guarda mi archivo convertido?",
+      "answer": "Normalmente en la carpeta Descargas de tu navegador, salvo que hayas elegido otra ubicación. La aplicación no modifica automáticamente tu archivo original."
+    },
+    {
+      "id": "start-batches",
+      "topic": "start",
+      "question": "¿Puedo procesar varios archivos a la vez?",
+      "answer": "Sí, en las herramientas que admiten lotes. El número permitido varía: ciertas conversiones admiten hasta 3 archivos en Free y lotes ampliados con PRO; otras herramientas son de un solo archivo.",
+      "path": "/pro"
+    },
+    {
+      "id": "img-formats",
+      "topic": "images",
+      "question": "¿Qué conversiones de imagen están disponibles?",
+      "answer": "Encontrarás JPG↔PNG, WebP→PNG/JPG, AVIF→PNG/JPG y HEIC→JPG, además de redimensionar y comprimir imágenes. La compatibilidad final depende también del navegador.",
+      "path": "/tools/images"
+    },
+    {
+      "id": "img-jpgpng",
+      "topic": "images",
+      "question": "¿En qué se diferencian JPG y PNG?",
+      "answer": "JPG suele ocupar menos espacio y no admite transparencia. PNG puede conservar transparencia y es práctico para gráficos, logotipos y capturas; suele pesar más.",
+      "path": "/jpg-to-png"
+    },
+    {
+      "id": "img-transparent",
+      "topic": "images",
+      "question": "¿Se conserva la transparencia al pasar PNG o WebP a JPG?",
+      "answer": "No. JPG no admite canal alfa: las zonas transparentes pasan a un fondo. Si necesitas transparencia, utiliza PNG cuando el archivo de origen la tenga.",
+      "path": "/png-to-jpg"
+    },
+    {
+      "id": "img-webp",
+      "topic": "images",
+      "question": "¿Para qué sirve convertir WebP?",
+      "answer": "WebP es habitual en páginas web. Puedes convertirlo a JPG para compartirlo con aplicaciones antiguas o a PNG si necesitas un archivo compatible con transparencias.",
+      "path": "/convert/webp-to-jpg"
+    },
+    {
+      "id": "img-heic",
+      "topic": "images",
+      "question": "¿Puedo convertir fotos HEIC de iPhone?",
+      "answer": "Hay una herramienta HEIC→JPG. Si una foto concreta no se puede abrir, prueba con otra exportación del iPhone; no todas las variantes de HEIC se decodifican igual en todos los navegadores.",
+      "path": "/convert/heic-to-jpg"
+    },
+    {
+      "id": "img-resize",
+      "topic": "images",
+      "question": "¿Redimensionar y comprimir una imagen es lo mismo?",
+      "answer": "No. Redimensionar cambia las dimensiones en píxeles; comprimir intenta reducir el tamaño del archivo. Puedes necesitar ambas operaciones, y una compresión con pérdida puede alterar la calidad.",
+      "path": "/resize-image"
+    },
+    {
+      "id": "ocr-purpose",
+      "topic": "ocr",
+      "question": "¿Qué hace el OCR?",
+      "answer": "Reconoce texto en imágenes y páginas de PDF escaneados, para copiarlo, corregirlo o descargarlo como TXT o Word. No garantiza una transcripción perfecta.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-files",
+      "topic": "ocr",
+      "question": "¿Qué archivos acepta el OCR?",
+      "answer": "Puedes cargar imágenes habituales como JPG, PNG o WebP y PDF escaneados. La interfaz permite hasta 10 archivos por operación y 20 MB por archivo; un PDF se procesa página a página.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-free",
+      "topic": "ocr",
+      "question": "¿Qué parte del OCR es gratis?",
+      "answer": "Todas las funciones: idiomas, modos, mejora de contraste, rotación, lotes, edición y exportación. Free permite 5 imágenes o páginas PDF al día; PRO elimina únicamente ese límite diario.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-languages",
+      "topic": "ocr",
+      "question": "¿Qué idiomas reconoce el OCR?",
+      "answer": "Incluye español, inglés, catalán, francés, alemán y otros idiomas que aparecen en el selector. También existe una opción combinada de español e inglés. Comprueba el idioma antes de reconocer.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-accuracy",
+      "topic": "ocr",
+      "question": "¿Por qué algunas palabras salen mal?",
+      "answer": "La precisión depende de la resolución, la iluminación, el contraste, la tipografía y la disposición del texto. Prueba a girar la imagen o alternar entre preparación automática, original y blanco y negro. Revisa siempre el resultado.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-pdf-pages",
+      "topic": "ocr",
+      "question": "¿Puedo extraer solo algunas páginas de un PDF?",
+      "answer": "Sí. En el OCR introduce rangos como 1-3,5. Cada página procesada cuenta como una imagen y, por estabilidad, cada operación admite un máximo técnico de 40 páginas/imágenes para ambos planes.",
+      "path": "/ocr"
+    },
+    {
+      "id": "ocr-tables",
+      "topic": "ocr",
+      "question": "¿Conserva tablas, columnas y el diseño original?",
+      "answer": "No de manera fiable. El OCR extrae texto y puede separar o alterar columnas, tablas y encabezados. El Word generado es editable, pero no recrea automáticamente la maquetación del original.",
+      "path": "/ocr"
+    },
+    {
+      "id": "pdf-merge",
+      "topic": "pdf",
+      "question": "¿Cómo uno varios PDF?",
+      "answer": "Usa «Unir PDF», incorpora los documentos en el orden deseado y descarga el archivo combinado. Los archivos protegidos o dañados pueden dar problemas.",
+      "path": "/merge-pdf"
+    },
+    {
+      "id": "pdf-split",
+      "topic": "pdf",
+      "question": "¿Puedo extraer páginas de un PDF?",
+      "answer": "Sí. «Dividir PDF» permite seleccionar páginas o rangos del documento. Comprueba el orden y el contenido del archivo resultante antes de utilizarlo.",
+      "path": "/split-pdf"
+    },
+    {
+      "id": "pdf-images",
+      "topic": "pdf",
+      "question": "¿Puedo convertir imágenes en PDF?",
+      "answer": "Sí. «JPG a PDF» permite crear un documento PDF a partir de imágenes compatibles. Si necesitas convertir PDF en imágenes, comprueba la herramienta concreta antes de asumir que está disponible.",
+      "path": "/jpg-to-pdf"
+    },
+    {
+      "id": "pdf-studio",
+      "topic": "pdf",
+      "question": "¿Qué es PDF Studio Beta?",
+      "answer": "Es un editor experimental de texto para PDF que permite sustituir texto seleccionable y añadir texto nuevo, con ajustes de tipografía y color. No equivale a un editor de PDF profesional completo.",
+      "path": "/pdf-studio"
+    },
+    {
+      "id": "pdf-scanned",
+      "topic": "pdf",
+      "question": "¿Puedo editar directamente el texto de un PDF escaneado?",
+      "answer": "Un escaneo suele contener imágenes, no caracteres editables. Utiliza primero el OCR para extraer texto. PDF Studio funciona mejor con documentos que tienen una capa de texto real.",
+      "path": "/ocr"
+    },
+    {
+      "id": "pdf-limitations",
+      "topic": "pdf",
+      "question": "¿Qué limitaciones tiene PDF Studio?",
+      "answer": "Algunas fuentes incrustadas, subgrupos de caracteres o textos repartidos en fragmentos internos dificultan las modificaciones. Revisa siempre el PDF exportado, especialmente si es importante.",
+      "path": "/pdf-studio/edit"
+    },
+    {
+      "id": "doc-available",
+      "topic": "documents",
+      "question": "¿Qué documentos puedo convertir a PDF?",
+      "answer": "Hay herramientas para DOCX→PDF, XLSX→PDF y TXT→PDF. Otros formatos aparecen en algunas páginas informativas, pero no deben darse por compatibles sin una herramienta específica.",
+      "path": "/tools/documents"
+    },
+    {
+      "id": "doc-format",
+      "topic": "documents",
+      "question": "¿El PDF conservará exactamente el diseño de Word o Excel?",
+      "answer": "No podemos garantizar una reproducción idéntica: tablas complejas, fuentes, gráficos, saltos y estilos pueden cambiar. Compara el PDF con el original antes de enviarlo.",
+      "path": "/docx-to-pdf"
+    },
+    {
+      "id": "doc-old",
+      "topic": "documents",
+      "question": "¿Puedo convertir un archivo Word .DOC antiguo?",
+      "answer": "La herramienta principal está destinada a DOCX. Guarda primero el archivo .DOC como .DOCX mediante tu procesador de textos si el conversor no lo admite.",
+      "path": "/docx-to-pdf"
+    },
+    {
+      "id": "doc-excel",
+      "topic": "documents",
+      "question": "¿Qué ocurre con las hojas grandes de Excel?",
+      "answer": "Los libros con muchas hojas, gráficos o celdas complejas pueden tardar más o necesitar ajustes de presentación. Revisa la paginación y los datos después de convertir.",
+      "path": "/xlsx-to-pdf"
+    },
+    {
+      "id": "doc-txt",
+      "topic": "documents",
+      "question": "¿Cómo paso texto plano a PDF?",
+      "answer": "Sube un archivo TXT a «TXT a PDF» y descarga el documento. Si lo que necesitas es reconocer letras de una fotografía, utiliza OCR en lugar de TXT a PDF.",
+      "path": "/txt-to-pdf"
+    },
+    {
+      "id": "audio-formats",
+      "topic": "audio",
+      "question": "¿Qué convertidores de audio aparecen disponibles?",
+      "answer": "WAV→MP3, FLAC→MP3 y OGG→MP3. Algunas entradas de audio adicionales pueden funcionar si el navegador logra decodificarlas; no prometemos compatibilidad universal.",
+      "path": "/tools/audio"
+    },
+    {
+      "id": "audio-bitrate",
+      "topic": "audio",
+      "question": "¿Qué calidad de MP3 puedo elegir?",
+      "answer": "En herramientas como WAV→MP3 se ofrecen opciones de 128 y 192 kbps. Un bitrate mayor suele aumentar el tamaño y puede mejorar la calidad perceptible, pero no recupera información perdida.",
+      "path": "/wav-to-mp3"
+    },
+    {
+      "id": "audio-wavmp3",
+      "topic": "audio",
+      "question": "¿Puedo convertir WAV a MP3 sin instalar nada?",
+      "answer": "Sí. El audio se decodifica y codifica en tu navegador. Los archivos grandes pueden tardar más, especialmente en equipos con poca memoria.",
+      "path": "/wav-to-mp3"
+    },
+    {
+      "id": "audio-flac",
+      "topic": "audio",
+      "question": "¿Qué diferencia hay entre FLAC y MP3?",
+      "answer": "FLAC comprime sin pérdida de información; MP3 utiliza compresión con pérdida. Convertir FLAC a MP3 facilita compartir archivos pequeños, pero no mantiene la fidelidad matemática del FLAC.",
+      "path": "/flac-to-mp3"
+    },
+    {
+      "id": "audio-wavflac",
+      "topic": "audio",
+      "question": "¿La conversión WAV a FLAC genera un FLAC auténtico?",
+      "answer": "La herramienta WAV a FLAC utiliza ahora un codificador FLAC sin pérdida y verifica la cabecera fLaC antes de permitir la descarga. El archivo se descarga con extensión .flac. Si el navegador no logra convertirlo, mostrará un error en vez de entregar un WAV. El primer uso puede tardar mientras se descarga FFmpeg."
+    },
+    {
+      "id": "audio-error",
+      "topic": "audio",
+      "question": "¿Por qué falla un audio aunque tenga una extensión compatible?",
+      "answer": "El contenedor y el códec interno pueden ser distintos. El navegador necesita decodificar el audio antes de convertirlo. Prueba con un archivo estándar o exporta de nuevo desde tu editor de audio.",
+      "path": "/wav-to-mp3"
+    },
+    {
+      "id": "video-tool",
+      "topic": "video",
+      "question": "¿Qué hace el compresor de vídeo?",
+      "answer": "Reduce el tamaño de un vídeo para facilitar su envío, con objetivos aproximados de 15, 25 o 50 MB. El resultado depende de la duración, resolución y complejidad del contenido.",
+      "path": "/compress-video-whatsapp"
+    },
+    {
+      "id": "video-limit",
+      "topic": "video",
+      "question": "¿Qué límite tiene la compresión gratuita de vídeo?",
+      "answer": "La herramienta pública admite vídeos de hasta 50 MB en Free. El tamaño máximo y la duración de otras herramientas pueden ser diferentes; consulta el aviso junto al selector de archivos.",
+      "path": "/compress-video-whatsapp"
+    },
+    {
+      "id": "video-time",
+      "topic": "video",
+      "question": "¿Por qué tarda tanto en comprimir un vídeo?",
+      "answer": "Utiliza FFmpeg WebAssembly en el navegador y depende de la potencia del equipo. Algunos vídeos de decenas de megabytes pueden tardar varios minutos; evita cerrar la pestaña durante el proceso.",
+      "path": "/compress-video-whatsapp"
+    },
+    {
+      "id": "video-formats",
+      "topic": "video",
+      "question": "¿Puedo cargar MP4, MOV o WebM?",
+      "answer": "La interfaz acepta varios formatos habituales, entre ellos MP4, MOV y WebM. Que un archivo concreto funcione depende de sus códecs internos y del navegador.",
+      "path": "/compress-video-whatsapp"
+    },
+    {
+      "id": "video-quality",
+      "topic": "video",
+      "question": "¿Por qué el vídeo pierde nitidez?",
+      "answer": "Para reducir mucho el peso, el codificador puede disminuir bitrate o resolución. Si el resultado no te convence, elige un tamaño de salida mayor y conserva siempre el original.",
+      "path": "/compress-video-whatsapp"
+    },
+    {
+      "id": "sub-srtvtt",
+      "topic": "subtitles",
+      "question": "¿Puedo convertir subtítulos SRT a VTT?",
+      "answer": "Sí. Hay herramientas para convertir SRT→WebVTT y VTT→SRT. Después revisa la sincronización y las etiquetas de formato si tu vídeo utiliza características especiales.",
+      "path": "/srt-to-vtt"
+    },
+    {
+      "id": "sub-txt",
+      "topic": "subtitles",
+      "question": "¿Puedo crear un SRT desde un TXT?",
+      "answer": "Sí, con TXT→SRT. Es una transformación básica y no sustituye la sincronización manual con el audio; comprueba que los tiempos se ajusten al vídeo.",
+      "path": "/txt-to-srt"
+    },
+    {
+      "id": "sub-translate",
+      "topic": "subtitles",
+      "question": "¿El conversor traduce automáticamente los subtítulos?",
+      "answer": "No. Cambia el formato o prepara bloques, pero no traduce el idioma del contenido.",
+      "path": "/srt-to-vtt"
+    },
+    {
+      "id": "sub-sync",
+      "topic": "subtitles",
+      "question": "¿Por qué mis subtítulos aparecen fuera de tiempo?",
+      "answer": "La conversión de formato no corrige desajustes existentes. Abre el resultado en un editor de subtítulos y comprueba tiempo inicial, final y fotogramas.",
+      "path": "/vtt-to-srt"
+    },
+    {
+      "id": "plan-free",
+      "topic": "plans",
+      "question": "¿Existe un plan gratuito?",
+      "answer": "Sí. Puedes utilizar las herramientas Free sin cuenta ni tarjeta, respetando los límites de cada utilidad. Todas las opciones de calidad del OCR son gratuitas.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-price",
+      "topic": "plans",
+      "question": "¿Cuánto cuesta PRO?",
+      "answer": "La página de precios muestra 5,99 € por año mediante Stripe. Comprueba los impuestos y el importe final en Checkout antes de confirmar el pago.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-benefit",
+      "topic": "plans",
+      "question": "¿Qué ofrece PRO frente a Free?",
+      "answer": "Principalmente más capacidad de procesamiento: OCR sin límite diario y lotes ampliados en las herramientas que lo admiten. La calidad del OCR es idéntica en ambos planes.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-ad",
+      "topic": "plans",
+      "question": "¿Hay publicidad en el plan Free?",
+      "answer": "Actualmente la publicidad externa está desactivada tanto en Free como en PRO mientras revisamos la seguridad del sitio. No es una diferencia activa entre planes.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-pay",
+      "topic": "plans",
+      "question": "¿Cómo se activa PRO después de pagar?",
+      "answer": "Stripe devuelve el navegador a una confirmación de pago y la web verifica la sesión. Tras la verificación, guarda el acceso PRO en ese navegador.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-annual",
+      "topic": "plans",
+      "question": "¿PRO se renueva cada año?",
+      "answer": "El producto está configurado como suscripción anual en Stripe. El acceso local del navegador dura 12 meses desde la activación; una renovación no garantiza sincronización automática del estado local. Contacta con soporte si necesitas ayuda.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-devices",
+      "topic": "plans",
+      "question": "¿Puedo utilizar mi PRO de pago en varios dispositivos?",
+      "answer": "Actualmente no hay una cuenta PRO sincronizada entre dispositivos. El acceso de pago se conserva en el navegador donde se activó. Si cambias de equipo o borras sus datos, contacta con soporte aportando un justificante, nunca los datos completos de tu tarjeta.",
+      "path": "/pro"
+    },
+    {
+      "id": "plan-cancel",
+      "topic": "plans",
+      "question": "¿Cómo cancelo o consulto una suscripción?",
+      "answer": "El cobro lo procesa Stripe. Si necesitas cancelar o consultar un pago, escribe a info@convertmyfilepro.com indicando la dirección usada en el pago y la fecha aproximada. Nunca envíes la contraseña ni el número completo de tarjeta.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-what",
+      "topic": "invites",
+      "question": "¿Qué es una invitación Pro Beta?",
+      "answer": "Es un acceso de cortesía para probar PRO sin pagar. Se concede por invitación del equipo y normalmente empieza con 90 días desde la activación. Algunas herramientas pueden seguir en Beta.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-validity",
+      "topic": "invites",
+      "question": "¿Cuándo caduca el enlace de invitación?",
+      "answer": "Debe activarse en un plazo de 14 días desde su creación y solo puede utilizarse una vez. Los 90 días de acceso comienzan cuando se canjea el enlace.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-payment",
+      "topic": "invites",
+      "question": "¿Necesito una tarjeta para activar Pro Beta?",
+      "answer": "No. Una invitación Pro Beta no requiere pago ni genera por sí sola una suscripción de Stripe.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-browser",
+      "topic": "invites",
+      "question": "¿Por qué Pro Beta funciona solo en un navegador?",
+      "answer": "La activación crea una sesión mediante una cookie de ese navegador. Si borras las cookies, cambias de navegador o pierdes la sesión, puedes necesitar otra invitación del propietario.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-renew",
+      "topic": "invites",
+      "question": "¿Se pueden regalar meses adicionales?",
+      "answer": "Sí. El propietario puede reactivar un acceso ya canjeado y regalar 1, 2, 3, 6 o 12 meses desde su panel privado. No reutilices un enlace antiguo; solicita uno nuevo si has perdido la sesión.",
+      "path": "/pro"
+    },
+    {
+      "id": "invite-revoke",
+      "topic": "invites",
+      "question": "¿Por qué desapareció mi Pro Beta?",
+      "answer": "El acceso puede haber caducado, haber sido revocado por el propietario o haberse perdido la cookie. Contacta con quien te invitó y explica qué ha pasado; no es necesario enviar varias solicitudes iguales.",
+      "path": "/pro"
+    },
+    {
+      "id": "privacy-files",
+      "topic": "privacy",
+      "question": "¿Se suben mis archivos a un servidor para convertirlos?",
+      "answer": "Las herramientas actuales de conversión están diseñadas para procesar los archivos en el navegador. Algunas descargan librerías o modelos; no confundas esos componentes con una subida de tu documento. Consulta también la política de privacidad.",
+      "path": "/privacy"
+    },
+    {
+      "id": "privacy-data",
+      "topic": "privacy",
+      "question": "¿Qué información puede registrar la web?",
+      "answer": "El navegador y los servicios de infraestructura pueden procesar datos técnicos y cookies. Stripe interviene en los pagos y Cloudflare en seguridad y funcionamiento. Consulta la política de privacidad para más detalles.",
+      "path": "/privacy"
+    },
+    {
+      "id": "privacy-secure",
+      "topic": "privacy",
+      "question": "¿El cifrado HTTPS garantiza que nunca habrá problemas?",
+      "answer": "No. HTTPS protege las comunicaciones, pero no impide todos los riesgos de un navegador, archivo, extensión o tercero. Conserva copias de tus originales y no compartas información sensible innecesariamente.",
+      "path": "/privacy"
+    },
+    {
+      "id": "privacy-sensitive",
+      "topic": "privacy",
+      "question": "¿Puedo utilizar archivos confidenciales?",
+      "answer": "Valora el riesgo antes de procesar documentos sensibles y comprueba sus políticas y requisitos legales. Aunque la conversión se realice localmente, la seguridad también depende de tu equipo y del navegador.",
+      "path": "/privacy"
+    },
+    {
+      "id": "privacy-account",
+      "topic": "privacy",
+      "question": "¿Se guardan mis archivos convertidos en una cuenta?",
+      "answer": "No existe actualmente un almacenamiento personal de conversiones en la nube. Descarga el resultado y consérvalo donde prefieras; la aplicación no lo archiva para recuperarlo posteriormente."
+    },
+    {
+      "id": "issues-empty",
+      "topic": "issues",
+      "question": "He pulsado Convertir y no ocurre nada. ¿Qué hago?",
+      "answer": "Comprueba que has seleccionado un archivo válido, que no supera el límite y que el navegador admite el formato. Recarga la herramienta y prueba con otro archivo de ejemplo."
+    },
+    {
+      "id": "issues-blank",
+      "topic": "issues",
+      "question": "¿Qué hago si la página aparece en blanco?",
+      "answer": "Prueba una recarga completa, una pestaña de incógnito o un navegador actualizado. Si persiste, escribe a soporte indicando la URL, el navegador y el mensaje de error; no envíes claves ni datos privados."
+    },
+    {
+      "id": "issues-large",
+      "topic": "issues",
+      "question": "¿Qué hago si mi archivo pesa demasiado?",
+      "answer": "Reduce el archivo original o divídelo, si procede. Los límites dependen de cada herramienta: el OCR admite 20 MB por archivo, la compresión de vídeo Free hasta 50 MB y otras utilidades pueden variar.",
+      "path": "/pro"
+    },
+    {
+      "id": "issues-download",
+      "topic": "issues",
+      "question": "¿Por qué no encuentro el archivo descargado?",
+      "answer": "Consulta la carpeta Descargas y el historial de descargas del navegador. Comprueba si el navegador ha bloqueado ventanas o descargas múltiples."
+    },
+    {
+      "id": "issues-report",
+      "topic": "issues",
+      "question": "¿Cómo notifico un fallo técnico?",
+      "answer": "Escribe a info@convertmyfilepro.com con el enlace de la herramienta, formato de entrada/salida, navegador y pasos para reproducir el error. Si necesitas adjuntar un ejemplo, evita datos personales o confidenciales."
+    },
+    {
+      "id": "issues-security",
+      "topic": "issues",
+      "question": "¿Qué hago si Chrome muestra una advertencia de seguridad?",
+      "answer": "No omitas la advertencia ni introduzcas datos de pago. Espera a que se revise la incidencia y, si quieres informar del problema, comunica la dirección de la página y la fecha a soporte."
+    }
+  ]
+}

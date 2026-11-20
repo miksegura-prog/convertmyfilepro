@@ -84,3 +84,72 @@ export async function sendInviteViaBrevo(
     return { ok: false, reason: 'provider_error' };
   }
 }
+
+
+/** Sending is informational only. D1 mutations happen before notification. */
+export async function sendAccessUpdateViaBrevo(
+  apiKey: string | undefined, to: string,
+  action: 'reactivate' | 'grant', expiresAt: number,
+  language: InviteLanguage, months?: number,
+): Promise<InviteEmailResult> {
+  if (!apiKey) return { ok: false, reason: 'not_configured' };
+  const es = language === 'es';
+  const gift = action === 'grant';
+  const amount = Number.isInteger(months) && months! > 0 ? months : 1;
+  const date = new Intl.DateTimeFormat(es ? 'es-ES' : 'en-GB', {
+    dateStyle: 'long', timeZone: 'UTC',
+  }).format(new Date(expiresAt));
+  const subject = es
+    ? (gift ? 'ConvertMyFilePro: meses PRO Beta adicionales' : 'ConvertMyFilePro: acceso PRO Beta reactivado')
+    : (gift ? 'ConvertMyFilePro: additional PRO Beta months' : 'ConvertMyFilePro: PRO Beta access restored');
+  const intro = es
+    ? (gift ? 'Hemos añadido ' + amount + (amount === 1 ? ' mes' : ' meses') + ' a tu acceso gratuito PRO Beta.'
+      : 'Tu acceso gratuito PRO Beta de ConvertMyFilePro vuelve a estar activo.')
+    : (gift ? 'We have added ' + amount + (amount === 1 ? ' month' : ' months') + ' to your complimentary PRO Beta access.'
+      : 'Your complimentary ConvertMyFilePro PRO Beta access has been restored.');
+  const expiry = es ? 'Acceso hasta: ' + date + '.' : 'Access until: ' + date + '.';
+  const session = es
+    ? 'Puedes usar PRO en el navegador donde activaste tu invitación, siempre que conserves las cookies. Si has perdido la sesión o cambiado de navegador, responde para solicitar una nueva invitación.'
+    : 'You can use PRO in the browser where you activated the invitation if its cookies remain available. If you lost your session or changed browsers, reply to request a new invitation.';
+  const closing = es ? 'Gracias por ayudar a mejorar ConvertMyFilePro.' : 'Thank you for helping improve ConvertMyFilePro.';
+  const home = 'https://www.convertmyfilepro.com/';
+  const faq = 'https://www.convertmyfilepro.com/faq';
+  const text = [intro, expiry, session, closing, home, faq].join('\n\n');
+  const html = [
+    '<!doctype html><html lang="', language,
+    '"><body style="font-family:Arial,sans-serif;color:#17303c;line-height:1.6;margin:0;padding:24px">',
+    '<div style="max-width:600px;margin:auto"><h1 style="font-size:22px">ConvertMyFilePro · PRO Beta</h1>',
+    '<p>', escapeHtml(intro), '</p><p><strong>', escapeHtml(expiry), '</strong></p>',
+    '<p>', escapeHtml(session), '</p><p>', escapeHtml(closing), '</p>',
+    '<p><a href="', home, '">ConvertMyFilePro</a> · <a href="', faq, '">FAQ / Help</a></p>',
+    '</div></body></html>',
+  ].join('');
+
+  try {
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'api-key': apiKey,
+        accept: 'application/json',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        sender: { name: 'ConvertMyFilePro', email: 'info@convertmyfilepro.com' },
+        to: [{ email: to }],
+        replyTo: { name: 'ConvertMyFilePro', email: 'info@convertmyfilepro.com' },
+        subject, htmlContent: html, textContent: text,
+        tags: [gift ? 'cmfp-beta-gift' : 'cmfp-beta-reactivated'],
+      }),
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!response.ok) {
+      console.error('Brevo access notice failed: HTTP', response.status);
+      return { ok: false, reason: 'provider_error' };
+    }
+    // Accepted by API is not proof of inbox delivery.
+    return { ok: true };
+  } catch (error) {
+    console.error('Brevo access notice failed:', error instanceof Error ? error.name : 'UnknownError');
+    return { ok: false, reason: 'provider_error' };
+  }
+}

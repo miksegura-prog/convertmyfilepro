@@ -20,5 +20,15 @@ export const PRO_BATCH_FILES = 20;
 export const FREE_VIDEO_MB = 50;
 export const PRO_FILE_SIZE_MB = 50;
 
-/** OCR: Free limita a 2 operaciones por sesión; PRO no tiene ese tope. */
-export const FREE_OCR_PAGES = 2;
+/** OCR: 5 imágenes o páginas al día en Free; PRO sin límite diario. Mismas funciones/calidad. */
+export const FREE_OCR_PAGES = 5;
+
+
+// Black Friday 2026 introductory discount: €2 off the FIRST annual invoice.
+// Stripe LIVE coupon CMFP_BF_2026_FIRST_YEAR, promotion code BLACKFRIDAY2026.
+// Regular annual subscription price and renewal remain €5.99 before tax.
+// Valid through 30 Nov 2026 23:59:59 Europe/Madrid (23:00:00 UTC on Nov 30).
+export const BLACK_FRIDAY_CODE = 'BLACKFRIDAY2026';
+export const BLACK_FRIDAY_FIRST_YEAR_EUR = 3.99;
+export const BLACK_FRIDAY_END_UTC = Date.UTC(2026, 10, 30, 23, 0, 0);
+export const isBlackFridayActive = () => Date.now() < BLACK_FRIDAY_END_UTC;
