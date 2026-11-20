@@ -116,16 +116,16 @@ const Owner: React.FC = () => {
     invite: Invitation, action: 'revoke' | 'reactivate' | 'grant', months?: number,
   ) => {
     const question = action === 'revoke'
-      ? \`¿Revocar inmediatamente el acceso de \${invite.email}?\`
+      ? `¿Revocar inmediatamente el acceso de ${invite.email}?`
       : action === 'reactivate'
-        ? \`¿Reactivar el acceso existente de \${invite.email} hasta su fecha de caducidad?\`
-        : \`¿Regalar \${months} mes(es) adicionales a \${invite.email}? Si está revocado, también se reactivará.\`;
+        ? `¿Reactivar el acceso existente de ${invite.email} hasta su fecha de caducidad?`
+        : `¿Regalar ${months} mes(es) adicionales a ${invite.email}? Si está revocado, también se reactivará.`;
     if (!window.confirm(question)) return;
     setBusy(true);
     setError('');
     setActionMessage('');
     try {
-      const response = await fetch(\`/api/owner/invitations/\${action}\`, {
+      const response = await fetch(`/api/owner/invitations/${action}`, {
         method: 'POST', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: invite.id, ...(action === 'grant' ? { months } : {}) }),
@@ -134,9 +134,9 @@ const Owner: React.FC = () => {
       if (!response.ok || !data.success) throw new Error(data.error || 'No se pudo modificar el acceso');
       await refresh();
       setActionMessage(
-        action === 'revoke' ? \`Acceso revocado: \${invite.email}\`
-          : action === 'reactivate' ? \`Acceso reactivado: \${invite.email}\`
-            : \`\${months} mes(es) regalados a \${invite.email}. Acceso hasta \${formatDate(data.expiresAt || null)}.\`,
+        action === 'revoke' ? `Acceso revocado: ${invite.email}`
+          : action === 'reactivate' ? `Acceso reactivado: ${invite.email}`
+            : `${months} mes(es) regalados a ${invite.email}. Acceso hasta ${formatDate(data.expiresAt || null)}.`,
       );
     } catch (err) { setError(err instanceof Error ? err.message : 'Error al modificar el acceso'); }
     finally { setBusy(false); }
@@ -240,7 +240,7 @@ const Owner: React.FC = () => {
                             )}
                             {item.redeemed_at !== null ? (
                               <>
-                                <select aria-label={\`Meses a regalar a \${item.email}\`}
+                                <select aria-label={`Meses a regalar a ${item.email}`}
                                   className="rounded-lg border border-[var(--color-border)] bg-transparent px-2 py-1.5 text-sm"
                                   value={giftMonths[item.id] || 1}
                                   disabled={busy}
@@ -283,12 +283,12 @@ const Owner: React.FC = () => {
                       <div>
                         <span className="font-medium">{event.email}</span> ·{' '}
                         {event.action === 'grant'
-                          ? \`Regalados \${event.months} mes(es)\`
+                          ? `Regalados ${event.months} mes(es)`
                           : event.action === 'reactivate' ? 'Acceso reactivado' : 'Acceso revocado'}
                       </div>
                       <span className="text-[var(--color-muted)]">
                         {formatDate(event.created_at)}
-                        {event.action === 'grant' && \` · Hasta \${formatDate(event.new_expires_at)}\`}
+                        {event.action === 'grant' && ` · Hasta ${formatDate(event.new_expires_at)}`}
                       </span>
                     </div>
                   ))}
