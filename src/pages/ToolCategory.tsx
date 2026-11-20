@@ -12,6 +12,7 @@ const ToolCategory: React.FC = () => {
 
   const allTools: Record<string, Tool[]> = {
     images: [
+      { id: 'ocr', title: t('tools.ocr.title'), description: t('tools.ocr.description'), category: 'images', icon: 'image', path: '/ocr', color: 'from-teal-500 to-cyan-600' },
       { id: 'jpg-to-png', title: t('tools.jpgToPng.title'), description: t('tools.jpgToPng.description'), category: 'images', icon: 'image', path: '/jpg-to-png', color: 'from-blue-500 to-cyan-500' },
       { id: 'png-to-jpg', title: t('tools.pngToJpg.title'), description: t('tools.pngToJpg.description'), category: 'images', icon: 'image', path: '/png-to-jpg', color: 'from-green-500 to-emerald-500' },
       { id: 'webp-to-jpg', title: t('tools.webpToJpg.title'), description: t('tools.webpToJpg.description'), category: 'images', icon: 'image', path: '/convert/webp-to-jpg', color: 'from-violet-500 to-purple-500' },
