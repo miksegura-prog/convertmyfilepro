@@ -264,8 +264,8 @@
     {
       "id": "audio-wavflac",
       "topic": "audio",
-      "question": "Does the tool labelled “WAV to FLAC” currently create FLAC?",
-      "answer": "Not yet. The current implementation of that link outputs uncompressed WAV, not FLAC. Do not use it when you need a FLAC file. We will correct the tool before advertising FLAC output."
+      "question": "Does WAV to FLAC conversion produce a genuine FLAC file?",
+      "answer": "The WAV to FLAC tool now uses a lossless FLAC encoder and checks the fLaC file signature before making the download available. The file is saved with a .flac extension. If your browser cannot complete conversion, you will see an error rather than receiving a mislabeled WAV. The first run may take longer while FFmpeg downloads."
     },
     {
       "id": "audio-error",
