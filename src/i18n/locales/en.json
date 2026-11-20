@@ -576,13 +576,13 @@
       "faq3": { "q": "Is OGG better than MP3?", "a": "OGG Vorbis offers slightly better quality at the same bitrate. However, MP3's universal compatibility makes it the preferred format for sharing." }
     },
     "wavToFlac": {
-      "title": "WAV to WAV",
-      "description": "Convert WAV audio files to uncompressed WAV format",
-      "seoTitle": "Convert WAV to WAV Online Free | ConvertMyFilePro",
-      "seoDescription": "Free online WAV converter. Convert and normalize audio files to standard WAV format. Lossless, private, no upload required.",
-      "faq1": { "q": "What is WAV format?", "a": "WAV is an uncompressed audio format developed by Microsoft and IBM. It preserves full audio quality with no data loss." },
-      "faq2": { "q": "Why convert audio to WAV?", "a": "WAV is the standard format for professional audio editing, DAWs, and CD burning. It maintains full 16-bit PCM quality." },
-      "faq3": { "q": "Is WAV lossless?", "a": "Yes. WAV is a lossless format. The audio data is preserved bit-perfect without any compression artifacts." }
+      "title": "WAV to FLAC",
+      "description": "Convert WAV audio files to losslessly compressed FLAC right in your browser",
+      "seoTitle": "Convert WAV to FLAC Online Free | ConvertMyFilePro",
+      "seoDescription": "Convert WAV to real FLAC using lossless compression. Free online audio converter in your browser.",
+      "faq1": {"q":"What is FLAC?","a":"FLAC is a lossless audio compression format that is usually smaller than uncompressed WAV."},
+      "faq2": {"q":"Why convert WAV to FLAC?","a":"To store audio without lossy compression, typically using less space than an uncompressed WAV."},
+      "faq3": {"q":"Do I need to install FFmpeg?","a":"No. The browser downloads an encoding component on the first conversion and creates a genuine FLAC file."}
     }
   },
   "faq": {
