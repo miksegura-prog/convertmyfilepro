@@ -464,7 +464,7 @@
     },
     "ocr": {
       "title": "OCR - Image to Text",
-      "description": "Extract text from images using OCR",
+      "description": "Extract text from images and scanned PDFs with free OCR, multiple languages and Word or TXT export",
       "seoTitle": "OCR Online Free | Extract Text from Image | ConvertMyFilePro",
       "seoDescription": "Free browser-based OCR for images and scanned PDFs. Multi-language, batch jobs, contrast improvements and editable TXT or Word export. PRO only increases volume.",
       "extracting": "Extracting text...",
