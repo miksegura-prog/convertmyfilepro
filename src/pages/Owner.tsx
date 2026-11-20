@@ -36,6 +36,9 @@ const Owner: React.FC = () => {
   const [history, setHistory] = useState<AccessEvent[]>([]);
   const [historyIssue, setHistoryIssue] = useState('');
   const [giftMonths, setGiftMonths] = useState<Record<string, number>>({});
+  const [noticeLanguages, setNoticeLanguages] = useState<Record<string, 'es' | 'en'>>({});
+  const [noticeMessage, setNoticeMessage] = useState('');
+  const [noticeFailed, setNoticeFailed] = useState(false);
   const [actionMessage, setActionMessage] = useState('');
   const [email, setEmail] = useState('');
   const [note, setNote] = useState('');
@@ -124,15 +127,30 @@ const Owner: React.FC = () => {
     setBusy(true);
     setError('');
     setActionMessage('');
+    setNoticeMessage('');
+    setNoticeFailed(false);
     try {
       const response = await fetch(`/api/owner/invitations/${action}`, {
         method: 'POST', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: invite.id, ...(action === 'grant' ? { months } : {}) }),
+        body: JSON.stringify({ id: invite.id,
+          ...(action === 'grant' ? { months } : {}),
+          language: noticeLanguages[invite.id] || 'es',
+        }),
       });
-      const data = await response.json() as { success?: boolean; error?: string; expiresAt?: number };
+      const data = await response.json() as {
+        success?: boolean; error?: string; expiresAt?: number;
+        emailStatus?: 'accepted' | 'failed';
+      };
       if (!response.ok || !data.success) throw new Error(data.error || 'No se pudo modificar el acceso');
       await refresh();
+      if (action !== 'revoke') {
+        const accepted = data.emailStatus === 'accepted';
+        setNoticeFailed(!accepted);
+        setNoticeMessage(accepted
+          ? 'Brevo ha aceptado el correo de notificación. Esto no confirma su entrega en la bandeja.'
+          : 'El acceso se ha actualizado, pero Brevo no ha aceptado el mensaje. Avisa personalmente si es necesario; NO repitas la ampliación para reenviar el correo.');
+      }
       setActionMessage(
         action === 'revoke' ? `Acceso revocado: ${invite.email}`
           : action === 'reactivate' ? `Acceso reactivado: ${invite.email}`
@@ -157,6 +175,7 @@ const Owner: React.FC = () => {
       {loading && <div className="flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" />Verificando Cloudflare Access…</div>}
       {error && <Card className="p-4 text-red-600" role="alert">{error}</Card>}
       {actionMessage && <Card className="p-4 text-emerald-700" role="status">{actionMessage}</Card>}
+      {noticeMessage && <Card className={noticeFailed ? 'p-4 text-amber-700' : 'p-4 text-emerald-700'} role="status">{noticeMessage}</Card>}
       {owner && (
         <>
           <Card className="p-4 text-sm">
@@ -240,6 +259,15 @@ const Owner: React.FC = () => {
                             )}
                             {item.redeemed_at !== null ? (
                               <>
+                                <select aria-label={`Idioma del aviso a ${item.email}`}
+                                  className="rounded-lg border border-[var(--color-border)] bg-transparent px-2 py-1.5 text-sm"
+                                  value={noticeLanguages[item.id] || 'es'}
+                                  disabled={busy}
+                                  onChange={event => setNoticeLanguages(current => ({
+                                    ...current, [item.id]: event.target.value === 'en' ? 'en' : 'es',
+                                  }))}>
+                                  <option value="es">Aviso ES</option><option value="en">Email EN</option>
+                                </select>
                                 <select aria-label={`Meses a regalar a ${item.email}`}
                                   className="rounded-lg border border-[var(--color-border)] bg-transparent px-2 py-1.5 text-sm"
                                   value={giftMonths[item.id] || 1}
