@@ -49,6 +49,7 @@ const SeoToolPage = lazy(() => import('@/pages/SeoToolPage'));
 
 const ProSuccess = lazy(() => import('@/pages/ProSuccess'));
 const Pro = lazy(() => import('@/pages/Pro'));
+const HelpCenter = lazy(() => import('@/pages/HelpCenter'));
 const LegalPage = lazy(() => import('@/pages/LegalPage'));
 const Owner = lazy(() => import('@/pages/Owner'));
 const ProInvite = lazy(() => import('@/pages/ProInvite'));
@@ -292,6 +293,7 @@ function App() {
               <Route path="invite" element={<Suspense fallback={<PageLoader />}><ProInvite /></Suspense>} />
 
               <Route path="pro" element={<Suspense fallback={<PageLoader />}><Pro /></Suspense>} />
+              <Route path="faq" element={<Suspense fallback={<PageLoader />}><HelpCenter /></Suspense>} />
               <Route path="privacy" element={<Suspense fallback={<PageLoader />}><LegalPage /></Suspense>} />
               <Route path="terms" element={<Suspense fallback={<PageLoader />}><LegalPage /></Suspense>} />
 
