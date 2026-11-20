@@ -1,4 +1,5 @@
 import { handleOwnerOrBetaApi, type OwnerEnv } from './owner/owner-api';
+import { handleIncomingMail, type IncomingEmailMessage, type IncomingMailEnv } from './owner/incoming-email';
 
 /**
  * Cloudflare Worker entry point — serves static assets from ./dist
@@ -8,7 +9,7 @@ import { handleOwnerOrBetaApi, type OwnerEnv } from './owner/owner-api';
  * This Worker intercepts only /api/* routes.
  */
 
-export interface Env extends OwnerEnv {
+export interface Env extends OwnerEnv, IncomingMailEnv {
   STRIPE_SECRET_KEY: string;
   ASSETS: { fetch(request: Request): Promise<Response> };
 }
@@ -39,6 +40,11 @@ interface StripeCheckoutSession {
 }
 
 export default {
+  // Email Routing only calls this handler if the info@ rule is manually switched
+  // to the Worker. Until then, the current Gmail forwarding remains unchanged.
+  async email(message: IncomingEmailMessage, env: Env): Promise<void> {
+    await handleIncomingMail(message, env);
+  },
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
