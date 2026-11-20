@@ -576,13 +576,13 @@
       "faq3": { "q": "¿Es OGG mejor que MP3?", "a": "OGG Vorbis ofrece calidad ligeramente superior. Pero MP3 es el estándar universal para compartir." }
     },
     "wavToFlac": {
-      "title": "WAV a WAV",
-      "description": "Convierte archivos de audio a formato WAV sin comprimir",
-      "seoTitle": "Convertir WAV a WAV Online Gratis | ConvertMyFilePro",
-      "seoDescription": "Conversor gratuito de WAV. Convierte y normaliza archivos de audio a formato WAV estándar. Sin pérdida, privado, sin subir archivos.",
-      "faq1": { "q": "¿Qué es WAV?", "a": "WAV es un formato de audio sin comprimir desarrollado por Microsoft e IBM. Preserva la calidad total sin pérdida de datos." },
-      "faq2": { "q": "¿Por qué convertir a WAV?", "a": "WAV es el formato estándar para edición de audio profesional. Mantiene calidad PCM de 16-bit completa." },
-      "faq3": { "q": "¿WAV es sin pérdida?", "a": "Sí. WAV es un formato sin pérdida. Los datos de audio se preservan bit por bit." }
+      "title": "WAV a FLAC",
+      "description": "Convierte archivos WAV a FLAC comprimido sin pérdida, directamente en el navegador",
+      "seoTitle": "Convertir WAV a FLAC Online Gratis | ConvertMyFilePro",
+      "seoDescription": "Convierte WAV a FLAC auténtico con compresión sin pérdida. Conversor de audio gratuito en tu navegador.",
+      "faq1": {"q":"¿Qué es FLAC?","a":"FLAC es un formato de compresión de audio sin pérdida. Normalmente ocupa menos que WAV sin comprimir."},
+      "faq2": {"q":"¿Por qué convertir WAV a FLAC?","a":"Para guardar una señal de audio sin compresión con pérdida, utilizando normalmente menos espacio que WAV."},
+      "faq3": {"q":"¿Necesito instalar FFmpeg?","a":"No. El navegador descarga el componente de codificación en la primera conversión y genera un archivo FLAC auténtico."}
     }
   },
   "faq": {
