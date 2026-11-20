@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
-  ArrowRight, CalendarDays, Check, Clock, Crown, Download, EyeOff,
-  FileText, Info, Layers, Megaphone, Rocket, ScanText, Sparkles, Type,
+  ArrowRight, CalendarDays, Check, Clock, Crown, Download,
+  FileText, Info, Layers, Rocket, ScanText, Sparkles, Type,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -44,7 +44,6 @@ const FREE_FEATURES: PlanFeature[] = [
   { key: 'studioReplace', icon: Type, badge: 'beta' },
   { key: 'studioAddText', icon: Type, badge: 'beta' },
   { key: 'downloads', icon: Download, badge: 'available' },
-  { key: 'ads', icon: Megaphone, badge: 'available' },
 ];
 
 const PRO_FEATURES: PlanFeature[] = [
@@ -52,7 +51,6 @@ const PRO_FEATURES: PlanFeature[] = [
   { key: 'batch', icon: Layers, badge: 'available' },
   { key: 'ocr', icon: ScanText, badge: 'available' },
   { key: 'studio', icon: Type, badge: 'beta' },
-  { key: 'noAds', icon: EyeOff, badge: 'available' },
   { key: 'advancedEditing', icon: Rocket, badge: 'soon' },
   { key: 'priority', icon: Clock, badge: 'soon' },
 ];
