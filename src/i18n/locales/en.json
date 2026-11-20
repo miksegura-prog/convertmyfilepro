@@ -81,7 +81,7 @@
     "upgrade": "See plans and pricing",
     "comingSoonNote": "Advanced paragraph editing and priority processing: Coming soon (not available yet).",
     "benefits": {
-      "adFree": "No ads, including Monetag ads",
+      "adFree": "Third-party advertising is currently disabled on Free and PRO",
       "unlimitedBatch": "Expanded batches: up to 20 files per batch (3 on Free)",
       "largeVideos": "Video compression up to 50 MB is also included on Free",
       "ocrExpanded": "Unlimited OCR images and pages per day, with exactly the same quality as Free",
@@ -125,10 +125,10 @@
   "plans": {
     "badge": "Clear pricing",
     "title": "Choose your plan",
-    "description": "Start free with every current tool and every OCR feature. PRO increases your daily image volume and removes ads for €5.99 per year.",
+    "description": "Start free with every current tool and every OCR feature. PRO increases your daily image volume and batch limits for €5.99 per year. Third-party advertising is currently disabled for every plan.",
     "badgesHelp": "Labels: what already works, what is still in Beta and what is coming later.",
     "seoTitle": "Plans and Pricing | Free and PRO | ConvertMyFilePro",
-    "seoDescription": "Compare ConvertMyFilePro Free and PRO: every OCR feature free with 5 daily images or pages; PRO removes the OCR volume limit and ads for €5.99 per year.",
+    "seoDescription": "Compare ConvertMyFilePro Free and PRO: all OCR features free with 5 daily images or pages; PRO has unlimited daily OCR and expanded batches for €5.99 per year.",
     "perYear": "/ year",
     "badges": { "available": "Available", "beta": "Beta", "soon": "Coming soon" },
     "free": {
@@ -143,7 +143,7 @@
       "recommended": "Recommended",
       "period": "/ year",
       "monthly": "{{monthly}}/month, billed annually",
-      "tagline": "More capacity and no ads, still processed in your browser.",
+      "tagline": "More capacity and expanded limits, still processed in your browser.",
       "cta": "Get PRO · {{price}}/year",
       "checkoutNote": "Payment handled by Stripe. Annual subscription: check the final amount before paying.",
       "active": "PRO active · until {{date}}",
@@ -168,7 +168,7 @@
       },
       "ads": {
         "title": "With ads",
-        "description": "The free version is funded by advertising (Monetag/AdSense)."
+        "description": "We currently show no third-party ads while reviewing site security."
       },
       "everythingFree": {
         "title": "Everything in Free",
@@ -192,7 +192,7 @@
       },
       "noAds": {
         "title": "No ads",
-        "description": "Ads, including Monetag, are hidden once PRO is activated in the browser."
+        "description": "Third-party advertising is temporarily disabled on both Free and PRO."
       },
       "advancedEditing": {
         "title": "Advanced paragraph editing",
@@ -222,7 +222,7 @@
         { "question": "How is PRO activated after payment?", "answer": "Stripe returns you to the confirmation page with the session ID. We verify the payment with Stripe and activate PRO in this browser." },
         { "question": "How long does PRO access last?", "answer": "Browser access lasts 12 months from payment. The annual subscription is managed by Stripe; renewal does not automatically extend the access stored in the browser." },
         { "question": "Does PRO work on several devices?", "answer": "No. PRO status is stored in the browser where it was activated. If you change device or clear browser data, contact support with your Stripe session ID." },
-        { "question": "What are the Free plan limits?", "answer": "Up to {{freeBatch}} files per batch in regular tools, videos up to {{freeVideo}} MB and {{freeOcr}} OCR images or pages per day, with ads. All OCR features are free." },
+        { "question": "What are the Free plan limits?", "answer": "Up to {{freeBatch}} files per batch in regular tools, videos up to {{freeVideo}} MB and {{freeOcr}} OCR images or pages per day. All OCR features are free and no third-party ads are currently shown." },
         { "question": "Can I cancel the subscription?", "answer": "The subscription is managed in Stripe. Email info@ConvertMyFilePro.com if you need help cancelling." }
       ]
     },
