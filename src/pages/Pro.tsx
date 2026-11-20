@@ -12,7 +12,8 @@ import { FAQ } from '@/components/ui-custom/FAQ';
 import { useProStatus } from '@/hooks/useProStatus';
 import {
   FREE_BATCH_FILES, FREE_OCR_PAGES, FREE_VIDEO_MB, PRO_BATCH_FILES,
-  PRO_PAYMENT_LINK, PRO_PRICE_EUR,
+  PRO_PAYMENT_LINK, PRO_PRICE_EUR, BLACK_FRIDAY_CODE,
+  BLACK_FRIDAY_FIRST_YEAR_EUR, isBlackFridayActive,
 } from '@/config/plans';
 
 type BadgeKind = 'available' | 'beta' | 'soon';
@@ -67,6 +68,8 @@ const Pro: React.FC = () => {
   const { isPro, hasProAccess, isOwner, expiresAt, betaExpiresAt } = useProStatus();
 
   const price = money(PRO_PRICE_EUR, i18n.language);
+  const campaignActive = isBlackFridayActive();
+  const isSpanish = i18n.language.startsWith('es');
   const featureValues = {
     freeBatch: FREE_BATCH_FILES,
     proBatch: PRO_BATCH_FILES,
@@ -185,6 +188,15 @@ const Pro: React.FC = () => {
                 {t('plans.pro.monthly', { monthly: money(PRO_PRICE_EUR / 12, i18n.language) })}
               </p>
               <p className="mt-2 text-sm text-[var(--color-muted)]">{t('plans.pro.tagline')}</p>
+              {campaignActive && !hasProAccess && (
+                <div className="mt-4 rounded-xl border border-emerald-300 bg-emerald-50 p-3 text-sm text-emerald-950 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-100">
+                  <strong className="block text-base">BLACK FRIDAY · {money(BLACK_FRIDAY_FIRST_YEAR_EUR, i18n.language)} {isSpanish ? 'el primer año' : 'for the first year'}</strong>
+                  <p className="mt-1 text-xs">{isSpanish ? 'Solo para nuevos clientes. Renovación a 5,99 €/año, más impuestos si corresponden.' : 'New customers only. Renews at €5.99/year, plus any applicable tax.'}</p>
+                  <p className="mt-2 text-xs font-semibold">{isSpanish ? 'Introduce este código al pagar en Stripe:' : 'Enter this code at Stripe Checkout:'}</p>
+                  <code className="mt-1 inline-block rounded border border-emerald-300 bg-white px-2 py-1 font-mono text-sm font-bold tracking-wide text-emerald-900 dark:bg-emerald-900 dark:text-white">{BLACK_FRIDAY_CODE}</code>
+                  <p className="mt-1 text-[11px]">{isSpanish ? 'Válido hasta el 30 de noviembre de 2026.' : 'Valid through 30 November 2026.'}</p>
+                </div>
+              )}
             </div>
 
             <ul className="mb-6 space-y-2">
@@ -211,7 +223,9 @@ const Pro: React.FC = () => {
                   >
                     <a href={PRO_PAYMENT_LINK} target="_blank" rel="noopener noreferrer">
                       <Sparkles className="mr-2 h-4 w-4" />
-                      {t('plans.pro.cta', { price })}
+                      {campaignActive
+                        ? (isSpanish ? 'Continuar a Stripe y aplicar el código' : 'Continue to Stripe and enter the code')
+                        : t('plans.pro.cta', { price })}
                     </a>
                   </Button>
                   <p className="mt-3 text-center text-xs text-[var(--color-muted)]">
