@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Menu, X, Moon, Sun, Globe, ChevronDown,
   Image, FileText, FileStack, Home, BookOpen, Music, Video,
-  Crown, Sparkles, Tag, ScanText
+  Crown, Sparkles, Tag, ScanText, HelpCircle
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -121,6 +121,7 @@ export const Header: React.FC = () => {
       ]
     },
     { path: '/blog', label: t('nav.blog'), icon: BookOpen },
+    { path: '/faq', label: t('nav.faq'), icon: HelpCircle },
     { path: '/pro', label: t('nav.pricing'), icon: Tag },
   ];
   const isActive = (path: string) => location.pathname === path;
