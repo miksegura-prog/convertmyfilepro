@@ -264,8 +264,8 @@
     {
       "id": "audio-wavflac",
       "topic": "audio",
-      "question": "¿La herramienta llamada «WAV a FLAC» genera ya FLAC?",
-      "answer": "Por ahora, no: la implementación actual de ese enlace genera WAV sin comprimir. No lo utilices esperando un archivo FLAC. Corregiremos esa función antes de anunciarla como conversión a FLAC."
+      "question": "¿La conversión WAV a FLAC genera un FLAC auténtico?",
+      "answer": "La herramienta WAV a FLAC utiliza ahora un codificador FLAC sin pérdida y verifica la cabecera fLaC antes de permitir la descarga. El archivo se descarga con extensión .flac. Si el navegador no logra convertirlo, mostrará un error en vez de entregar un WAV. El primer uso puede tardar mientras se descarga FFmpeg."
     },
     {
       "id": "audio-error",
