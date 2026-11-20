@@ -15,6 +15,7 @@
     "audioVideo": "Audio y Vídeo",
     "blog": "Blog",
     "pricing": "Planes",
+    "faq": "Ayuda", 
     "about": "Nosotros",
     "contact": "Contacto"
   },
@@ -586,21 +587,22 @@
   },
   "faq": {
     "title": "Preguntas Frecuentes",
+    "helpCenterLink": "Ver todas las preguntas frecuentes y el centro de ayuda", 
     "secure": {
       "question": "¿Mis datos están seguros?",
-      "answer": "¡Sí! Todo el procesamiento de archivos ocurre directamente en tu navegador. Tus archivos nunca abandonan tu dispositivo ni se suben a ningún servidor."
+      "answer": "Las conversiones actuales se realizan principalmente en el navegador. Algunos componentes técnicos se descargan y proveedores como Cloudflare o Stripe gestionan datos de infraestructura o pagos; consulta la política de privacidad."
     },
     "free": {
       "question": "¿Este servicio es gratuito?",
-      "answer": "¡Sí, todas nuestras herramientas básicas son completamente gratuitas! Podemos introducir funciones premium en el futuro para necesidades avanzadas."
+      "answer": "Sí. Puedes usar las herramientas Free sin registro, con límites según la función. PRO amplía la cantidad de OCR y los lotes donde estén disponibles; los detalles están en Planes."
     },
     "limits": {
       "question": "¿Hay límites de tamaño de archivo?",
-      "answer": "Sí, para garantizar un rendimiento óptimo en tu navegador, limitamos el tamaño de los archivos a 50MB por archivo para la mayoría de las herramientas."
+      "answer": "Los límites varían según la utilidad: el OCR admite 20 MB por archivo y hasta 5 imágenes/páginas al día en Free; el compresor de vídeo Free acepta hasta 50 MB. Consulta cada herramienta."
     },
     "quality": {
       "question": "¿Se verá afectada la calidad de mi imagen?",
-      "answer": "Nuestras herramientas están diseñadas para mantener la mayor calidad posible. Para compresión, puedes ajustar el control deslizante de calidad para encontrar el equilibrio perfecto."
+      "answer": "Depende de la conversión. JPG y los métodos de compresión con pérdida pueden alterar la imagen. Guarda siempre el original y revisa el resultado."
     }
   },
   "ads": {
