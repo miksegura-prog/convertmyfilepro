@@ -1,3 +1,5 @@
+> **DESACTIVADO POR SEGURIDAD (20/11/2026).** ConvertMyFilePro ha retirado la publicidad externa y el service worker publicitario mientras se resuelve la incidencia «Páginas engañosas» de Search Console. Esta guía es histórica. **No reinstales estos scripts ni actives anuncios push, vignette o popunder.**
+
 # 💰 Guía Completa: Configurar Monetag en ConvertMyFilePro
 
 ## Paso 1: Crear Cuenta en Monetag
