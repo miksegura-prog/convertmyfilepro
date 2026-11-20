@@ -143,7 +143,8 @@ const Owner: React.FC = () => {
         emailStatus?: 'accepted' | 'failed';
       };
       if (!response.ok || !data.success) throw new Error(data.error || 'No se pudo modificar el acceso');
-      await refresh();
+      // Confirm the committed mutation BEFORE reloading the list. If a later
+      // refresh fails, never suggest repeating a gift (which would double it).
       if (action !== 'revoke') {
         const accepted = data.emailStatus === 'accepted';
         setNoticeFailed(!accepted);
@@ -156,6 +157,12 @@ const Owner: React.FC = () => {
           : action === 'reactivate' ? `Acceso reactivado: ${invite.email}`
             : `${months} mes(es) regalados a ${invite.email}. Acceso hasta ${formatDate(data.expiresAt || null)}.`,
       );
+      try {
+        await refresh();
+      } catch {
+        setNoticeFailed(true);
+        setNoticeMessage('Acceso actualizado, pero no se pudo recargar la lista. Recarga el panel. NO repitas una ampliación de meses.');
+      }
     } catch (err) { setError(err instanceof Error ? err.message : 'Error al modificar el acceso'); }
     finally { setBusy(false); }
   };
