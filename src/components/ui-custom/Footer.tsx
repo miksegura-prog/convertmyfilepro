@@ -13,6 +13,7 @@ export const Footer: React.FC = () => {
 
   const toolLinks = {
     images: [
+      { path: '/ocr', label: t('tools.ocr.title') },
       { path: '/jpg-to-png', label: t('tools.jpgToPng.title') },
       { path: '/png-to-jpg', label: t('tools.pngToJpg.title') },
       { path: '/resize-image', label: t('tools.resizeImage.title') },
