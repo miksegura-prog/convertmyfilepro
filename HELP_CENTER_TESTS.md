@@ -18,7 +18,8 @@ La nueva página `/faq` presenta **70 preguntas en 12 categorías** en español 
 6. Confirmar acceso desde **Ayuda** en navegación de escritorio y móvil, pie de página y enlace bajo el FAQ corto de cada conversor.
 7. Comprobar en el navegador el título/SEO canónico `https://www.convertmyfilepro.com/faq` y que `/faq` figura en `/sitemap.xml`.
 8. Regresión de seguridad: verificar que los scripts publicitarios externos eliminados (Monetag y push) **no han reaparecido**. Mantener el aviso de Search Console en seguimiento antes de captar tráfico.
-9. Comprobar que funcionan `/owner`, `/ocr`, `/wav-to-mp3` y `/compress-video-whatsapp`; no es necesario repetir pruebas extensas de cada conversor para publicar solo una página de ayuda.
+9. Probar ambas rutas de WAV→FLAC con un WAV PCM conocido (por ejemplo, 5 segundos): ejecutar, descargar `.flac`, abrirlo en un reproductor compatible y confirmar la firma inicial `fLaC`; probar también un `.txt` renombrado `.wav` y confirmar que muestra error, no «Éxito».
+10. Comprobar que funcionan `/owner`, `/ocr`, `/wav-to-mp3` y `/compress-video-whatsapp`; no es necesario repetir pruebas extensas de cada conversor para publicar solo una página de ayuda.
 
 ## Límites y afirmaciones importantes
 
@@ -26,7 +27,7 @@ La nueva página `/faq` presenta **70 preguntas en 12 categorías** en español 
 - Vídeo: 50 MB gratis, conversión en el navegador mediante FFmpeg WebAssembly que puede tardar minutos.
 - Plan de pago: 5,99 €/año mostrado en código, Stripe; la renovación de Stripe no sincroniza automáticamente el almacenamiento del navegador.
 - Pro Beta: un solo uso, activación en 14 días, 90 días iniciales, cookie por navegador, meses regalados por Owner.
-- `/wav-to-flac` actualmente genera WAV: la FAQ **lo explica claramente** y evita asegurar que la salida es FLAC. La corrección real del conversor será un cambio independiente.
+- `/wav-to-flac` y `/convert/wav-to-flac` ahora usan codificación FFmpeg FLAC, descargan `.flac` y validan que el archivo empiece por `fLaC`. El primer uso descarga un componente FFmpeg. **Pendiente de prueba manual en el navegador** con un WAV PCM corto; verifica extensión, firma y reproducción/lectura del archivo. No dar por validado el códec solo porque compile.
 - El procesamiento de archivos de los conversores actuales está concebido para ser local. No asegurar que absolutamente ninguna información pase por infraestructura, Cloudflare o Stripe.
 - La notificación por Brevo para reactivaciones y una respuesta automática a `info@` **aún no se han implementado**; la nueva `/faq` proporciona el destino futuro de los correos.
 
