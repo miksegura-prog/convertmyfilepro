@@ -81,7 +81,7 @@
     "upgrade": "Ver planes y precios",
     "comingSoonNote": "Edición avanzada de párrafos y procesamiento prioritario: Próximamente (aún no disponibles).",
     "benefits": {
-      "adFree": "Sin publicidad, incluidos los anuncios de Monetag",
+      "adFree": "Sin publicidad de terceros actualmente, tanto en Free como en PRO",
       "unlimitedBatch": "Lotes ampliados: hasta 20 archivos por lote (3 en Free)",
       "largeVideos": "La compresión de vídeo hasta 50 MB está incluida también en Free",
       "ocrExpanded": "OCR sin límite diario de imágenes o páginas, con la misma calidad que Gratis",
@@ -125,10 +125,10 @@
   "plans": {
     "badge": "Precios claros",
     "title": "Elige tu plan",
-    "description": "Empieza gratis con todas las herramientas actuales y todas las opciones de OCR. PRO amplía la cantidad diaria de imágenes y elimina los anuncios por 5,99 € al año.",
+    "description": "Empieza gratis con todas las herramientas actuales y todas las opciones de OCR. PRO amplía la cantidad diaria de imágenes y los límites de lote por 5,99 € al año. La publicidad externa está desactivada en todos los planes.",
     "badgesHelp": "Etiquetas: lo que ya funciona, lo que sigue en Beta y lo que llegará más adelante.",
     "seoTitle": "Planes y precios | Gratis y PRO | ConvertMyFilePro",
-    "seoDescription": "Compara ConvertMyFilePro Free y PRO: OCR con todas las funciones gratis y 5 imágenes o páginas al día; PRO sin límite diario de OCR y sin anuncios por 5,99 € al año.",
+    "seoDescription": "Compara ConvertMyFilePro Free y PRO: OCR completo gratis con 5 imágenes o páginas al día; PRO sin límite diario de OCR y con lotes ampliados por 5,99 € al año.",
     "perYear": "/ año",
     "badges": { "available": "Disponible", "beta": "Beta", "soon": "Próximamente" },
     "free": {
@@ -143,7 +143,7 @@
       "recommended": "Recomendado",
       "period": "/ año",
       "monthly": "{{monthly}}/mes, facturado anualmente",
-      "tagline": "Más capacidad y sin anuncios, manteniendo el procesamiento en tu navegador.",
+      "tagline": "Más capacidad y mayores límites, manteniendo el procesamiento en tu navegador.",
       "cta": "Activar PRO · {{price}}/año",
       "checkoutNote": "Pago gestionado por Stripe. Suscripción anual: revisa el importe final antes de pagar.",
       "active": "PRO activo · hasta {{date}}",
@@ -168,7 +168,7 @@
       },
       "ads": {
         "title": "Con anuncios",
-        "description": "La versión gratuita se financia con publicidad (Monetag/AdSense)."
+        "description": "Actualmente no mostramos publicidad externa mientras revisamos la seguridad del sitio."
       },
       "everythingFree": {
         "title": "Todo lo incluido en Free",
@@ -192,7 +192,7 @@
       },
       "noAds": {
         "title": "Sin publicidad",
-        "description": "Se ocultan los anuncios, incluidos los de Monetag, al activar PRO en el navegador."
+        "description": "La publicidad externa está desactivada temporalmente en Free y PRO."
       },
       "advancedEditing": {
         "title": "Edición avanzada de párrafos",
@@ -222,7 +222,7 @@
         { "question": "¿Cómo se activa PRO después del pago?", "answer": "Stripe te devuelve a la página de confirmación con el identificador de la sesión. Comprobamos el pago con Stripe y activamos PRO en este navegador." },
         { "question": "¿Cuánto dura el acceso PRO?", "answer": "El acceso en el navegador dura 12 meses desde el pago. La suscripción anual se gestiona en Stripe; la renovación no amplía automáticamente el acceso guardado en el navegador." },
         { "question": "¿PRO funciona en varios dispositivos?", "answer": "No. El estado PRO se guarda en el navegador donde se activó. Si cambias de dispositivo o borras los datos del navegador, contacta con soporte con tu ID de sesión de Stripe." },
-        { "question": "¿Qué límites tiene el plan Free?", "answer": "Hasta {{freeBatch}} archivos por lote en las herramientas habituales, vídeos de {{freeVideo}} MB y {{freeOcr}} imágenes o páginas OCR al día, con anuncios. Todas las funciones de OCR son gratis." },
+        { "question": "¿Qué límites tiene el plan Free?", "answer": "Hasta {{freeBatch}} archivos por lote en las herramientas habituales, vídeos de {{freeVideo}} MB y {{freeOcr}} imágenes o páginas OCR al día. Todas las funciones de OCR son gratis; no se muestran anuncios externos." },
         { "question": "¿Puedo cancelar la suscripción?", "answer": "La suscripción se gestiona en Stripe. Escríbenos a info@ConvertMyFilePro.com si necesitas ayuda con la cancelación." }
       ]
     },
