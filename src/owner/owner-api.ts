@@ -1,4 +1,4 @@
-import { sendInviteViaBrevo, type InviteLanguage } from './brevo-email';
+import { sendInviteViaBrevo, sendAccessUpdateViaBrevo, type InviteLanguage } from './brevo-email';
 
 /**
  * Owner (real, production) + 90-day Pro Beta invitations.
@@ -33,6 +33,7 @@ type Invite = {
 };
 type AdminInvite = {
   id: string;
+  email: string;
   redeemed_at: number | null;
   revoked_at: number | null;
   expires_at: number | null;
@@ -68,7 +69,7 @@ async function logAccessEvent(
 
 async function getAdminInvite(env: OwnerEnv, id: string): Promise<AdminInvite | null> {
   return env.DB!.prepare(
-    'SELECT id, redeemed_at, revoked_at, expires_at, session_hash FROM pro_beta_invites WHERE id = ?'
+    'SELECT id, email, redeemed_at, revoked_at, expires_at, session_hash FROM pro_beta_invites WHERE id = ?'
   ).bind(id).first<AdminInvite>();
 }
 
@@ -362,7 +363,13 @@ export async function handleOwnerOrBetaApi(request: Request, env: OwnerEnv): Pro
     ).bind(id, row.revoked_at, Date.now()).run();
     if (result.meta?.changes !== 1) return json({ error: 'Access changed. Refresh and try again.' }, 409);
     await logAccessEvent(env, id, ownerEmail, 'reactivate', null, row.expires_at, row.expires_at);
-    return json({ success: true, expiresAt: row.expires_at });
+    // Do not repeat the D1 mutation when only email delivery fails.
+    const language: InviteLanguage = body?.language === 'en' ? 'en' : 'es';
+    const delivery = await sendAccessUpdateViaBrevo(
+      env.BREVO_API_KEY, row.email, 'reactivate', row.expires_at, language,
+    );
+    return json({ success: true, expiresAt: row.expires_at,
+      emailStatus: delivery.ok ? 'accepted' : 'failed' });
   }
   if (path === '/api/owner/invitations/grant' && request.method === 'POST') {
     const body = await readJson(request);
@@ -383,7 +390,13 @@ export async function handleOwnerOrBetaApi(request: Request, env: OwnerEnv): Pro
     ).bind(newExpiry, id, row.expires_at, row.revoked_at).run();
     if (result.meta?.changes !== 1) return json({ error: 'Access changed. Refresh and try again.' }, 409);
     await logAccessEvent(env, id, ownerEmail, 'grant', months, row.expires_at, newExpiry);
-    return json({ success: true, expiresAt: newExpiry, reactivated: row.revoked_at !== null });
+    // Send once after the expiry update succeeds. Never repeat a gift just to retry email.
+    const language: InviteLanguage = body?.language === 'en' ? 'en' : 'es';
+    const delivery = await sendAccessUpdateViaBrevo(
+      env.BREVO_API_KEY, row.email, 'grant', newExpiry, language, months,
+    );
+    return json({ success: true, expiresAt: newExpiry,
+      reactivated: row.revoked_at !== null, emailStatus: delivery.ok ? 'accepted' : 'failed' });
   }
   return json({ error: 'Not found' }, 404);
 }
